@@ -5,9 +5,14 @@ export const Reviews: CollectionConfig = {
   access: {
     read: () => true,
   },
+  labels: {
+    singular: { cs: 'Recenze', en: 'Review', ru: 'Отзыв' },
+    plural: { cs: 'Recenze', en: 'Reviews', ru: 'Отзывы' },
+  },
   admin: {
     useAsTitle: 'authorName',
     defaultColumns: ['authorName', 'rating', 'source', 'isApproved'],
+    group: { cs: 'Obsah', en: 'Content', ru: 'Контент' },
   },
   fields: [
     { name: 'authorName', type: 'text', required: true, label: 'Jméno autora' },

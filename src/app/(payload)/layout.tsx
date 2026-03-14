@@ -6,22 +6,29 @@ import config from '@payload-config'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import React from 'react'
 
-import { importMap } from './admin/importMap'
+import '@payloadcms/next/css'
 import './custom.scss'
 
 type Args = {
   children: React.ReactNode
 }
 
-const serverFunction: ServerFunctionClient = async function ({ args, name }) {
+const serverFunction: ServerFunctionClient = async function (args) {
   'use server'
-  return handleServerFunctions({ args, name, config, importMap })
+  return handleServerFunctions({
+    ...args,
+    config,
+    importMap: (await import('./admin/importMap.js')).importMap,
+  })
 }
 
-const Layout = ({ children }: Args) => (
-  <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
-    {children}
-  </RootLayout>
-)
+const Layout = async ({ children }: Args) => {
+  const { importMap } = await import('./admin/importMap.js')
+  return (
+    <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
+      {children}
+    </RootLayout>
+  )
+}
 
 export default Layout

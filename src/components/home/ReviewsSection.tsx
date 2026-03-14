@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import useEmblaCarousel from "embla-carousel-react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
 type Props = {
   reviews: Array<{
@@ -14,6 +15,9 @@ type Props = {
     date?: string | null;
     source?: string;
   }>;
+  cmsTitle?: string | null;
+  cmsSubtitle?: string | null;
+  cmsLeaveReviewButton?: string | null;
 };
 
 const sourceInitial = (source?: string) => {
@@ -27,7 +31,20 @@ const sourceInitial = (source?: string) => {
 const arrowBtnClass =
   "flex items-center justify-center w-12 h-12 rounded-[10px] border-2 border-[#b1b3b6] bg-[#f0eff0] text-[#302e2f] transition-all hover:border-[#7960a9] hover:text-[#7960a9] hover:shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]";
 
-export default function ReviewsSection({ reviews }: Props) {
+export default function ReviewsSection({ reviews, cmsTitle, cmsSubtitle, cmsLeaveReviewButton }: Props) {
+  const t = useTranslations();
+  const locale = useLocale();
+
+  const formatDate = (dateStr: string) => {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    return d.toLocaleDateString(locale === "cs" ? "cs-CZ" : locale === "ru" ? "ru-RU" : "en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -60,24 +77,24 @@ export default function ReviewsSection({ reviews }: Props) {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-[30px] lg:mb-[64px] gap-4">
           <div className="text-center lg:text-left">
             <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#f0eff0] leading-[36px] lg:leading-[48px]">
-              Co říkají naši klienti
+              {t("reviews.title")}
             </h2>
             <p className="font-clash font-medium text-[15px] lg:text-[36px] text-[#f0eff0] leading-[24px] lg:leading-normal mt-1">
-              Přečtěte si recenze od skutečných zákazníků
+              {t("reviews.subtitle")}
             </p>
           </div>
           <div className="flex items-center justify-center lg:justify-end gap-2">
             <div className="flex items-center gap-2">
               <button
                 onClick={scrollPrev}
-                aria-label="Předchozí recenze"
+                aria-label={t("reviews.prevReview")}
                 className={arrowBtnClass}
               >
                 <ChevronLeft className="size-6" />
               </button>
               <button
                 onClick={scrollNext}
-                aria-label="Další recenze"
+                aria-label={t("reviews.nextReview")}
                 className={arrowBtnClass}
               >
                 <ChevronRight className="size-6" />
@@ -89,7 +106,7 @@ export default function ReviewsSection({ reviews }: Props) {
               rel="noopener noreferrer"
               className="hidden lg:inline-flex items-center gap-3 bg-[#7960a9] backdrop-blur-[8px] text-[#f0eff0] font-clash font-medium text-[14.5px] leading-[24px] rounded-[10px] px-8 py-4 hover:opacity-90 transition-opacity"
             >
-              Zanechat recenzi
+              {t("reviews.leaveReview")}
             </Link>
           </div>
         </div>
@@ -136,7 +153,7 @@ export default function ReviewsSection({ reviews }: Props) {
                     </p>
                     {review.date && (
                       <p className="font-clash font-medium text-[11.8px] leading-[16px] text-[#302e2f]">
-                        {review.date}
+                        {formatDate(review.date)}
                       </p>
                     )}
                   </div>
@@ -156,7 +173,7 @@ export default function ReviewsSection({ reviews }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center bg-[#7960a9] text-[#f0eff0] font-clash font-medium text-[14.5px] leading-[24px] rounded-[10px] px-8 py-4 hover:opacity-90 transition-opacity"
           >
-            Zanechat recenzi
+            {t("reviews.leaveReview")}
           </Link>
         </div>
       </div>

@@ -2,7 +2,9 @@ import {
   getFAQ,
   getPartners,
   getBlogPosts,
+  getTranslations as getCmsTranslations,
 } from "@/lib/payload";
+import { getLocale } from "next-intl/server";
 import FaqSection from "@/components/home/FaqSection";
 import PartnersSection from "@/components/home/PartnersSection";
 import BlogSection from "@/components/home/BlogSection";
@@ -20,15 +22,20 @@ import {
  */
 export default async function SharedBottomSections({
   wrapInLightBg = true,
+  pageSlug,
 }: {
   /** If true, wraps FAQ/Partners/Blog in a light bg with wave decorations.
    *  Set false when embedding inside an already-light section. */
   wrapInLightBg?: boolean;
+  /** Filter FAQ items by page. If omitted, shows all FAQ items. */
+  pageSlug?: string;
 }) {
-  const [faq, partners, blogPosts] = await Promise.all([
-    getFAQ(),
+  const locale = await getLocale();
+  const [faq, partners, blogPosts, cmsTranslations] = await Promise.all([
+    getFAQ(pageSlug),
     getPartners(),
     getBlogPosts(4),
+    getCmsTranslations(locale),
   ]);
 
   const faqItems = faq.map((f) => ({
@@ -52,9 +59,9 @@ export default async function SharedBottomSections({
 
   const sections = (
     <>
-      <FaqSection items={faqItems} />
+      <FaqSection items={faqItems} cmsContactUsButton={cmsTranslations?.faqContactUsButton} />
       <PartnersSection partners={partnerItems} />
-      <BlogSection posts={blogItems} />
+      <BlogSection posts={blogItems} cmsReadAllButton={cmsTranslations?.blogReadAllButton} />
     </>
   );
 
@@ -68,7 +75,7 @@ export default async function SharedBottomSections({
       ) : (
         sections
       )}
-      <NewsletterSection />
+      <NewsletterSection cmsSubscribeButton={cmsTranslations?.newsletterSubscribeButton} />
     </>
   );
 }

@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design mockups & reference images
+*.pdf
+Group*.png
+image.png
+photo_*.jpg
+payload-admin-custom-styles-guide.md
+
+# screenshots (debug/reference)
+screenshots/
+
+# telegram bridge (separate service)
+telegram-bridge/
+
+# CMS uploaded media (managed by Payload)
+public/media/

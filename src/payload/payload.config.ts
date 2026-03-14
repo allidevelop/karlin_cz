@@ -6,21 +6,28 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 // Collections
-import { Services } from './collections/Services'
-import { ServiceCategories } from './collections/ServiceCategories'
-import { VehicleCategories } from './collections/VehicleCategories'
-import { BlogPosts } from './collections/BlogPosts'
-import { Promotions } from './collections/Promotions'
-import { Reviews } from './collections/Reviews'
-import { FAQ } from './collections/FAQ'
-import { Partners } from './collections/Partners'
-import { Media } from './collections/Media'
-import { Newsletter } from './collections/Newsletter'
-import { Pages } from './collections/Pages'
-import { Bookings } from './collections/Bookings'
+import { Services } from './collections/Services.ts'
+import { ServiceCategories } from './collections/ServiceCategories.ts'
+import { VehicleCategories } from './collections/VehicleCategories.ts'
+import { BlogPosts } from './collections/BlogPosts.ts'
+import { Promotions } from './collections/Promotions.ts'
+import { Reviews } from './collections/Reviews.ts'
+import { FAQ } from './collections/FAQ.ts'
+import { Partners } from './collections/Partners.ts'
+import { Media } from './collections/Media.ts'
+import { Newsletter } from './collections/Newsletter.ts'
+import { Pages } from './collections/Pages.ts'
+import { Bookings } from './collections/Bookings.ts'
+import { ContactMessages } from './collections/ContactMessages.ts'
+import { Banners } from './collections/Banners.ts'
+import { PopupBanners } from './collections/PopupBanners.ts'
+import { PromoCodes } from './collections/PromoCodes.ts'
 
 // Globals
-import { ExpressWashSettings } from './globals/ExpressWashSettings'
+import { ExpressWashSettings } from './globals/ExpressWashSettings.ts'
+import { SiteSettings } from './globals/SiteSettings.ts'
+import { HomePageContent } from './globals/HomePageContent.ts'
+import { Translations } from './globals/Translations.ts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,6 +39,15 @@ export default buildConfig({
       titleSuffix: '— Automycka Karlin',
     },
   },
+  localization: {
+    locales: [
+      { label: 'Čeština', code: 'cs' },
+      { label: 'English', code: 'en' },
+      { label: 'Русский', code: 'ru' },
+    ],
+    defaultLocale: 'cs',
+    fallback: true,
+  },
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: {
@@ -42,7 +58,14 @@ export default buildConfig({
     {
       slug: 'users',
       auth: true,
-      admin: { useAsTitle: 'email' },
+      labels: {
+        singular: { cs: 'Uživatel', en: 'User', ru: 'Пользователь' },
+        plural: { cs: 'Uživatelé', en: 'Users', ru: 'Пользователи' },
+      },
+      admin: {
+        useAsTitle: 'email',
+        group: { cs: 'Nastavení', en: 'Settings', ru: 'Настройки' },
+      },
       fields: [],
     },
     Services,
@@ -57,8 +80,12 @@ export default buildConfig({
     Newsletter,
     Pages,
     Bookings,
+    ContactMessages,
+    Banners,
+    PopupBanners,
+    PromoCodes,
   ],
-  globals: [ExpressWashSettings],
+  globals: [ExpressWashSettings, SiteSettings, HomePageContent, Translations],
   secret: process.env.PAYLOAD_SECRET || 'default-secret-change-in-production',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

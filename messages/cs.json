@@ -1,0 +1,710 @@
+{
+  "common": {
+    "currency": "Kč",
+    "priceFrom": "od",
+    "pricesFrom": "ceny od",
+    "loading": "Načítání...",
+    "back": "Zpět",
+    "continue": "Pokračovat",
+    "learnMore": "Zjistit více",
+    "bookNow": "Rezervace",
+    "phone": "+420 775 009 033",
+    "email": "automyckakarlin@email.cz",
+    "address": "Sokolovská 694/98, Karlín, 186 00 Praha",
+    "brandName": "AUTOMYČKA KARLÍN",
+    "navigate": "Navigovat",
+    "submit": "Odeslat",
+    "apply": "Použít",
+    "close": "Zavřít",
+    "minRead": "min čtení",
+    "allServices": "Všechny služby"
+  },
+  "navigation": {
+    "booking": "Rezervace",
+    "services": "Služby",
+    "promotions": "Akce",
+    "forBusiness": "Pro firmy",
+    "reviews": "Recenze",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "serviceMenu": {
+      "toGo": "To Go",
+      "toGlow": "To Glow",
+      "toWow": "To Wow",
+      "premiumDetailing": "Premium Detailing",
+      "allServices": "Všechny služby"
+    }
+  },
+  "header": {
+    "logoAlt": "Automyčka Karlín logo",
+    "changeLanguage": "Změnit jazyk",
+    "czech": "Čeština",
+    "english": "English",
+    "callPhone": "Zavolat {phone}",
+    "openMenu": "Otevřít menu",
+    "russian": "Русский"
+  },
+  "footer": {
+    "description": "Profesionální autopéče na Karlíně. Moderní technologie, ekologické přípravky, zkušený tým.",
+    "quickLinks": "Rychlé odkazy",
+    "servicesHeading": "Služby",
+    "contactHeading": "Kontakt",
+    "workingHoursHeading": "Pracovní doba",
+    "workingHours": "Po - Ne: 7:00 - 20:00",
+    "copyright": "© 2026 AUTOMYČKA KARLÍN. Všechna práva vyhrazena",
+    "privacyPolicy": "Zásady ochrany osobních údajů",
+    "termsOfService": "Obchodní podmínky"
+  },
+  "hero": {
+    "title": "Automyčka Karlín",
+    "subtitle": "Ruční čištění disků",
+    "cta": "Rychlá Rezervace",
+    "navigate": "Navigovat",
+    "imageAlt": "Porsche 911 v automyčce"
+  },
+  "services": {
+    "title": "Naše služby",
+    "subtitle": "Vyberte si program pro vaše vozidlo",
+    "allServices": "Všechny služby",
+    "chooseProgram": "Zvolit program",
+    "vehicles": {
+      "hatchback": "Hatchback / Sedan",
+      "suv": "SUV",
+      "gclass": "G-Class / V-Class / Pickup",
+      "motorcycle": "Motocykly"
+    },
+    "vehicleDescriptions": {
+      "hatchback": "Osobní vozy, kombi, kupé",
+      "suv": "Crossovery a sportovně-užitková vozidla",
+      "gclass": "Velká SUV, dodávky, MPV, pickupy",
+      "motorcycle": "Silniční, enduro, skútry"
+    }
+  },
+  "promotions": {
+    "title": "Exkluzivní akce",
+    "subtitle": "Využijte naše časově omezené nabídky",
+    "allPromotions": "Všechny akce",
+    "viewDetail": "Zobrazit detail",
+    "validUntil": "Platí do",
+    "prevSlide": "Předchozí",
+    "nextSlide": "Další",
+    "backToPromotions": "Zpět na akce",
+    "backToAllPromotions": "Zpět na Všechny akce",
+    "permanentOffer": "Stálá nabídka",
+    "youSave": "Ušetříte",
+    "bookWithPromo": "Rezervovat s touto akcí",
+    "whatsIncluded": "Co je zahrnuto",
+    "terms": "Podmínky akce",
+    "otherPromotions": "Další akce",
+    "photo": "Foto",
+    "notFound": "Akce nenalezena"
+  },
+  "expressWash": {
+    "imageAlt": "Expresní ruční mytí aut již od 985 Kč",
+    "cards": {
+      "parking": {
+        "line1": "Parkování",
+        "line2": "Zdarma",
+        "description": "Parking na celý den\n7:00 - 20:00"
+      },
+      "accessibility": {
+        "line1": "Výborná",
+        "line2": "Dostupnost",
+        "description": "Najdete nás na Karlíně\nOtevřeno Po - Ne"
+      },
+      "loyalty": {
+        "line1": "Věrnostní",
+        "line2": "Program",
+        "description": "Získej odměnu za každé mytí"
+      },
+      "voucher": {
+        "line1": "Dárkový",
+        "line2": "Voucher",
+        "description": "Poptávku pošlete přes formulář níže"
+      },
+      "comingSoon1": {
+        "line1": "Již",
+        "line2": "Brzy",
+        "description": "Připravujeme pro vás\nnovou službu"
+      },
+      "comingSoon2": {
+        "line1": "Již",
+        "line2": "Brzy",
+        "description": "Připravujeme pro vás\ndalší novinku"
+      }
+    },
+    "start": "Začít"
+  },
+  "reviews": {
+    "title": "Co říkají naši klienti",
+    "subtitle": "Přečtěte si recenze od skutečných zákazníků",
+    "leaveReview": "Zanechat recenzi",
+    "prevReview": "Předchozí recenze",
+    "nextReview": "Další recenze"
+  },
+  "contactSection": {
+    "title": "Kontakty",
+    "formHeading": "Máte ještě něco na srdci?",
+    "formSubheading": "Hoďte nám zprávu přes formulář a my se hned ozveme!",
+    "nameLabel": "Jméno",
+    "namePlaceholder": "Vaše jméno",
+    "phoneLabel": "Telefon",
+    "phonePlaceholder": "+420 775 009 033",
+    "emailLabel": "Email",
+    "emailPlaceholder": "vas@email.cz",
+    "messageLabel": "Váš dotaz",
+    "messagePlaceholder": "Vaše zpráva...",
+    "sendMessage": "Odeslat zprávu",
+    "contactInfo": "Kontaktní informace",
+    "operatingHours": "Provozní doba",
+    "operatingHoursValue": "Pondělí – Neděle: 7:00 – 20:00",
+    "openWeekends": "Otevřeno i o víkendech",
+    "howToReach": "Jak se k nám dostat",
+    "location": "Karlín, Praha 8",
+    "accessInfo": "Snadná dostupnost MHD i autem",
+    "mapTitle": "Mapa - Automyčka Karlín"
+  },
+  "faq": {
+    "title": "Často kladené otázky",
+    "subtitle": "Odpovědi na nejčastější dotazy o našich službách",
+    "noAnswer": "Nenašli jste odpověď na svou otázku?",
+    "contactUs": "Kontaktujte nás"
+  },
+  "partners": {
+    "title": "Naši partneři",
+    "subtitle": "Spolupracujeme s prémiovými značkami",
+    "prevPartner": "Předchozí partner",
+    "nextPartner": "Další partner"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Tipy a novinky ze světa autopéče",
+    "readAll": "Přečíst všechny články",
+    "prevArticle": "Předchozí článek",
+    "nextArticle": "Další článek",
+    "pageTitle": "Blog & Novinky",
+    "pageSubtitle": "Vše o péči o automobily, tipy a novinky z naší automyčky",
+    "backHome": "Zpět na hlavní stránku",
+    "backToBlog": "Zpět na blog",
+    "noArticles": "Zatím nejsou žádné články.",
+    "readMoreArticles": "Přečíst další články",
+    "moreArticles": "Další články",
+    "notFound": "Článek nenalezen",
+    "categories": {
+      "carCare": "Péče o vůz",
+      "tips": "Tipy a rady",
+      "news": "Novinky",
+      "technology": "Technologie"
+    }
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subtitle": "Přihlaste se k odběru, abyste nepropásli důležité události!",
+    "emailLabel": "E-mailová adresa",
+    "emailPlaceholder": "Váš email",
+    "subscribe": "Přihlásit se",
+    "socialHeading": "Sledujte naše sociální sítě",
+    "socialText": "Na nich zveřejňujeme nejnovější zprávy a také slevy a akce",
+    "instagram": "Instagram",
+    "formLabel": "Přihlášení k newsletteru"
+  },
+  "booking": {
+    "heroTitle": "Rezervace mytí",
+    "steps": {
+      "vehicle": {
+        "label": "Výběr kategorie vozidla",
+        "short": "Vozidlo",
+        "subtitle": "Vyberte kategorii vašeho vozidla"
+      },
+      "program": {
+        "label": "Výběr programu",
+        "short": "Program",
+        "subtitle": "Vyberte si program pro vaše vozidlo"
+      },
+      "addons": {
+        "label": "Doplňkové služby",
+        "short": "Doplňky",
+        "subtitle": "Vylepšete své mytí dalšími službami"
+      },
+      "datetime": {
+        "label": "Datum a čas",
+        "short": "Datum",
+        "subtitle": "Vyberte datum a čas návštěvy"
+      },
+      "contact": {
+        "label": "Kontaktní údaje",
+        "short": "Kontakt",
+        "subtitle": "Vyplňte své kontaktní údaje"
+      }
+    },
+    "vehicle": {
+      "title": "Naše služby",
+      "subtitle": "Vyberte si program pro vaše vozidlo"
+    },
+    "program": {
+      "title": "Vyberte program",
+      "subtitle": "Profesionální péče o váš vůz v srdci Prahy",
+      "changeCategory": "Změnit kategorii",
+      "whatsIncluded": "Více o programu?",
+      "hide": "Skrýt",
+      "add": "Přidat",
+      "remove": "Odebrat",
+      "cart": "Košík",
+      "emptyCart": "Zatím jste nevybrali žádný program.",
+      "promoLabel": "Slevový kód",
+      "promoPlaceholder": "Zadejte kód",
+      "total": "Celkem",
+      "backToVehicle": "Zpět na výběr vozidla",
+      "programBadge": "Program",
+      "mostPopular": "Nejoblíbenější",
+      "duration": "{minutes} min"
+    },
+    "addons": {
+      "title": "Doplňkové služby",
+      "subtitle": "Vylepšete svou mytí dalšími službami",
+      "continueWithout": "Pokračovat Bez výběru Doplňku",
+      "cartTitle": "KOŠÍK",
+      "emptyCart": "Váš košík je prázdný",
+      "promoPlaceholder": "Zadejte reklamní kód",
+      "selectDate": "Vyberte datum",
+      "addonCount1": "doplňka",
+      "addonCount2to4": "doplňky",
+      "addonCount5plus": "doplňků",
+      "skipToAddons": "Pouze doplňkové služby",
+      "addonOnlyMode": "Záznam bez programu",
+      "categoryInterior": "Péče o interiér",
+      "categoryExterior": "Péče o exteriér",
+      "categoryProtection": "Ochrana a vosky"
+    },
+    "cart": {
+      "discount": "Sleva",
+      "promoInvalid": "Neplatný promokód",
+      "promoExpired": "Platnost promokódu vypršela",
+      "promoUsedUp": "Promokód byl již vyčerpán",
+      "timeMorning": "Dopoledne",
+      "timeAfternoon": "Odpoledne",
+      "timeEvening": "Večer",
+      "promoBadge": "Akce"
+    },
+    "contactForm": {
+      "title": "Osobní údaje",
+      "nameLabel": "Jméno *",
+      "namePlaceholder": "Zadejte vaše jméno",
+      "phoneLabel": "Telefon *",
+      "phonePlaceholder": "Zadejte telefonní číslo",
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "Zadejte e-mail",
+      "promoLabel": "Zadejte reklamní kód",
+      "commentLabel": "Komentář",
+      "commentPlaceholder": "Komentář k záznamu",
+      "reminderLabel": "Připomenutí",
+      "reminder1h": "1 hodinu před návštěvou",
+      "reminder2h": "2 hodiny před návštěvou",
+      "reminder24h": "24 hodin před návštěvou",
+      "noReminder": "Bez připomenutí",
+      "gdprConsent": "souhlasím se zpracováním svých <link>osobních údajů</link> a potvrzuji, že jsem si přečetl/a přijal/a Zásady ochrany osobních údajů a Uživatelská smlouva",
+      "gdprLink": "osobních údajů",
+      "marketingConsent": "souhlasím se zasíláním obchodních sdělení (nabídky, slevy, akce, novinky) na mou e-mailovou adresu",
+      "submitBooking": "Kompletní registrace",
+      "addonBadge": "Doplněk",
+      "selectTime": "Vyberte čas",
+      "noTimeslots": "Žádné volné časy pro tento den.",
+      "errorCreate": "Nepodařilo se vytvořit rezervaci. Zkuste to prosím znovu.",
+      "errorNetwork": "Chyba sítě. Zkontrolujte připojení a zkuste to znovu."
+    },
+    "confirmation": {
+      "done": "Hotovo",
+      "thankYou": "Děkujeme za rezervaci",
+      "servicesLabel": "Služby",
+      "addonsLabel": "Doplňkové služby",
+      "totalLabel": "Celkem",
+      "bookingRefLabel": "Číslo rezervace",
+      "statusLabel": "Stav",
+      "statusConfirmed": "Potvrzeno",
+      "statusPending": "Čeká na potvrzení",
+      "contactsLabel": "Kontakty",
+      "backHome": "Zpět na hlavní stránku",
+      "noBookingTitle": "Rezervace nenalezena",
+      "noBookingText": "Nemáme žádné údaje o vaší rezervaci. Zkuste si zarezervovat nový termín.",
+      "goToBooking": "Přejít na rezervaci",
+      "addToCalendar": "Přidat do kalendáře",
+      "addToGoogleCalendar": "Google Calendar",
+      "downloadICS": "Stáhnout .ics",
+      "calendarEventTitle": "Automyčka — {service}",
+      "defaultService": "Mytí"
+    }
+  },
+  "proFirmy": {
+    "badge": "Firemní řešení",
+    "title": "Prémiová péče pro vaši firmu",
+    "description": "Automyčka Karlín poskytuje komplexní služby péče o firemní vozidla s individuálním přístupem a speciálními podmínkami pro korporátní klienty.",
+    "getCta": "Získat nabídku",
+    "ourServices": "Naše služby",
+    "formHeading": "Poptat firemní služby",
+    "companyLabel": "Název společnosti *",
+    "contactPersonLabel": "Kontaktní osoba *",
+    "emailLabel": "E-mail *",
+    "phoneLabel": "Telefon *",
+    "fleetSizeLabel": "Velikost vozového parku",
+    "fleetSizeDefault": "Vyberte velikost",
+    "fleetSize1to5": "1-5 vozidel",
+    "fleetSize6to20": "6-20 vozidel",
+    "fleetSize21to50": "21-50 vozidel",
+    "fleetSize50plus": "50+ vozidel",
+    "messageLabel": "Vaše zpráva",
+    "messagePlaceholder": "Popište vaše požadavky...",
+    "submitInquiry": "Odeslat poptávku",
+    "whyUsTitle": "Proč si nás vybrat?",
+    "whyUsSubtitle": "Poskytujeme komplexní řešení pro firemní klienty s důrazem na kvalitu a flexibilitu",
+    "benefits": {
+      "flexibleSlots": {
+        "title": "Flexibilní časové sloty",
+        "description": "Speciální termíny pro firemní vozidla mimo špičku"
+      },
+      "goodPrices": {
+        "title": "Výhodné ceny",
+        "description": "Speciální slevy pro pravidelné zákazníky a větší flotily"
+      },
+      "premiumCare": {
+        "title": "Prémiová péče",
+        "description": "Profesionální servis zachovávající hodnotu vašich vozidel"
+      },
+      "personalManager": {
+        "title": "Osobní manažer",
+        "description": "Dedikovaný kontakt pro koordinaci všech služeb"
+      },
+      "verifiedQuality": {
+        "title": "Ověřená kvalita",
+        "description": "Pracujeme s prémiovou kosmetikou a nejmodernějšími technologiemi pro dokonalý výsledek."
+      },
+      "individualApproach": {
+        "title": "Individuální přístup",
+        "description": "Každý klient dostává řešení šité na míru podle svých specifických požadavků a potřeb."
+      },
+      "reliablePartner": {
+        "title": "Spolehlivý partner",
+        "description": "Dlouhodobá spolupráce s řadou firem, které si cení naší spolehlivosti a profesionality."
+      }
+    }
+  },
+  "doplnkoveSluzby": {
+    "title": "Doplňkové služby",
+    "subtitle": "Rozšiřte péči o váš vůz s našimi službami",
+    "tabs": {
+      "programs": "Programy",
+      "vehicleCategories": "Kategorie vozidel",
+      "additionalServices": "Doplňkové služby"
+    },
+    "categories": {
+      "interior": "Interiér",
+      "glass": "Skla",
+      "exterior": "Lak & Exteriér"
+    },
+    "rating": "Hodnocení"
+  },
+  "serviceDetail": {
+    "backToServices": "Zpět na služby",
+    "quickBooking": "Rychlá Rezervace",
+    "ourServicesTitle": "Naše služby",
+    "ourServicesSubtitle": "Kompletní péče o váš automobil",
+    "serviceTypes": {
+      "handWash": {
+        "title": "Ručné mytí",
+        "description": "Důkladné ruční mytí s prémiovou autochemií"
+      },
+      "contactless": {
+        "title": "Bezkontaktní mytí",
+        "description": "Šetrné mytí vysokotlakým proudem vody"
+      },
+      "interiorCleaning": {
+        "title": "Čištění interiéru",
+        "description": "Profesionální vysávání a čištění sedadel"
+      },
+      "complete": {
+        "title": "Komplexní mytí",
+        "description": "Kompletní péče - exteriér i interiér"
+      }
+    },
+    "ctaBanner1": "Mytí pro všechny typy vozidel: osobní auta, SUV, dodávky",
+    "ctaBanner2": "Maximální péče a ochrana vašeho vozidla",
+    "order": "Objednat",
+    "advantages": {
+      "title": "Naše výhody",
+      "subtitle": "AUTOMYČKA KARLÍN vs ostatní",
+      "competitorTitle": "Ostatní autopračky",
+      "competitors": [
+        "Standardní autochemie",
+        "Různá kvalita personálu",
+        "Bez záruky na ochranu laku",
+        "Průměrná doba mytí 30-45 minut",
+        "Složitá dostupnost",
+        "Agresivní chemikálie"
+      ],
+      "ours": [
+        "Prémiová autochemie nejvyšší kvality",
+        "Zkušený tým profesionálů",
+        "100% ochrana laku",
+        "Express mytí 15-20 minut",
+        "Skvělá lokalita v centru Karlína",
+        "Ekologické přípravky",
+        "Online rezervační systém 24/7",
+        "Věrnostní program s bonusy",
+        "Bezplatné parkování",
+        "Kontrola kvality po každém mytí",
+        "Pojištění vozidla během mytí",
+        "Moderní technologie a vybavení"
+      ]
+    },
+    "beforeAfter": {
+      "before": "Před mytím",
+      "after": "Po mytí",
+      "beforeLabel": "DO",
+      "afterLabel": "PO"
+    },
+    "whyChooseUs": {
+      "title": "Proč si vybrat AUTOMYČKA KARLÍN",
+      "subtitle": "Naše konkurenční výhody",
+      "noScratches": {
+        "title": "Bez škrábanců",
+        "description": "Garantujeme šetrné mytí bez poškození"
+      },
+      "qualityControl": {
+        "title": "Kontrola kvality",
+        "description": "Každé auto kontrolujeme před předáním"
+      },
+      "individual": {
+        "title": "Individuální přístup",
+        "description": "Každé auto vyžaduje specifickou péči"
+      },
+      "premium": {
+        "title": "Premium služby",
+        "description": "Používáme jen ty nejlepší produkty"
+      }
+    },
+    "tagline": "Perfektní pro každodenní mytí i prémiovou péči o váš vůz",
+    "howItWorks": {
+      "title": "Jak to funguje",
+      "subtitle": "Jednoduchý proces ve 4 krocích",
+      "step1": {
+        "title": "Příjezd nebo rezervace",
+        "description": "Přijeďte bez objednání nebo si rezervujte termín online"
+      },
+      "step2": {
+        "title": "Výběr služby",
+        "description": "Vyberte si vhodný balíček nebo jednotlivé služby"
+      },
+      "step3": {
+        "title": "Mytí a péče",
+        "description": "Necháme váš vůz zářit jako nový"
+      },
+      "step4": {
+        "title": "Převzetí a platba",
+        "description": "Zkontrolujte výsledek a zaplaťte"
+      }
+    },
+    "safety": {
+      "title": "Bezpečnost a zodpovědnost",
+      "subtitle": "Vaše důvěra je naší prioritou",
+      "certifiedChemistry": {
+        "title": "Certifikovaná autochemie",
+        "description": "Používáme pouze schválené a testované přípravky"
+      },
+      "ecoStandards": {
+        "title": "Ekologické normy",
+        "description": "Dodržujeme všechny environmentální předpisy"
+      },
+      "insurance": {
+        "title": "Pojištění",
+        "description": "Každé vozidlo je během mytí plně pojištěno"
+      },
+      "premiumCars": {
+        "title": "Pro prémiové vozy",
+        "description": "Vhodné i pro nové a luxusní automobily"
+      }
+    },
+    "pricing": {
+      "title": "Ceník a faktory ovlivňující cenu",
+      "subtitle": "Transparentní cenotvorba",
+      "vehicleType": {
+        "title": "Typ vozidla",
+        "description": "Osobní, SUV, dodávka - každý typ má svou cenu"
+      },
+      "chosenService": {
+        "title": "Zvolená služba",
+        "description": "Od rychlého mytí po kompletní detailing"
+      },
+      "dirtLevel": {
+        "title": "Stupeň znečištění",
+        "description": "Silně znečištěná vozidla vyžadují více péče"
+      },
+      "additionalServices": {
+        "title": "Doplňkové služby",
+        "description": "Vosk, černění pneumatik, čištění interiéru"
+      },
+      "basePrice": "Základní mytí osobního vozu od",
+      "whatsIncluded": "Co je zahrnuto",
+      "pricingByCategory": "Ceník dle kategorie",
+      "bookAppointment": "Rezervovat termín"
+    },
+    "otherServices": "Další služby",
+    "notFound": "Služba nenalezena"
+  },
+  "servicesPage": {
+    "title": "Všechny naše služby",
+    "subtitle": "Objevte portfolio našich prémiových služeb"
+  },
+  "promotionsPage": {
+    "title": "Speciální akce",
+    "subtitle": "Využijte naše exkluzivní nabídky"
+  },
+  "metadata": {
+    "title": "Automyčka Karlín | Profesionální ruční mytí aut Praha",
+    "description": "Profesionální ruční mytí a detailing vozidel v Praze Karlíně. Expresní mytí, kompletní péče, keramický coating. Online rezervace.",
+    "blogTitle": "Blog & Novinky | Automyčka Karlín",
+    "blogDescription": "Vše o péči o automobily, tipy a novinky z naší automyčky.",
+    "servicesTitle": "Všechny naše služby | Automyčka Karlín",
+    "servicesDescription": "Objevte portfolio našich prémiových služeb mytí a detailingu.",
+    "promotionsTitle": "Speciální akce | Automyčka Karlín",
+    "promotionsDescription": "Využijte naše exkluzivní nabídky a slevy na mytí vozidel.",
+    "additionalServicesTitle": "Doplňkové služby | Automyčka Karlín",
+    "additionalServicesDescription": "Rozšiřte péči o váš vůz s našimi doplňkovými službami.",
+    "bookingTitle": "Rezervace mytí | Automyčka Karlín",
+    "bookingDescription": "Zarezervujte si termín mytí online. Výběr programu, doplňkových služeb a pohodlná rezervace.",
+    "vehicleCategoriesTitle": "Kategorie vozidel | Automyčka Karlín",
+    "vehicleCategoriesDescription": "Vyberte kategorii vašeho vozidla a zjistěte ceny služeb mytí a detailingu.",
+    "termsTitle": "Obchodní podmínky | Automyčka Karlín",
+    "termsDescription": "Obchodní podmínky společnosti AUTOMYČKA KARLÍN pro poskytování služeb mytí a detailingu vozidel.",
+    "privacyTitle": "Zásady ochrany osobních údajů | Automyčka Karlín",
+    "privacyDescription": "Zásady ochrany osobních údajů společnosti AUTOMYČKA KARLÍN. Informace o zpracování osobních údajů.",
+    "forBusinessTitle": "Pro firmy | Automyčka Karlín",
+    "forBusinessDescription": "Automyčka Karlín poskytuje komplexní služby péče o firemní vozidla s individuálním přístupem.",
+    "promoNotFound": "Akce nenalezena"
+  },
+  "contactForm": {
+    "sending": "Odesílání...",
+    "success": "Zpráva byla úspěšně odeslána. Brzy se vám ozveme!",
+    "errorRequired": "Vyplňte prosím všechna povinná pole.",
+    "errorGeneric": "Došlo k chybě při odesílání. Zkuste to prosím znovu."
+  },
+  "newsletterForm": {
+    "subscribing": "Přihlašování...",
+    "success": "Úspěšně přihlášeno k odběru novinek!",
+    "alreadySubscribed": "Tento email je již přihlášen k odběru.",
+    "errorInvalid": "Zadejte prosím platný email.",
+    "errorGeneric": "Došlo k chybě. Zkuste to prosím znovu."
+  },
+  "notFoundCTA": {
+    "heading": "Nenašli jste co hledáte?",
+    "subtitle": "Podívejte se na naše služby nebo nás kontaktujte",
+    "bookNow": "Rezervovat termín",
+    "callUs": "Zavolejte nám"
+  },
+  "kategorieVozidel": {
+    "title": "Kategorie vozidel",
+    "subtitle": "Vyberte kategorii vašeho vozidla",
+    "learnMore": "Zjistit více",
+    "pricesFrom": "ceny od",
+    "booking": "Zvolit Program"
+  },
+  "legal": {
+    "terms": {
+      "title": "Obchodní podmínky",
+      "effectiveDate": "Tyto obchodní podmínky jsou platné a účinné od 1. 1. 2026.",
+      "s1Title": "1. Úvodní ustanovení",
+      "s1p1": "Tyto obchodní podmínky (dále jen „Podmínky“) upravují práva a povinnosti mezi společností AUTOMYČKA KARLÍN, se sídlem Sokolovská 694/98, 186 00 Praha 8 – Karlín, IČO: 12345678 (dále jen „Poskytovatel“), a zákazníkem (dále jen „Zákazník“) při využívání služeb mytí, čištění a detailingu vozidel.",
+      "s1p2": "Objednáním služby nebo provedením rezervace Zákazník potvrzuje, že se seznámil s těmito Podmínkami a souhlasí s nimi.",
+      "s2Title": "2. Objednávka a rezervace",
+      "s2p1": "Rezervaci služeb lze provést následujícími způsoby:",
+      "s2l1": "Online prostřednictvím rezervačního systému na webových stránkách.",
+      "s2l2": "Telefonicky na čísle +420 775 009 033.",
+      "s2l3": "Osobně na provozovně.",
+      "s2p2": "Rezervace je závazná po jejím potvrzení ze strany Poskytovatele. Potvrzení je zasláno e-mailem nebo SMS na kontaktní údaje uvedené Zákazníkem.",
+      "s2p3": "Zákazník je povinen dostavit se na provozovnu v rezervovaném čase. V případě zpoždění delšího než 15 minut si Poskytovatel vyhrazuje právo rezervaci zrušit.",
+      "s3Title": "3. Ceny a platby",
+      "s3p1": "Všechny ceny jsou uvedeny v českých korunách (CZK) včetně DPH. Aktuální ceník je k dispozici na webových stránkách a na provozovně.",
+      "s3p2": "Konečná cena služby může být upravena v závislosti na skutečném stavu a znečištění vozidla, o čemž bude Zákazník informován před zahájením služby.",
+      "s3p3": "Platbu lze provést následujícími způsoby:",
+      "s3l1": "Platební kartou (Visa, Mastercard) – na provozovně i online.",
+      "s3l2": "Hotově – na provozovně.",
+      "s3l3": "Bankovním převodem – pro firemní zákazníky na základě faktury.",
+      "s4Title": "4. Zrušení a změna rezervace",
+      "s4p1": "Zákazník může rezervaci bezplatně zrušit nebo změnit nejpozději 24 hodin před plánovaným termínem služby.",
+      "s4p2": "V případě zrušení rezervace méně než 24 hodin před plánovaným termínem si Poskytovatel vyhrazuje právo účtovat storno poplatek ve výši 50 % z ceny objednané služby.",
+      "s4p3": "Při opakovaném nedostavení se bez předchozího zrušení rezervace si Poskytovatel vyhrazuje právo vyžadovat od Zákazníka zálohu při budoucích rezervacích.",
+      "s5Title": "5. Odpovědnost",
+      "s5p1": "Poskytovatel odpovídá za škody způsobené prokazatelně jeho zaviněním při provádění služby. Zákazník je povinen případnou škodu nahlásit bezprostředně po převzetí vozidla, nejpozději však do 24 hodin.",
+      "s5p2": "Poskytovatel neodpovídá za:",
+      "s5l1": "Škody způsobené skrytými vadami vozidla (uvolněné díly, poškozený lak apod.).",
+      "s5l2": "Předměty ponechané ve vozidle během poskytování služby.",
+      "s5l3": "Škody vzniklé v důsledku nedodržení pokynů Poskytovatele Zákazníkem.",
+      "s6Title": "6. Reklamace",
+      "s6p1": "Zákazník má právo reklamovat kvalitu poskytnuté služby. Reklamaci je nutné uplatnit neprodleně při převzetí vozidla nebo nejpozději do 24 hodin od dokončení služby.",
+      "s6p2": "Reklamaci lze uplatnit:",
+      "s6l1": "Osobně na provozovně.",
+      "s6l2": "E-mailem na adrese automyckakarlin@email.cz.",
+      "s6l3": "Telefonicky na čísle +420 775 009 033.",
+      "s6p3": "Poskytovatel reklamaci posoudí a vyřídí nejpozději do 30 dnů od jejího obdržení. V případě oprávněné reklamace Poskytovatel zajistí bezplatné opakování služby nebo vrácení příslušné části ceny.",
+      "s7Title": "7. Ochrana osobních údajů",
+      "s7p1": "Informace o zpracování osobních údajů jsou uvedeny v samostatném dokumentu <link>Zásady ochrany osobních údajů</link>, který je nedílnou součástí těchto Podmínek.",
+      "s8Title": "8. Závěrečná ustanovení",
+      "s8p1": "Tyto Podmínky se řídí právním řádem České republiky, zejména zákonem č. 89/2012 Sb., občanský zákoník, v platném znění.",
+      "s8p2": "Poskytovatel si vyhrazuje právo tyto Podmínky kdykoli změnit. Aktuální znění Podmínek je vždy k dispozici na webových stránkách Poskytovatele.",
+      "s8p3": "Případné spory budou řešeny přednostně mimosoudní cestou. Pokud nedojde k dohodě, je příslušným soudem soud v Praze.",
+      "s8p4": "V případě, že některé ustanovení těchto Podmínek bude shledáno neplatným nebo nevymahatelným, nebude tím dotčena platnost a vymahatelnost ostatních ustanovení."
+    },
+    "privacy": {
+      "title": "Zásady ochrany osobních údajů",
+      "effectiveDate": "Tyto zásady ochrany osobních údajů jsou platné a účinné od 1. 1. 2026.",
+      "s1Title": "1. Úvod",
+      "s1p1": "Společnost AUTOMYČKA KARLÍN (dále jen „Správce“) si váží Vaší důvěry a je zavázána chránit Vaše osobní údaje. Tyto zásady ochrany osobních údajů popisují, jakým způsobem shromažďujeme, používáme, uchováváme a chráníme Vaše osobní údaje při využívání našich služeb, webových stránek a rezervačního systému.",
+      "s1p2": "Zpracování osobních údajů probíhá v souladu s nařízením Evropského parlamentu a Rady (EU) 2016/679, obecným nařízením o ochraně osobních údajů (GDPR), a příslušnými právními předpisy České republiky.",
+      "s2Title": "2. Správce osobních údajů",
+      "s2p1": "Správcem Vašich osobních údajů je:",
+      "s3Title": "3. Účel zpracování",
+      "s3p1": "Vaše osobní údaje zpracováváme pro následující účely:",
+      "s3l1": "<b>Rezervace a objednávky</b> – zpracování rezervací mytí a detailingu, správa objednávek a komunikace ohledně poskytovaných služeb.",
+      "s3l2": "<b>Zasílání newsletterů</b> – informování o novinkách, akcích a speciálních nabídkách (pouze s Vaším souhlasem).",
+      "s3l3": "<b>Zlepšování služeb</b> – analýza preferencí zákazníků a optimalizace nabídky služeb a uživatelského zážitku na webových stránkách.",
+      "s3l4": "<b>Zákonné povinnosti</b> – plnění daňových, účetních a dalších zákonných povinností.",
+      "s3l5": "<b>Komunikace</b> – odpovědi na Vaše dotazy a žádosti prostřednictvím kontaktního formuláře, e-mailu nebo telefonu.",
+      "s4Title": "4. Právní základ zpracování",
+      "s4p1": "Osobní údaje zpracováváme na základě následujících právních titulů:",
+      "s4l1": "<b>Plnění smlouvy</b> (čl. 6 odst. 1 písm. b) GDPR) – zpracování je nezbytné pro plnění smlouvy o poskytování služeb, jejíž smluvní stranou jste Vy.",
+      "s4l2": "<b>Souhlas</b> (čl. 6 odst. 1 písm. a) GDPR) – pro zasílání marketingových sdělení a newsletterů. Souhlas můžete kdykoli odvolat.",
+      "s4l3": "<b>Oprávněný zájem</b> (čl. 6 odst. 1 písm. f) GDPR) – zlepšování služeb a ochrana našich oprávněných zájmů.",
+      "s4l4": "<b>Zákonná povinnost</b> (čl. 6 odst. 1 písm. c) GDPR) – plnění povinností vyplývajících z právních předpisů.",
+      "s5Title": "5. Doba uchování",
+      "s5p1": "Vaše osobní údaje uchováváme pouze po dobu nezbytně nutnou pro splnění účelu zpracování:",
+      "s5l1": "<b>Údaje o rezervacích a objednávkách</b> – po dobu trvání smluvního vztahu a následně 3 roky pro případné reklamace.",
+      "s5l2": "<b>Účetní a daňové doklady</b> – 10 let dle zákonných požadavků.",
+      "s5l3": "<b>Marketingové souhlasy</b> – do odvolání souhlasu.",
+      "s5l4": "<b>Údaje z kontaktních formulářů</b> – 1 rok od posledního kontaktu.",
+      "s6Title": "6. Příjemci údajů",
+      "s6p1": "Vaše osobní údaje mohou být sdíleny s následujícími třetími stranami:",
+      "s6l1": "<b>Altegio</b> – provozovatel rezervačního systému, který zajišťuje technickou správu rezervací.",
+      "s6l2": "<b>Platební procesory</b> – zpracovatelé karetních plateb pro bezpečné provádění platebních transakcí.",
+      "s6l3": "<b>Účetní a daňoví poradci</b> – pro plnění zákonných povinností.",
+      "s6l4": "<b>Poskytovatelé IT služeb</b> – hosting, správa webových stránek a e-mailové komunikace.",
+      "s6p2": "Vaše údaje nepředáváme do třetích zemí mimo Evropský hospodářský prostor bez odpovídajících záruk.",
+      "s7Title": "7. Vaše práva",
+      "s7p1": "V souvislosti se zpracováním osobních údajů máte následující práva:",
+      "s7l1": "<b>Právo na přístup</b> – máte právo získat potvrzení o tom, zda jsou Vaše osobní údaje zpracovávány, a pokud ano, získat k nim přístup.",
+      "s7l2": "<b>Právo na opravu</b> – máte právo požadovat opravu nepřesných nebo doplnění neúplných osobních údajů.",
+      "s7l3": "<b>Právo na výmaz</b> – máte právo požadovat vymazání svých osobních údajů, pokud pro jejich zpracování neexistuje zákonný důvod.",
+      "s7l4": "<b>Právo na přenositelnost</b> – máte právo získat osobní údaje, které jste nám poskytli, ve strukturovaném a strojově čitelném formátu.",
+      "s7l5": "<b>Právo vznést námitku</b> – máte právo vznést námitku proti zpracování osobních údajů na základě oprávněného zájmu.",
+      "s7l6": "<b>Právo na omezení zpracování</b> – máte právo požadovat omezení zpracování osobních údajů.",
+      "s7l7": "<b>Právo odvolat souhlas</b> – pokud je zpracování založeno na souhlasu, máte právo tento souhlas kdykoli odvolat.",
+      "s7p2": "Svá práva můžete uplatnit zasláním žádosti na e-mailovou adresu automyckakarlin@email.cz. Máte rovněž právo podat stížnost u Úřadu pro ochranu osobních údajů (ÚOOÚ).",
+      "s8Title": "8. Cookies",
+      "s8p1": "Naše webové stránky používají soubory cookies pro zajištění správné funkčnosti webu, analýzu návštěvnosti a personalizaci obsahu. Cookies jsou malé textové soubory, které se ukládají ve Vašem prohlížeči.",
+      "s8p2": "Používáme následující typy cookies:",
+      "s8l1": "<b>Nezbytné cookies</b> – zajišťují základní funkčnost webu a nelze je deaktivovat.",
+      "s8l2": "<b>Analytické cookies</b> – pomáhají nám pochopit, jak návštěvníci používají webové stránky.",
+      "s8l3": "<b>Marketingové cookies</b> – slouží k zobrazení relevantních reklamních sdělení.",
+      "s8p3": "Nastavení cookies můžete kdykoli změnit v nastavení svého prohlížeče.",
+      "s9Title": "9. Kontakt",
+      "s9p1": "V případě jakýchkoli dotazů ohledně zpracování Vašich osobních údajů nás neváhejte kontaktovat:"
+    }
+  }
+}

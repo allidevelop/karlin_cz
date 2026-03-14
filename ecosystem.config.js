@@ -12,5 +12,15 @@ module.exports = {
     autorestart: true,
     watch: false,
     max_memory_restart: '1G',
+  }, {
+    name: 'automycka-karlin-bot',
+    script: 'telegram-bridge/bot.js',
+    cwd: '/home/developer/projects/moykacz',
+    filter_env: ['CLAUDECODE'],
+    instances: 1,
+    exec_mode: 'fork',
+    autorestart: true,
+    max_memory_restart: '512M',
+    restart_delay: 5000,
   }]
 }

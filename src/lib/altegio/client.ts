@@ -2,10 +2,11 @@ import type {
   AltegioResponse,
   AltegioService,
   AltegioCategory,
-  AltegioBookDate,
+  AltegioBookDatesResponse,
   AltegioBookTime,
   AltegioBookingRequest,
   AltegioClientData,
+  AltegioRecord,
 } from './types'
 
 const ALTEGIO_BASE_URL = 'https://api.alteg.io/api/v1'
@@ -108,7 +109,7 @@ class AltegioClient {
   async getAvailableDates(
     serviceId: number,
     staffId?: number
-  ): Promise<AltegioResponse<AltegioBookDate[]>> {
+  ): Promise<AltegioResponse<AltegioBookDatesResponse>> {
     const params = new URLSearchParams({
       service_ids: String(serviceId),
     })
@@ -116,7 +117,7 @@ class AltegioClient {
       params.set('staff_id', String(staffId))
     }
 
-    return this.rateLimitedFetch<AltegioBookDate[]>(
+    return this.rateLimitedFetch<AltegioBookDatesResponse>(
       `${ALTEGIO_BASE_URL}/book_dates/${this.config.companyId}?${params.toString()}`
     )
   }
@@ -171,6 +172,29 @@ class AltegioClient {
         method: 'POST',
         body: JSON.stringify(data),
       }
+    )
+  }
+
+  /**
+   * Fetch booking records for the company.
+   * GET /records/{company_id}
+   * Requires record_form_access permission on the user token.
+   */
+  async getRecords(params?: {
+    startDate?: string  // YYYY-MM-DD
+    endDate?: string    // YYYY-MM-DD
+    page?: number
+    count?: number
+  }): Promise<AltegioResponse<AltegioRecord[]>> {
+    const searchParams = new URLSearchParams()
+    if (params?.startDate) searchParams.set('start_date', params.startDate)
+    if (params?.endDate) searchParams.set('end_date', params.endDate)
+    if (params?.page) searchParams.set('page', String(params.page))
+    searchParams.set('count', String(params?.count ?? 200))
+
+    const qs = searchParams.toString()
+    return this.rateLimitedFetch<AltegioRecord[]>(
+      `${ALTEGIO_BASE_URL}/records/${this.config.companyId}${qs ? `?${qs}` : ''}`
     )
   }
 }

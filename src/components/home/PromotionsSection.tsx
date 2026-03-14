@@ -2,73 +2,41 @@
 
 import { useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
-type Props = {
-  promotions: Array<{
-    title: string;
-    slug: string;
-    description?: string | null;
-    discountedPrice?: number | null;
-    originalPrice?: number | null;
-    badge?: string | null;
-    validUntil?: string | null;
-  }>;
+type Promo = {
+  title: string;
+  slug: string;
+  description?: string | null;
+  discountedPrice?: number | null;
+  originalPrice?: number | null;
+  badge?: string | null;
+  validUntil?: string | null;
+  imageUrl?: string | null;
 };
 
-const fallbackPromos = [
-  {
-    title: "Zimní kompletní péče",
-    subtitle: "Ochrana vozu před zimou",
-    description: "Kompletní mytí + ochrana laku + ošetření podvozku proti korozi",
-    price: 1750,
-    originalPrice: 2500,
-    badge: "Nejlepší nabídka",
-    validUntil: "31.3.2026",
-    image: "/images/promo-winter.png",
-    slug: "zimni-kompletni-pece",
-  },
-  {
-    title: "Zimní kompletní péče",
-    subtitle: "Ochrana vozu před zimou",
-    description: "Kompletní mytí + ochrana laku + ošetření podvozku proti korozi",
-    price: 1750,
-    originalPrice: 2500,
-    badge: "Premium",
-    validUntil: "31.3.2026",
-    image: "/images/promo-winter.png",
-    slug: "zimni-kompletni-pece-2",
-  },
-  {
-    title: "Zimní kompletní péče",
-    subtitle: "Ochrana vozu před zimou",
-    description: "Kompletní mytí + ochrana laku + ošetření podvozku proti korozi",
-    price: 1750,
-    originalPrice: 2500,
-    badge: "Premium",
-    validUntil: "31.3.2026",
-    image: "/images/promo-winter.png",
-    slug: "zimni-kompletni-pece-3",
-  },
-  {
-    title: "Zimní kompletní péče",
-    subtitle: "Ochrana vozu před zimou",
-    description: "Kompletní mytí + ochrana laku + ošetření podvozku proti korozi",
-    price: 1750,
-    originalPrice: 2500,
-    badge: "Populární",
-    validUntil: "31.3.2026",
-    image: "/images/promo-winter.png",
-    slug: "zimni-kompletni-pece-4",
-  },
-];
+type Props = {
+  promotions: Promo[];
+  cmsTitle?: string | null;
+  cmsSubtitle?: string | null;
+  cmsViewDetailButton?: string | null;
+  cmsAllPromotionsButton?: string | null;
+};
 
 const arrowBtnClass =
   "flex items-center justify-center w-12 h-12 rounded-[10px] border-2 border-[#b1b3b6] bg-[#f0eff0] text-[#302e2f] transition-all hover:border-[#7960a9] hover:text-[#7960a9] hover:shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]";
 
-export default function PromotionsSection({ promotions: _promotions }: Props) {
+export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, cmsViewDetailButton, cmsAllPromotionsButton }: Props) {
+  const t = useTranslations();
+  const locale = useLocale();
+  const dateFormatter = new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -86,7 +54,7 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
     emblaApi?.scrollNext();
   }, [emblaApi]);
 
-  const promos = fallbackPromos;
+  if (promotions.length === 0) return null;
 
   return (
     <section className="pb-[25px]">
@@ -95,23 +63,23 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-[30px] gap-4">
           <div>
             <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
-              Exkluzivní akce
+              {t("promotions.title")}
             </h2>
             <p className="font-clash font-medium text-[15.1px] lg:text-[36px] text-[#302e2f] leading-[24px] lg:leading-normal mt-1 lg:mt-0">
-              Využijte naše časově omezené nabídky
+              {t("promotions.subtitle")}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={scrollPrev}
-              aria-label="Předchozí"
+              aria-label={t("promotions.prevSlide")}
               className={arrowBtnClass}
             >
               <ChevronLeft className="size-6" />
             </button>
             <button
               onClick={scrollNext}
-              aria-label="Další"
+              aria-label={t("promotions.nextSlide")}
               className={arrowBtnClass}
             >
               <ChevronRight className="size-6" />
@@ -120,7 +88,7 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
               href="/akce"
               className="hidden lg:inline-flex items-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity ml-2"
             >
-              Všechny akce
+              {t("promotions.allPromotions")}
               <ArrowRight className="size-[18px]" />
             </Link>
           </div>
@@ -131,10 +99,10 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
       <div className="pl-4 lg:pl-[max(32px,calc((100vw-1536px)/2+32px))]">
         <div ref={emblaRef} className="overflow-hidden">
           <div className="flex gap-4 lg:gap-[48px]">
-            {promos.map((promo, i) => (
+            {promotions.map((promo, i) => (
               <div
                 key={`${promo.slug}-${i}`}
-                className="min-w-0 shrink-0 grow-0 basis-[348px] lg:basis-[400px]"
+                className="min-w-0 shrink-0 grow-0 basis-[85vw] sm:basis-[348px] lg:basis-[400px]"
               >
                 <div className="relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] h-[549px]">
                   {/* Badge — Dynamic Island shape */}
@@ -149,7 +117,7 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
                   {/* Top: Image */}
                   <div className="relative h-[256px] overflow-hidden">
                     <Image
-                      src={promo.image}
+                      src={promo.imageUrl || "/images/promo-winter.png"}
                       alt={promo.title}
                       fill
                       className="object-cover"
@@ -160,9 +128,6 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
                       <h3 className="font-clash font-bold text-[26px] lg:text-[32px] text-[#f0eff0] uppercase text-center leading-[30px]">
                         {promo.title}
                       </h3>
-                      <p className="font-clash font-medium text-[16px] text-[#f0eff0] text-center leading-[20px]">
-                        {promo.subtitle}
-                      </p>
                     </div>
                   </div>
 
@@ -174,35 +139,45 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
                     </p>
 
                     {/* Prices */}
-                    <div className="border-b border-[#f0eff0] pb-4">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-clash font-bold text-[32px] leading-[40px] text-[#7960a9]">
-                          {promo.price}
-                        </span>
-                        <span className="font-clash font-normal text-[18px] text-[#7960a9]">
-                          Kč
-                        </span>
-                        <span className="font-clash font-medium text-[24px] leading-[40px] text-[#b1b3b6] line-through ml-2">
-                          {promo.originalPrice}
-                        </span>
-                        <span className="font-clash font-normal text-[16px] text-[#b1b3b6] line-through">
-                          Kč
-                        </span>
+                    {(promo.discountedPrice || promo.originalPrice) && (
+                      <div className="border-b border-[#f0eff0] pb-4">
+                        <div className="flex items-baseline gap-2">
+                          {promo.discountedPrice && (
+                            <>
+                              <span className="font-clash font-bold text-[32px] leading-[40px] text-[#7960a9]">
+                                {promo.discountedPrice}
+                              </span>
+                              <span className="font-clash font-normal text-[18px] text-[#7960a9]">
+                                {t("common.currency")}
+                              </span>
+                            </>
+                          )}
+                          {promo.originalPrice && (
+                            <>
+                              <span className="font-clash font-medium text-[24px] leading-[40px] text-[#b1b3b6] line-through ml-2">
+                                {promo.originalPrice}
+                              </span>
+                              <span className="font-clash font-normal text-[16px] text-[#b1b3b6] line-through">
+                                {t("common.currency")}
+                              </span>
+                            </>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* CTA */}
                     <Link
                       href={`/akce/${promo.slug}`}
                       className="flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14.8px] uppercase leading-[24px] rounded-[10px] px-6 py-4 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] hover:opacity-90 transition-opacity"
                     >
-                      Zobrazit detail
+                      {t("promotions.viewDetail")}
                     </Link>
 
                     {/* Validity */}
                     {promo.validUntil && (
                       <p className="font-clash font-medium text-[14px] text-[#302e2f] text-center leading-[20px]">
-                        Platí do {promo.validUntil}
+                        {t("promotions.validUntil")} {dateFormatter.format(new Date(promo.validUntil))}
                       </p>
                     )}
                   </div>
@@ -220,7 +195,7 @@ export default function PromotionsSection({ promotions: _promotions }: Props) {
             href="/akce"
             className="flex items-center justify-center gap-2 bg-[#302e2f] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-4 w-full hover:opacity-90 transition-opacity"
           >
-            Všechny akce
+            {t("promotions.allPromotions")}
             <ArrowRight className="size-[18px]" />
           </Link>
         </div>

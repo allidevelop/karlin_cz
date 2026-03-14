@@ -25,11 +25,10 @@ export interface AltegioCategory {
   staff: number[]
 }
 
-/** A single available date returned from the book_dates endpoint. */
-export interface AltegioBookDate {
-  date: string
-  /** Whether the date is available for booking. */
-  is_available: boolean
+/** Response from the book_dates endpoint — arrays of date strings. */
+export interface AltegioBookDatesResponse {
+  booking_dates: string[]  // "YYYY-MM-DD"
+  working_dates: string[]  // "YYYY-MM-DD"
 }
 
 /** A single available time slot returned from the book_times endpoint. */
@@ -41,29 +40,31 @@ export interface AltegioBookTime {
   seance_length: number
 }
 
-/** Payload sent to create a new booking record. */
+/** Payload sent to create a new booking record via book_record endpoint. */
 export interface AltegioBookingRequest {
-  /** Array of service objects with id and staff_id. */
-  appointments: {
-    id: number
-    staff_id: number
-  }[]
-  /** Client information. */
-  client: {
-    phone: string
-    name: string
-    email?: string
-  }
-  /** ISO date string (YYYY-MM-DD). */
-  date: string
-  /** Time string (HH:mm). */
-  time: string
+  /** Client phone (required). */
+  phone: string
+  /** Client full name (required). */
+  fullname: string
+  /** Client email (optional). */
+  email?: string
   /** Optional comment for the booking. */
   comment?: string
-  /** SMS notification for the client. */
+  /** SMS reminder hours before visit (0 to disable). */
   notify_by_sms?: number
-  /** Email notification for the client. */
+  /** Email reminder hours before visit (0 to disable). */
   notify_by_email?: number
+  /** Appointments array — each item contains services, staff_id, datetime. */
+  appointments: {
+    /** Identifier for response mapping. */
+    id: number
+    /** Array of service IDs to book. */
+    services: number[]
+    /** Team member ID (0 = any available). */
+    staff_id: number
+    /** ISO 8601 datetime (e.g., "2026-03-05T19:00:00.000+01:00"). */
+    datetime: string
+  }[]
 }
 
 /** Client data structure for the Altegio API. */
@@ -78,6 +79,45 @@ export interface AltegioClientData {
   importance_id: number
   categories: number[]
   label: string
+}
+
+/** A booking record returned by the Altegio API. */
+export interface AltegioRecord {
+  id: number
+  company_id: number
+  staff_id: number
+  services: Array<{
+    id: number
+    title: string
+    cost: number
+    cost_to_pay: number
+    amount: number
+  }>
+  staff?: {
+    id: number
+    name: string
+    specialization: string
+  }
+  client?: {
+    id: number
+    name: string
+    surname: string
+    phone: string
+    email: string
+  }
+  date: string            // "YYYY-MM-DD HH:mm:ss"
+  datetime: string        // ISO datetime
+  create_date: string     // ISO datetime
+  comment: string
+  online: boolean | number
+  visit_attendance: number // -1=not come, 0=waiting, 1=confirmed, 2=came
+  attendance: number
+  confirmed: number
+  seance_length: number   // seconds
+  length: number          // seconds
+  deleted: boolean
+  record_from?: string    // source label, e.g. "Altegio.me App", "Online widget"
+  from_url?: string       // referrer URL
 }
 
 /** Generic wrapper for Altegio API responses. */

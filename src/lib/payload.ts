@@ -1,6 +1,12 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
+/** Extract the URL from a resolved Payload upload field. */
+export function getMediaUrl(media: unknown): string | null {
+  if (!media || typeof media !== 'object') return null
+  return (media as { url?: string }).url ?? null
+}
+
 // ---------------------------------------------------------------------------
 // Services
 // ---------------------------------------------------------------------------
@@ -23,6 +29,42 @@ export async function getServices(limit = 100) {
 }
 
 /**
+ * Get all active programs (non-addon services), sorted by sortOrder.
+ */
+export async function getPrograms(limit = 100) {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'services',
+    limit,
+    depth: 2,
+    sort: 'sortOrder',
+    where: {
+      isActive: { equals: true },
+      isAddon: { equals: false },
+    },
+  })
+  return result.docs
+}
+
+/**
+ * Get all active addons, sorted by sortOrder.
+ */
+export async function getAddons(limit = 100) {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'services',
+    limit,
+    depth: 1,
+    sort: 'sortOrder',
+    where: {
+      isActive: { equals: true },
+      isAddon: { equals: true },
+    },
+  })
+  return result.docs
+}
+
+/**
  * Get a single service by its slug.
  * Returns the document or `null` if not found.
  */
@@ -31,6 +73,7 @@ export async function getServiceBySlug(slug: string) {
   const result = await payload.find({
     collection: 'services',
     limit: 1,
+    depth: 2,
     where: {
       slug: { equals: slug },
     },
@@ -67,6 +110,7 @@ export async function getVehicleCategories() {
   const result = await payload.find({
     collection: 'vehicle-categories',
     limit: 100,
+    depth: 1,
     sort: 'sortOrder',
   })
   return result.docs
@@ -78,9 +122,27 @@ export async function getVehicleCategories() {
 
 /**
  * Get all active FAQ items, sorted by sortOrder.
+ * If `page` is provided, only returns items assigned to that page (or items with no pages set).
  */
-export async function getFAQ() {
+export async function getFAQ(page?: string) {
   const payload = await getPayload({ config })
+
+  if (page) {
+    const result = await payload.find({
+      collection: 'faq',
+      limit: 100,
+      sort: 'sortOrder',
+      where: {
+        isActive: { equals: true },
+        or: [
+          { pages: { contains: page } },
+          { pages: { exists: false } },
+        ],
+      },
+    })
+    return result.docs
+  }
+
   const result = await payload.find({
     collection: 'faq',
     limit: 100,
@@ -124,6 +186,7 @@ export async function getPromotions() {
   const result = await payload.find({
     collection: 'promotions',
     limit: 100,
+    depth: 1,
     where: {
       isActive: { equals: true },
     },
@@ -140,6 +203,7 @@ export async function getPromotionBySlug(slug: string) {
   const result = await payload.find({
     collection: 'promotions',
     limit: 1,
+    depth: 1,
     where: {
       slug: { equals: slug },
     },
@@ -159,6 +223,7 @@ export async function getBlogPosts(limit = 10) {
   const result = await payload.find({
     collection: 'blog-posts',
     limit,
+    depth: 1,
     sort: '-publishedAt',
     where: {
       isPublished: { equals: true },
@@ -176,6 +241,7 @@ export async function getBlogPostBySlug(slug: string) {
   const result = await payload.find({
     collection: 'blog-posts',
     limit: 1,
+    depth: 1,
     where: {
       slug: { equals: slug },
     },
@@ -190,13 +256,15 @@ export async function getBlogPostBySlug(slug: string) {
 export async function getExpressWashSettings() {
   try {
     const payload = await getPayload({ config })
-    const data = await payload.findGlobal({ slug: 'express-wash-settings' })
+    const data = await payload.findGlobal({ slug: 'express-wash-settings', depth: 1 })
     return {
       showLoyaltyCta: !!data?.showLoyaltyCta,
       showVoucherCta: !!data?.showVoucherCta,
+      desktopBannerUrl: getMediaUrl(data?.desktopBannerImage),
+      mobileBannerUrl: getMediaUrl(data?.mobileBannerImage),
     }
   } catch {
-    return { showLoyaltyCta: false, showVoucherCta: false }
+    return { showLoyaltyCta: false, showVoucherCta: false, desktopBannerUrl: null, mobileBannerUrl: null }
   }
 }
 
@@ -212,10 +280,118 @@ export async function getPartners() {
   const result = await payload.find({
     collection: 'partners',
     limit: 100,
+    depth: 1,
     sort: 'sortOrder',
     where: {
       isActive: { equals: true },
     },
   })
   return result.docs
+}
+
+// ---------------------------------------------------------------------------
+// Site Settings (Global)
+// ---------------------------------------------------------------------------
+
+export async function getSiteSettings(locale?: string) {
+  try {
+    const payload = await getPayload({ config })
+    return await payload.findGlobal({
+      slug: 'site-settings',
+      locale: locale as 'cs' | 'en' | 'ru' | undefined,
+    })
+  } catch {
+    return null
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Banners
+// ---------------------------------------------------------------------------
+
+/**
+ * Get active banners filtered by position, respecting date scheduling.
+ */
+export async function getActiveBanners(position?: string, locale?: string) {
+  const payload = await getPayload({ config })
+
+  const result = await payload.find({
+    collection: 'banners',
+    limit: 20,
+    depth: 1,
+    sort: '-priority',
+    locale: locale as 'cs' | 'en' | 'ru' | undefined,
+    where: position
+      ? { and: [{ isActive: { equals: true } }, { position: { equals: position } }] }
+      : { isActive: { equals: true } },
+  })
+
+  const now = new Date()
+  return result.docs.filter((b) => {
+    if (b.startDate && new Date(b.startDate) > now) return false
+    if (b.endDate && new Date(b.endDate) < now) return false
+    return true
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Popup Banners
+// ---------------------------------------------------------------------------
+
+/**
+ * Get active popup banners sorted by priority (highest first), respecting date scheduling.
+ */
+export async function getActivePopups(locale?: string) {
+  const payload = await getPayload({ config })
+
+  const result = await payload.find({
+    collection: 'popup-banners',
+    limit: 10,
+    depth: 1,
+    sort: '-priority',
+    locale: locale as 'cs' | 'en' | 'ru' | undefined,
+    where: {
+      isActive: { equals: true },
+    },
+  })
+
+  const now = new Date()
+  return result.docs.filter((p) => {
+    if (p.startDate && new Date(p.startDate as string) > now) return false
+    if (p.endDate && new Date(p.endDate as string) < now) return false
+    return true
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Translations (Global)
+// ---------------------------------------------------------------------------
+
+export async function getTranslations(locale?: string) {
+  try {
+    const payload = await getPayload({ config })
+    return await payload.findGlobal({
+      slug: 'translations',
+      locale: locale as 'cs' | 'en' | 'ru' | undefined,
+    })
+  } catch {
+    return null
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Home Page Content (Global)
+// ---------------------------------------------------------------------------
+
+export async function getHomePageContent(locale?: string) {
+  try {
+    const payload = await getPayload({ config })
+    return await payload.findGlobal({
+      slug: 'home-page-content',
+      locale: locale as 'cs' | 'en' | 'ru' | undefined,
+      depth: 1,
+    })
+  } catch {
+    return null
+  }
 }

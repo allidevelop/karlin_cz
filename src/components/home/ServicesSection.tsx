@@ -1,39 +1,76 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { getVehicleCategories, getServices } from "@/lib/payload";
 
-const vehicleCards = [
-  {
-    id: "sedan",
-    name: "Hatchback / Sedan",
-    image: "/images/vehicle-hatchback.png",
-    price: 985,
-    href: "/rezervace/program?vehicle=sedan",
-  },
-  {
-    id: "suv",
-    name: "SUV",
-    image: "/images/vehicle-suv-1.png",
-    price: 1085,
-    href: "/rezervace/program?vehicle=suv",
-  },
-  {
-    id: "g-class",
-    name: "G-Class / V-Class / Pickup",
-    image: "/images/vehicle-gclass-1.png",
-    price: 1085,
-    href: "/rezervace/program?vehicle=g-class",
-  },
-  {
-    id: "motocykly",
-    name: "Motocykly",
-    image: "/images/vehicle-moto-1.png",
-    price: 985,
-    href: "/rezervace/program?vehicle=motocykly",
-  },
-];
+/** Fallback images for vehicle categories without CMS images */
+const FALLBACK_IMAGE_MAP: Record<string, string> = {
+  "hatchback-sedan": "/images/vehicle-hatchback.png",
+  suv: "/images/vehicle-suv-1.png",
+  "g-class-v-class-pickup": "/images/vehicle-gclass-1.png",
+  motocykly: "/images/vehicle-moto-1.png",
+};
 
-export default function ServicesSection() {
+/** Slug -> booking vehicle param mapping */
+const SLUG_TO_VEHICLE_PARAM: Record<string, string> = {
+  "hatchback-sedan": "sedan",
+  suv: "suv",
+  "g-class-v-class-pickup": "g-class",
+  motocykly: "motocykly",
+};
+
+type Props = {
+  cmsTitle?: string | null;
+  cmsSubtitle?: string | null;
+  cmsChooseProgramButton?: string | null;
+  cmsAllServicesButton?: string | null;
+};
+
+export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChooseProgramButton, cmsAllServicesButton }: Props) {
+  const t = await getTranslations();
+  const [vehicleCategories, services] = await Promise.all([
+    getVehicleCategories(),
+    getServices(),
+  ]);
+
+  // Build min price per vehicle category from CMS services
+  const minPriceByCategory = new Map<string | number, number>();
+  for (const service of services) {
+    const pricingByVehicle = service.pricingByVehicle as
+      | { vehicleCategory: { id?: number } | number; price: number }[]
+      | undefined;
+    if (!pricingByVehicle) continue;
+    for (const p of pricingByVehicle) {
+      const catId =
+        typeof p.vehicleCategory === "object" && p.vehicleCategory !== null
+          ? p.vehicleCategory.id
+          : p.vehicleCategory;
+      if (catId == null) continue;
+      const current = minPriceByCategory.get(catId);
+      if (current == null || p.price < current) {
+        minPriceByCategory.set(catId, p.price);
+      }
+    }
+  }
+
+  // Build vehicle cards from CMS data
+  const vehicleCards = vehicleCategories.map((vc) => {
+    const slug = vc.slug as string;
+    const cmsImage = vc.image as { url?: string } | null | undefined;
+    const imageSrc = (typeof cmsImage === "object" && cmsImage?.url) ? cmsImage.url : (FALLBACK_IMAGE_MAP[slug] ?? "");
+    const vehicleParam = SLUG_TO_VEHICLE_PARAM[slug] ?? slug;
+    const price = minPriceByCategory.get(vc.id) ?? 0;
+
+    return {
+      id: vehicleParam,
+      name: vc.name ?? "",
+      image: imageSrc,
+      price,
+      href: `/rezervace/program?vehicle=${vehicleParam}`,
+    };
+  });
+
   return (
     <section id="services" className="pb-[80px]">
       <div className="max-w-[1536px] mx-auto pt-[25px] px-4 lg:px-[32px]">
@@ -41,17 +78,17 @@ export default function ServicesSection() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-[30px] gap-4">
           <div>
             <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
-              Naše služby
+              {t("services.title")}
             </h2>
             <p className="font-clash font-normal text-[14.8px] lg:text-[36px] lg:font-medium text-[#302e2f] leading-[24px] lg:leading-normal mt-1">
-              Vyberte si program pro vaše vozidlo
+              {t("services.subtitle")}
             </p>
           </div>
           <Link
             href="/sluzby"
             className="inline-flex items-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity self-start lg:self-auto"
           >
-            Všechny služby
+            {t("services.allServices")}
             <ArrowRight className="size-[18px]" />
           </Link>
         </div>
@@ -90,29 +127,29 @@ export default function ServicesSection() {
               <div className="p-4 lg:p-6 lg:h-[240px] flex flex-col items-center justify-center backdrop-blur-[5px]">
                 {/* Mobile price layout */}
                 <div className="lg:hidden text-center">
-                  <span className="font-clash font-normal text-[15px] text-[#302e2f]">od </span>
+                  <span className="font-clash font-normal text-[15px] text-[#302e2f]">{t("common.priceFrom")} </span>
                   <span className="font-clash font-bold text-[20px] text-[#7960a9]">{card.price}</span>
-                  <span className="font-clash font-normal text-[15px] text-[#7960a9]"> Kč</span>
+                  <span className="font-clash font-normal text-[15px] text-[#7960a9]"> {t("common.currency")}</span>
                 </div>
 
                 {/* Desktop price layout */}
                 <div className="hidden lg:flex flex-col items-center gap-2 flex-1 justify-center">
                   <span className="font-clash font-bold text-[12px] text-[#b1b3b6] uppercase tracking-[0.6px] leading-[16px]">
-                    ceny od
+                    {t("common.pricesFrom")}
                   </span>
                   <div className="flex items-baseline gap-1">
                     <span className="font-clash font-bold text-[60px] leading-[60px] text-[#7960a9]">
                       {card.price}
                     </span>
                     <span className="font-clash font-bold text-[22.9px] leading-[32px] text-[#7960a9]">
-                      Kč
+                      {t("common.currency")}
                     </span>
                   </div>
                 </div>
 
                 {/* CTA button (desktop only) */}
                 <button className="hidden lg:flex w-full items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] uppercase leading-[24px] rounded-[10px] py-[14px] hover:opacity-90 transition-opacity">
-                  Zvolit program
+                  {t("services.chooseProgram")}
                 </button>
               </div>
             </Link>

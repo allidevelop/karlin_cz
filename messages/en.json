@@ -1,0 +1,710 @@
+{
+  "common": {
+    "currency": "CZK",
+    "priceFrom": "from",
+    "pricesFrom": "prices from",
+    "loading": "Loading...",
+    "back": "Back",
+    "continue": "Continue",
+    "learnMore": "Learn more",
+    "bookNow": "Book now",
+    "phone": "+420 775 009 033",
+    "email": "automyckakarlin@email.cz",
+    "address": "Sokolovská 694/98, Karlín, 186 00 Prague",
+    "brandName": "AUTOMYČKA KARLÍN",
+    "navigate": "Navigate",
+    "submit": "Submit",
+    "apply": "Apply",
+    "close": "Close",
+    "minRead": "min read",
+    "allServices": "All services"
+  },
+  "navigation": {
+    "booking": "Book now",
+    "services": "Services",
+    "promotions": "Deals",
+    "forBusiness": "For business",
+    "reviews": "Reviews",
+    "blog": "Blog",
+    "contact": "Contact",
+    "serviceMenu": {
+      "toGo": "To Go",
+      "toGlow": "To Glow",
+      "toWow": "To Wow",
+      "premiumDetailing": "Premium Detailing",
+      "allServices": "All services"
+    }
+  },
+  "header": {
+    "logoAlt": "Automyčka Karlín logo",
+    "changeLanguage": "Change language",
+    "czech": "Čeština",
+    "english": "English",
+    "callPhone": "Call {phone}",
+    "openMenu": "Open menu",
+    "russian": "Русский"
+  },
+  "footer": {
+    "description": "Professional car care in Karlín. Modern technology, eco-friendly products, experienced team.",
+    "quickLinks": "Quick links",
+    "servicesHeading": "Services",
+    "contactHeading": "Contact",
+    "workingHoursHeading": "Working hours",
+    "workingHours": "Mon - Sun: 7:00 AM - 8:00 PM",
+    "copyright": "© 2026 AUTOMYČKA KARLÍN. All rights reserved",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "hero": {
+    "title": "Automyčka Karlín",
+    "subtitle": "Hand wheel cleaning",
+    "cta": "Quick Booking",
+    "navigate": "Navigate",
+    "imageAlt": "Porsche 911 at car wash"
+  },
+  "services": {
+    "title": "Our services",
+    "subtitle": "Choose a program for your vehicle",
+    "allServices": "All services",
+    "chooseProgram": "Choose program",
+    "vehicles": {
+      "hatchback": "Hatchback / Sedan",
+      "suv": "SUV",
+      "gclass": "G-Class / V-Class / Pickup",
+      "motorcycle": "Motorcycles"
+    },
+    "vehicleDescriptions": {
+      "hatchback": "Passenger cars, wagons, coupes",
+      "suv": "Crossovers and sport utility vehicles",
+      "gclass": "Large SUVs, vans, MPVs, pickups",
+      "motorcycle": "Road, enduro, scooters"
+    }
+  },
+  "promotions": {
+    "title": "Exclusive deals",
+    "subtitle": "Take advantage of our limited-time offers",
+    "allPromotions": "All deals",
+    "viewDetail": "View detail",
+    "validUntil": "Valid until",
+    "prevSlide": "Previous",
+    "nextSlide": "Next",
+    "backToPromotions": "Back to deals",
+    "backToAllPromotions": "Back to all deals",
+    "permanentOffer": "Permanent offer",
+    "youSave": "You save",
+    "bookWithPromo": "Book with this deal",
+    "whatsIncluded": "What's included",
+    "terms": "Deal terms",
+    "otherPromotions": "Other deals",
+    "photo": "Photo",
+    "notFound": "Deal not found"
+  },
+  "expressWash": {
+    "imageAlt": "Express hand car wash from 985 CZK",
+    "cards": {
+      "parking": {
+        "line1": "Free",
+        "line2": "Parking",
+        "description": "Parking all day\n7:00 AM - 8:00 PM"
+      },
+      "accessibility": {
+        "line1": "Excellent",
+        "line2": "Location",
+        "description": "Find us in Karlín\nOpen Mon - Sun"
+      },
+      "loyalty": {
+        "line1": "Loyalty",
+        "line2": "Program",
+        "description": "Earn rewards with every wash"
+      },
+      "voucher": {
+        "line1": "Gift",
+        "line2": "Voucher",
+        "description": "Send your request via the form below"
+      },
+      "comingSoon1": {
+        "line1": "Coming",
+        "line2": "Soon",
+        "description": "We're preparing a new\nservice for you"
+      },
+      "comingSoon2": {
+        "line1": "Coming",
+        "line2": "Soon",
+        "description": "We're preparing another\nnew feature"
+      }
+    },
+    "start": "Start"
+  },
+  "reviews": {
+    "title": "What our clients say",
+    "subtitle": "Read reviews from real customers",
+    "leaveReview": "Leave a review",
+    "prevReview": "Previous review",
+    "nextReview": "Next review"
+  },
+  "contactSection": {
+    "title": "Contact",
+    "formHeading": "Have something on your mind?",
+    "formSubheading": "Drop us a message and we'll get back to you right away!",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+420 775 009 033",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "Your question",
+    "messagePlaceholder": "Your message...",
+    "sendMessage": "Send message",
+    "contactInfo": "Contact information",
+    "operatingHours": "Operating hours",
+    "operatingHoursValue": "Monday – Sunday: 7:00 AM – 8:00 PM",
+    "openWeekends": "Open on weekends",
+    "howToReach": "How to reach us",
+    "location": "Karlín, Prague 8",
+    "accessInfo": "Easy access by public transport and car",
+    "mapTitle": "Map - Automyčka Karlín"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Answers to the most common questions about our services",
+    "noAnswer": "Didn't find the answer to your question?",
+    "contactUs": "Contact us"
+  },
+  "partners": {
+    "title": "Our partners",
+    "subtitle": "We cooperate with premium brands",
+    "prevPartner": "Previous partner",
+    "nextPartner": "Next partner"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Tips and news from the world of car care",
+    "readAll": "Read all articles",
+    "prevArticle": "Previous article",
+    "nextArticle": "Next article",
+    "pageTitle": "Blog & News",
+    "pageSubtitle": "Everything about car care, tips and news from our car wash",
+    "backHome": "Back to homepage",
+    "backToBlog": "Back to blog",
+    "noArticles": "No articles yet.",
+    "readMoreArticles": "Read more articles",
+    "moreArticles": "More articles",
+    "notFound": "Article not found",
+    "categories": {
+      "carCare": "Car care",
+      "tips": "Tips & advice",
+      "news": "News",
+      "technology": "Technology"
+    }
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subtitle": "Subscribe to not miss important events!",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Your email",
+    "subscribe": "Subscribe",
+    "socialHeading": "Follow our social media",
+    "socialText": "We share the latest news, discounts and promotions there",
+    "instagram": "Instagram",
+    "formLabel": "Newsletter subscription"
+  },
+  "booking": {
+    "heroTitle": "Book a wash",
+    "steps": {
+      "vehicle": {
+        "label": "Vehicle category",
+        "short": "Vehicle",
+        "subtitle": "Choose your vehicle category"
+      },
+      "program": {
+        "label": "Program selection",
+        "short": "Program",
+        "subtitle": "Choose a program for your vehicle"
+      },
+      "addons": {
+        "label": "Additional services",
+        "short": "Add-ons",
+        "subtitle": "Enhance your wash with additional services"
+      },
+      "datetime": {
+        "label": "Date & time",
+        "short": "Date",
+        "subtitle": "Choose your visit date and time"
+      },
+      "contact": {
+        "label": "Contact details",
+        "short": "Contact",
+        "subtitle": "Fill in your contact information"
+      }
+    },
+    "vehicle": {
+      "title": "Our services",
+      "subtitle": "Choose a program for your vehicle"
+    },
+    "program": {
+      "title": "Choose a program",
+      "subtitle": "Professional car care in the heart of Prague",
+      "changeCategory": "Change category",
+      "whatsIncluded": "More about program?",
+      "hide": "Hide",
+      "add": "Add",
+      "remove": "Remove",
+      "cart": "Cart",
+      "emptyCart": "You haven't selected a program yet.",
+      "promoLabel": "Discount code",
+      "promoPlaceholder": "Enter code",
+      "total": "Total",
+      "backToVehicle": "Back to vehicle selection",
+      "programBadge": "Program",
+      "mostPopular": "Most popular",
+      "duration": "{minutes} min"
+    },
+    "addons": {
+      "title": "Additional services",
+      "subtitle": "Enhance your wash with additional services",
+      "continueWithout": "Continue without add-ons",
+      "cartTitle": "CART",
+      "emptyCart": "Your cart is empty",
+      "promoPlaceholder": "Enter promo code",
+      "selectDate": "Select date",
+      "addonCount1": "add-on",
+      "addonCount2to4": "add-ons",
+      "addonCount5plus": "add-ons",
+      "skipToAddons": "Add-ons only",
+      "addonOnlyMode": "Booking without program",
+      "categoryInterior": "Interior care",
+      "categoryExterior": "Exterior care",
+      "categoryProtection": "Protection & waxes"
+    },
+    "cart": {
+      "discount": "Discount",
+      "promoInvalid": "Invalid promo code",
+      "promoExpired": "Promo code has expired",
+      "promoUsedUp": "Promo code has been used up",
+      "timeMorning": "Morning",
+      "timeAfternoon": "Afternoon",
+      "timeEvening": "Evening",
+      "promoBadge": "Promo"
+    },
+    "contactForm": {
+      "title": "Personal details",
+      "nameLabel": "Name *",
+      "namePlaceholder": "Enter your name",
+      "phoneLabel": "Phone *",
+      "phonePlaceholder": "Enter phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "promoLabel": "Enter promo code",
+      "commentLabel": "Comment",
+      "commentPlaceholder": "Comment for the booking",
+      "reminderLabel": "Reminder",
+      "reminder1h": "1 hour before visit",
+      "reminder2h": "2 hours before visit",
+      "reminder24h": "24 hours before visit",
+      "noReminder": "No reminder",
+      "gdprConsent": "I agree to the processing of my <link>personal data</link> and confirm that I have read and accepted the Privacy Policy and Terms of Service",
+      "gdprLink": "personal data",
+      "marketingConsent": "I agree to receive marketing communications (offers, discounts, promotions, news) to my email address",
+      "submitBooking": "Complete registration",
+      "addonBadge": "Add-on",
+      "selectTime": "Select time",
+      "noTimeslots": "No available times for this day.",
+      "errorCreate": "Failed to create booking. Please try again.",
+      "errorNetwork": "Network error. Check your connection and try again."
+    },
+    "confirmation": {
+      "done": "Done",
+      "thankYou": "Thank you for your booking",
+      "servicesLabel": "Services",
+      "addonsLabel": "Add-on services",
+      "totalLabel": "Total",
+      "bookingRefLabel": "Booking reference",
+      "statusLabel": "Status",
+      "statusConfirmed": "Confirmed",
+      "statusPending": "Pending confirmation",
+      "contactsLabel": "Contact",
+      "backHome": "Back to homepage",
+      "noBookingTitle": "No booking found",
+      "noBookingText": "We don't have any booking data. Please try making a new reservation.",
+      "goToBooking": "Go to booking",
+      "addToCalendar": "Add to Calendar",
+      "addToGoogleCalendar": "Google Calendar",
+      "downloadICS": "Download .ics",
+      "calendarEventTitle": "Car Wash — {service}",
+      "defaultService": "Car Wash"
+    }
+  },
+  "proFirmy": {
+    "badge": "Business solutions",
+    "title": "Premium care for your business",
+    "description": "Automyčka Karlín provides comprehensive fleet care services with an individual approach and special conditions for corporate clients.",
+    "getCta": "Get a quote",
+    "ourServices": "Our services",
+    "formHeading": "Request business services",
+    "companyLabel": "Company name *",
+    "contactPersonLabel": "Contact person *",
+    "emailLabel": "Email *",
+    "phoneLabel": "Phone *",
+    "fleetSizeLabel": "Fleet size",
+    "fleetSizeDefault": "Select size",
+    "fleetSize1to5": "1-5 vehicles",
+    "fleetSize6to20": "6-20 vehicles",
+    "fleetSize21to50": "21-50 vehicles",
+    "fleetSize50plus": "50+ vehicles",
+    "messageLabel": "Your message",
+    "messagePlaceholder": "Describe your requirements...",
+    "submitInquiry": "Submit inquiry",
+    "whyUsTitle": "Why choose us?",
+    "whyUsSubtitle": "We provide comprehensive solutions for corporate clients with a focus on quality and flexibility",
+    "benefits": {
+      "flexibleSlots": {
+        "title": "Flexible time slots",
+        "description": "Special appointments for company vehicles during off-peak hours"
+      },
+      "goodPrices": {
+        "title": "Competitive prices",
+        "description": "Special discounts for regular customers and larger fleets"
+      },
+      "premiumCare": {
+        "title": "Premium care",
+        "description": "Professional service preserving the value of your vehicles"
+      },
+      "personalManager": {
+        "title": "Personal manager",
+        "description": "Dedicated contact for coordination of all services"
+      },
+      "verifiedQuality": {
+        "title": "Verified quality",
+        "description": "We work with premium cosmetics and the most modern technologies for perfect results."
+      },
+      "individualApproach": {
+        "title": "Individual approach",
+        "description": "Each client receives a tailor-made solution according to their specific requirements and needs."
+      },
+      "reliablePartner": {
+        "title": "Reliable partner",
+        "description": "Long-term cooperation with a number of companies that value our reliability and professionalism."
+      }
+    }
+  },
+  "doplnkoveSluzby": {
+    "title": "Additional services",
+    "subtitle": "Extend the care of your vehicle with our services",
+    "tabs": {
+      "programs": "Programs",
+      "vehicleCategories": "Vehicle categories",
+      "additionalServices": "Additional services"
+    },
+    "categories": {
+      "interior": "Interior",
+      "glass": "Glass",
+      "exterior": "Paint & Exterior"
+    },
+    "rating": "Rating"
+  },
+  "serviceDetail": {
+    "backToServices": "Back to services",
+    "quickBooking": "Quick Booking",
+    "ourServicesTitle": "Our services",
+    "ourServicesSubtitle": "Complete care for your car",
+    "serviceTypes": {
+      "handWash": {
+        "title": "Hand wash",
+        "description": "Thorough hand wash with premium car chemistry"
+      },
+      "contactless": {
+        "title": "Contactless wash",
+        "description": "Gentle wash with high-pressure water stream"
+      },
+      "interiorCleaning": {
+        "title": "Interior cleaning",
+        "description": "Professional vacuuming and seat cleaning"
+      },
+      "complete": {
+        "title": "Complete wash",
+        "description": "Full care - exterior and interior"
+      }
+    },
+    "ctaBanner1": "Wash for all vehicle types: cars, SUVs, vans",
+    "ctaBanner2": "Maximum care and protection for your vehicle",
+    "order": "Order",
+    "advantages": {
+      "title": "Our advantages",
+      "subtitle": "AUTOMYČKA KARLÍN vs others",
+      "competitorTitle": "Other car washes",
+      "competitors": [
+        "Standard car chemistry",
+        "Varying staff quality",
+        "No paint protection guarantee",
+        "Average washing time 30-45 minutes",
+        "Difficult accessibility",
+        "Aggressive chemicals"
+      ],
+      "ours": [
+        "Premium car chemistry of the highest quality",
+        "Experienced team of professionals",
+        "100% paint protection",
+        "Express wash 15-20 minutes",
+        "Great location in central Karlín",
+        "Eco-friendly products",
+        "Online booking system 24/7",
+        "Loyalty program with bonuses",
+        "Free parking",
+        "Quality check after every wash",
+        "Vehicle insurance during washing",
+        "Modern technology and equipment"
+      ]
+    },
+    "beforeAfter": {
+      "before": "Before wash",
+      "after": "After wash",
+      "beforeLabel": "BEFORE",
+      "afterLabel": "AFTER"
+    },
+    "whyChooseUs": {
+      "title": "Why choose AUTOMYČKA KARLÍN",
+      "subtitle": "Our competitive advantages",
+      "noScratches": {
+        "title": "No scratches",
+        "description": "We guarantee gentle washing without damage"
+      },
+      "qualityControl": {
+        "title": "Quality control",
+        "description": "We check every car before handover"
+      },
+      "individual": {
+        "title": "Individual approach",
+        "description": "Every car requires specific care"
+      },
+      "premium": {
+        "title": "Premium services",
+        "description": "We only use the best products"
+      }
+    },
+    "tagline": "Perfect for everyday washing and premium care for your vehicle",
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Simple process in 4 steps",
+      "step1": {
+        "title": "Arrival or booking",
+        "description": "Drive in without an appointment or book online"
+      },
+      "step2": {
+        "title": "Service selection",
+        "description": "Choose a suitable package or individual services"
+      },
+      "step3": {
+        "title": "Washing & care",
+        "description": "We'll make your car shine like new"
+      },
+      "step4": {
+        "title": "Handover & payment",
+        "description": "Check the result and pay"
+      }
+    },
+    "safety": {
+      "title": "Safety and responsibility",
+      "subtitle": "Your trust is our priority",
+      "certifiedChemistry": {
+        "title": "Certified car chemistry",
+        "description": "We only use approved and tested products"
+      },
+      "ecoStandards": {
+        "title": "Eco standards",
+        "description": "We comply with all environmental regulations"
+      },
+      "insurance": {
+        "title": "Insurance",
+        "description": "Every vehicle is fully insured during washing"
+      },
+      "premiumCars": {
+        "title": "For premium cars",
+        "description": "Suitable for new and luxury vehicles too"
+      }
+    },
+    "pricing": {
+      "title": "Pricing and factors affecting price",
+      "subtitle": "Transparent pricing",
+      "vehicleType": {
+        "title": "Vehicle type",
+        "description": "Personal, SUV, van - each type has its price"
+      },
+      "chosenService": {
+        "title": "Chosen service",
+        "description": "From quick wash to complete detailing"
+      },
+      "dirtLevel": {
+        "title": "Level of dirt",
+        "description": "Heavily soiled vehicles require more care"
+      },
+      "additionalServices": {
+        "title": "Additional services",
+        "description": "Wax, tire blackening, interior cleaning"
+      },
+      "basePrice": "Basic wash for a personal car from",
+      "whatsIncluded": "What's included",
+      "pricingByCategory": "Pricing by category",
+      "bookAppointment": "Book an appointment"
+    },
+    "otherServices": "Other services",
+    "notFound": "Service not found"
+  },
+  "servicesPage": {
+    "title": "All our services",
+    "subtitle": "Discover our portfolio of premium services"
+  },
+  "promotionsPage": {
+    "title": "Special deals",
+    "subtitle": "Take advantage of our exclusive offers"
+  },
+  "metadata": {
+    "title": "Automyčka Karlín | Professional Hand Car Wash Prague",
+    "description": "Professional hand car washing and detailing in Prague Karlín. Express wash, complete care, ceramic coating. Online booking.",
+    "blogTitle": "Blog & News | Automyčka Karlín",
+    "blogDescription": "Everything about car care, tips and news from our car wash.",
+    "servicesTitle": "All Our Services | Automyčka Karlín",
+    "servicesDescription": "Discover our portfolio of premium washing and detailing services.",
+    "promotionsTitle": "Special Deals | Automyčka Karlín",
+    "promotionsDescription": "Take advantage of our exclusive offers and discounts on car washing.",
+    "additionalServicesTitle": "Additional Services | Automyčka Karlín",
+    "additionalServicesDescription": "Extend the care of your vehicle with our additional services.",
+    "bookingTitle": "Book a Wash | Automyčka Karlín",
+    "bookingDescription": "Book your car wash appointment online. Choose a program, add-on services and convenient booking.",
+    "vehicleCategoriesTitle": "Vehicle Categories | Automyčka Karlín",
+    "vehicleCategoriesDescription": "Choose your vehicle category and find out washing and detailing prices.",
+    "termsTitle": "Terms of Service | Automyčka Karlín",
+    "termsDescription": "Terms of Service of AUTOMYČKA KARLÍN for car washing and detailing services.",
+    "privacyTitle": "Privacy Policy | Automyčka Karlín",
+    "privacyDescription": "Privacy Policy of AUTOMYČKA KARLÍN. Information about personal data processing.",
+    "forBusinessTitle": "For Business | Automyčka Karlín",
+    "forBusinessDescription": "Automyčka Karlín provides comprehensive fleet care services with an individual approach.",
+    "promoNotFound": "Deal not found"
+  },
+  "contactForm": {
+    "sending": "Sending...",
+    "success": "Message sent successfully. We will get back to you soon!",
+    "errorRequired": "Please fill in all required fields.",
+    "errorGeneric": "An error occurred. Please try again."
+  },
+  "newsletterForm": {
+    "subscribing": "Subscribing...",
+    "success": "Successfully subscribed to newsletter!",
+    "alreadySubscribed": "This email is already subscribed.",
+    "errorInvalid": "Please enter a valid email.",
+    "errorGeneric": "An error occurred. Please try again."
+  },
+  "notFoundCTA": {
+    "heading": "Didn't find what you're looking for?",
+    "subtitle": "Check out our services or contact us",
+    "bookNow": "Book now",
+    "callUs": "Call us"
+  },
+  "kategorieVozidel": {
+    "title": "Vehicle Categories",
+    "subtitle": "Choose your vehicle category",
+    "learnMore": "Learn more",
+    "pricesFrom": "prices from",
+    "booking": "Choose Program"
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms of Service",
+      "effectiveDate": "These Terms of Service are valid and effective from January 1, 2026.",
+      "s1Title": "1. General Provisions",
+      "s1p1": "These Terms of Service (hereinafter \"Terms\") govern the rights and obligations between AUTOMYČKA KARLÍN, with registered office at Sokolovská 694/98, 186 00 Prague 8 – Karlín, ID: 12345678 (hereinafter \"Provider\"), and the customer (hereinafter \"Customer\") when using car washing, cleaning, and detailing services.",
+      "s1p2": "By ordering a service or making a reservation, the Customer confirms that they have read and agree to these Terms.",
+      "s2Title": "2. Ordering and Reservation",
+      "s2p1": "Services can be reserved in the following ways:",
+      "s2l1": "Online via the booking system on the website.",
+      "s2l2": "By phone at +420 775 009 033.",
+      "s2l3": "In person at the premises.",
+      "s2p2": "The reservation is binding upon confirmation by the Provider. Confirmation is sent by email or SMS to the contact details provided by the Customer.",
+      "s2p3": "The Customer is obliged to arrive at the premises at the reserved time. In case of a delay longer than 15 minutes, the Provider reserves the right to cancel the reservation.",
+      "s3Title": "3. Prices and Payments",
+      "s3p1": "All prices are quoted in Czech Koruna (CZK) including VAT. The current price list is available on the website and at the premises.",
+      "s3p2": "The final price of the service may be adjusted depending on the actual condition and level of soiling of the vehicle, about which the Customer will be informed before the service begins.",
+      "s3p3": "Payment can be made in the following ways:",
+      "s3l1": "By payment card (Visa, Mastercard) – at the premises and online.",
+      "s3l2": "In cash – at the premises.",
+      "s3l3": "By bank transfer – for corporate customers based on an invoice.",
+      "s4Title": "4. Cancellation and Modification of Reservation",
+      "s4p1": "The Customer may cancel or modify the reservation free of charge no later than 24 hours before the scheduled service time.",
+      "s4p2": "In case of cancellation less than 24 hours before the scheduled time, the Provider reserves the right to charge a cancellation fee of 50% of the ordered service price.",
+      "s4p3": "In case of repeated no-shows without prior cancellation, the Provider reserves the right to require a deposit from the Customer for future reservations.",
+      "s5Title": "5. Liability",
+      "s5p1": "The Provider is liable for damages demonstrably caused by their fault during the provision of services. The Customer is obliged to report any damage immediately upon receipt of the vehicle, but no later than within 24 hours.",
+      "s5p2": "The Provider is not liable for:",
+      "s5l1": "Damage caused by hidden defects of the vehicle (loose parts, damaged paint, etc.).",
+      "s5l2": "Items left in the vehicle during the provision of services.",
+      "s5l3": "Damage resulting from the Customer's failure to follow the Provider's instructions.",
+      "s6Title": "6. Complaints",
+      "s6p1": "The Customer has the right to complain about the quality of the provided service. The complaint must be made immediately upon receipt of the vehicle or no later than 24 hours after completion of the service.",
+      "s6p2": "Complaints can be made:",
+      "s6l1": "In person at the premises.",
+      "s6l2": "By email at automyckakarlin@email.cz.",
+      "s6l3": "By phone at +420 775 009 033.",
+      "s6p3": "The Provider will assess and resolve the complaint within 30 days of receipt. In case of a valid complaint, the Provider will arrange a free repeat of the service or a refund of the corresponding portion of the price.",
+      "s7Title": "7. Personal Data Protection",
+      "s7p1": "Information about personal data processing is provided in a separate document <link>Privacy Policy</link>, which is an integral part of these Terms.",
+      "s8Title": "8. Final Provisions",
+      "s8p1": "These Terms are governed by the laws of the Czech Republic, in particular Act No. 89/2012 Coll., the Civil Code, as amended.",
+      "s8p2": "The Provider reserves the right to amend these Terms at any time. The current version of the Terms is always available on the Provider's website.",
+      "s8p3": "Any disputes will be resolved primarily out of court. If no agreement is reached, the competent court is the court in Prague.",
+      "s8p4": "If any provision of these Terms is found to be invalid or unenforceable, this shall not affect the validity and enforceability of the remaining provisions."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "effectiveDate": "This Privacy Policy is valid and effective from January 1, 2026.",
+      "s1Title": "1. Introduction",
+      "s1p1": "AUTOMYČKA KARLÍN (hereinafter \"Controller\") values your trust and is committed to protecting your personal data. This Privacy Policy describes how we collect, use, store, and protect your personal data when using our services, website, and booking system.",
+      "s1p2": "Personal data processing is carried out in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council, the General Data Protection Regulation (GDPR), and applicable laws of the Czech Republic.",
+      "s2Title": "2. Data Controller",
+      "s2p1": "The controller of your personal data is:",
+      "s3Title": "3. Purpose of Processing",
+      "s3p1": "We process your personal data for the following purposes:",
+      "s3l1": "<b>Reservations and orders</b> – processing car wash and detailing reservations, order management, and communication regarding provided services.",
+      "s3l2": "<b>Sending newsletters</b> – informing about news, promotions, and special offers (only with your consent).",
+      "s3l3": "<b>Improving services</b> – analyzing customer preferences and optimizing the service offering and user experience on the website.",
+      "s3l4": "<b>Legal obligations</b> – fulfilling tax, accounting, and other legal obligations.",
+      "s3l5": "<b>Communication</b> – responding to your inquiries and requests via the contact form, email, or phone.",
+      "s4Title": "4. Legal Basis for Processing",
+      "s4p1": "We process personal data based on the following legal grounds:",
+      "s4l1": "<b>Performance of contract</b> (Art. 6(1)(b) GDPR) – processing is necessary for the performance of the service agreement to which you are a party.",
+      "s4l2": "<b>Consent</b> (Art. 6(1)(a) GDPR) – for sending marketing communications and newsletters. You may withdraw your consent at any time.",
+      "s4l3": "<b>Legitimate interest</b> (Art. 6(1)(f) GDPR) – improving services and protecting our legitimate interests.",
+      "s4l4": "<b>Legal obligation</b> (Art. 6(1)(c) GDPR) – fulfilling obligations arising from legislation.",
+      "s5Title": "5. Retention Period",
+      "s5p1": "We retain your personal data only for the period necessary to fulfill the purpose of processing:",
+      "s5l1": "<b>Reservation and order data</b> – for the duration of the contractual relationship and subsequently 3 years for potential complaints.",
+      "s5l2": "<b>Accounting and tax documents</b> – 10 years as required by law.",
+      "s5l3": "<b>Marketing consents</b> – until withdrawal of consent.",
+      "s5l4": "<b>Contact form data</b> – 1 year from the last contact.",
+      "s6Title": "6. Data Recipients",
+      "s6p1": "Your personal data may be shared with the following third parties:",
+      "s6l1": "<b>Altegio</b> – operator of the booking system that provides technical management of reservations.",
+      "s6l2": "<b>Payment processors</b> – card payment processors for secure payment transactions.",
+      "s6l3": "<b>Accountants and tax advisors</b> – for fulfilling legal obligations.",
+      "s6l4": "<b>IT service providers</b> – hosting, website management, and email communication.",
+      "s6p2": "We do not transfer your data to third countries outside the European Economic Area without appropriate safeguards.",
+      "s7Title": "7. Your Rights",
+      "s7p1": "In connection with personal data processing, you have the following rights:",
+      "s7l1": "<b>Right of access</b> – you have the right to obtain confirmation as to whether your personal data is being processed, and if so, to access it.",
+      "s7l2": "<b>Right to rectification</b> – you have the right to request correction of inaccurate or completion of incomplete personal data.",
+      "s7l3": "<b>Right to erasure</b> – you have the right to request deletion of your personal data if there is no legal reason for processing.",
+      "s7l4": "<b>Right to data portability</b> – you have the right to receive personal data you have provided to us in a structured, machine-readable format.",
+      "s7l5": "<b>Right to object</b> – you have the right to object to the processing of personal data based on legitimate interest.",
+      "s7l6": "<b>Right to restriction of processing</b> – you have the right to request restriction of personal data processing.",
+      "s7l7": "<b>Right to withdraw consent</b> – if processing is based on consent, you have the right to withdraw that consent at any time.",
+      "s7p2": "You can exercise your rights by sending a request to automyckakarlin@email.cz. You also have the right to file a complaint with the Office for Personal Data Protection (ÚOOÚ).",
+      "s8Title": "8. Cookies",
+      "s8p1": "Our website uses cookies to ensure proper functionality, analyze traffic, and personalize content. Cookies are small text files stored in your browser.",
+      "s8p2": "We use the following types of cookies:",
+      "s8l1": "<b>Necessary cookies</b> – ensure basic website functionality and cannot be deactivated.",
+      "s8l2": "<b>Analytical cookies</b> – help us understand how visitors use the website.",
+      "s8l3": "<b>Marketing cookies</b> – used to display relevant advertising messages.",
+      "s8p3": "You can change your cookie settings at any time in your browser settings.",
+      "s9Title": "9. Contact",
+      "s9p1": "If you have any questions regarding the processing of your personal data, please do not hesitate to contact us:"
+    }
+  }
+}

@@ -3,27 +3,32 @@
 import { useCallback } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-type Props = {
-  partners: Array<{ name: string; website?: string | null }>;
+type Partner = {
+  name: string;
+  website?: string | null;
+  logoUrl?: string | null;
 };
 
-const partnerLogos = [
-  { name: "ICEBERG", image: "/images/partner-bmw.png" },
-  { name: "ICEBERG", image: "/images/partner-mercedes.png" },
-  { name: "ICEBERG", image: "/images/partner-mercedes-2.png" },
-  { name: "ICEBERG", image: "/images/partner-bmw-2.png" },
-  { name: "ICEBERG", image: "/images/partner-mercedes-3.png" },
-  { name: "ICEBERG", image: "/images/partner-mercedes-4.png" },
-  { name: "Lexus", image: "/images/partner-lexus.png" },
-  { name: "Range Rover", image: "/images/partner-bmw.png" },
+type Props = {
+  partners: Partner[];
+  cmsTitle?: string | null;
+  cmsSubtitle?: string | null;
+};
+
+const fallbackLogos = [
+  "/images/partner-am-1.png",
+  "/images/partner-am-2.png",
 ];
 
 const arrowBtnClass =
   "flex items-center justify-center w-12 h-12 rounded-[10px] border-2 border-[#b1b3b6] bg-[#f0eff0] text-[#302e2f] transition-all hover:border-[#7960a9] hover:text-[#7960a9] hover:shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]";
 
-export default function PartnersSection({ partners: _partners }: Props) {
+export default function PartnersSection({ partners, cmsTitle, cmsSubtitle }: Props) {
+  const t = useTranslations();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: true,
@@ -48,23 +53,23 @@ export default function PartnersSection({ partners: _partners }: Props) {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8 gap-4">
           <div className="text-center lg:text-left">
             <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
-              Naši partneři
+              {t("partners.title")}
             </h2>
             <p className="font-clash font-medium text-[15px] lg:text-[20px] text-[#302e2f] leading-[24px] lg:leading-[28px] mt-1">
-              Spolupracujeme s prémiovými značkami
+              {t("partners.subtitle")}
             </p>
           </div>
           <div className="flex items-center justify-center lg:justify-end gap-2">
             <button
               onClick={scrollPrev}
-              aria-label="Předchozí partner"
+              aria-label={t("partners.prevPartner")}
               className={arrowBtnClass}
             >
               <ChevronLeft className="size-6" />
             </button>
             <button
               onClick={scrollNext}
-              aria-label="Další partner"
+              aria-label={t("partners.nextPartner")}
               className={arrowBtnClass}
             >
               <ChevronRight className="size-6" />
@@ -77,14 +82,14 @@ export default function PartnersSection({ partners: _partners }: Props) {
       <div className="pl-4 lg:pl-[max(32px,calc((100vw-1536px)/2+32px))]">
         <div ref={emblaRef} className="overflow-hidden">
           <div className="flex gap-4">
-            {partnerLogos.map((partner, i) => (
+            {partners.map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
                 className="min-w-0 shrink-0 grow-0 basis-[133px] lg:basis-[220px]"
               >
                 <div className="rounded-[6px] border border-[#b1b3b6]/60 p-[14.5px] lg:p-6 shadow-[0px_2.4px_3.6px_-2.4px_rgba(0,0,0,0.1)] bg-[#f0eff0] flex flex-col items-center justify-center h-[97px] lg:h-[160px]">
                   <Image
-                    src={partner.image}
+                    src={partner.logoUrl || fallbackLogos[i % fallbackLogos.length]}
                     alt={partner.name}
                     width={170}
                     height={110}

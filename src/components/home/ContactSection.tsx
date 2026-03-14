@@ -1,13 +1,25 @@
-import { MapPin, Clock, Navigation, Send } from "lucide-react";
+import { MapPin, Clock, Navigation } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import ContactForm from "./ContactForm";
 
-export default function ContactSection() {
+type Props = {
+  cmsTitle?: string | null;
+  cmsFormHeading?: string | null;
+  cmsFormSubheading?: string | null;
+  cmsSendButton?: string | null;
+  cmsNavigateButton?: string | null;
+};
+
+export default async function ContactSection({ cmsTitle, cmsFormHeading, cmsFormSubheading, cmsSendButton, cmsNavigateButton }: Props) {
+  const t = await getTranslations();
+
   return (
     <section id="contact" className="pt-[68px]">
       <div className="max-w-[1280px] mx-auto px-4 lg:px-[32px]">
         {/* Section header */}
         <div className="text-center mb-[25px] lg:mb-[45px]">
           <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
-            Kontakty
+            {t("contactSection.title")}
           </h2>
         </div>
 
@@ -15,81 +27,13 @@ export default function ContactSection() {
           {/* Left: Contact form */}
           <div className="w-full lg:w-[calc(50%-16px)] min-w-0 rounded-[10px] border-2 border-[#b1b3b6] bg-[#f0eff0] p-6 lg:p-[42px] flex flex-col">
             <h3 className="font-clash font-bold text-[20px] lg:text-[24px] leading-[28px] lg:leading-[32px] text-[#302e2f] mb-2">
-              Máte ještě něco na srdci?
+              {t("contactSection.formHeading")}
             </h3>
             <p className="font-clash font-medium text-[13.1px] lg:text-[20px] leading-[20px] lg:leading-[24px] text-[#302e2f] mb-6">
-              Hoďte nám zprávu přes formulář a my se hned ozveme!
+              {t("contactSection.formSubheading")}
             </p>
 
-            <form className="space-y-5 flex-1 flex flex-col" aria-label="Kontaktní formulář">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block font-clash font-medium text-[12.3px] leading-[20px] text-[#302e2f] mb-2"
-                >
-                  Jméno
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Vaše jméno"
-                  className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block font-clash font-medium text-[12.4px] leading-[20px] text-[#302e2f] mb-2"
-                >
-                  Telefon
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="+420 775 009 033"
-                  className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block font-clash font-medium text-[13.6px] leading-[20px] text-[#302e2f] mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="vas@email.cz"
-                  className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block font-clash font-medium text-[13.1px] leading-[20px] text-[#302e2f] mb-2"
-                >
-                  Váš dotaz
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  placeholder="Vaše zpráva..."
-                  className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[178px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-auto w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[20px] uppercase rounded-[10px] px-8 py-4 hover:opacity-90 transition-opacity"
-              >
-                <Send className="size-5" />
-                Odeslat zprávu
-              </button>
-            </form>
+            <ContactForm cmsSendButton={cmsSendButton} />
           </div>
 
           {/* Right: Map + Contact info */}
@@ -104,50 +48,50 @@ export default function ContactSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Mapa - Automyčka Karlín"
+                title={t("contactSection.mapTitle")}
                 className="w-full h-full"
               />
             </div>
 
             {/* Contact info */}
-            <div className="p-6 lg:px-8 lg:py-6 space-y-5 flex-1 flex flex-col">
+            <div className="p-6 lg:px-8 lg:pt-6 lg:pb-[42px] space-y-5 flex-1 flex flex-col">
               <h3 className="font-clash font-bold text-[20px] lg:text-[24px] leading-[28px] lg:leading-[32px] text-[#302e2f]">
-                Kontaktní informace
+                {t("contactSection.contactInfo")}
               </h3>
 
               <div className="flex flex-col lg:flex-row gap-5">
-                {/* Provozní doba */}
+                {/* Provozni doba */}
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className="w-10 h-10 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[8px] flex items-center justify-center shrink-0">
                     <Clock className="size-4 text-[#f0eff0]" />
                   </div>
                   <div className="flex flex-col gap-0.5 min-w-0">
                     <p className="font-clash font-medium text-[15px] leading-[22px] text-[#302e2f]">
-                      Provozní doba
+                      {t("contactSection.operatingHours")}
                     </p>
-                    <p className="font-clash font-medium text-[13px] leading-[20px] text-[#302e2f] whitespace-nowrap">
-                      Pondělí &ndash; Neděle: 7:00 &ndash; 20:00
+                    <p className="font-clash font-medium text-[13px] leading-[20px] text-[#302e2f]">
+                      {t("contactSection.operatingHoursValue")}
                     </p>
                     <p className="font-clash font-medium text-[11px] leading-[16px] text-[#302e2f]">
-                      Otevřeno i o víkendech
+                      {t("contactSection.openWeekends")}
                     </p>
                   </div>
                 </div>
 
-                {/* Jak se k nám dostat */}
+                {/* Jak se k nam dostat */}
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className="w-10 h-10 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[8px] flex items-center justify-center shrink-0">
                     <MapPin className="size-4 text-[#f0eff0]" />
                   </div>
                   <div className="flex flex-col gap-0.5 min-w-0">
                     <p className="font-clash font-medium text-[15px] leading-[22px] text-[#302e2f]">
-                      Jak se k nám dostat
+                      {t("contactSection.howToReach")}
                     </p>
                     <p className="font-clash font-medium text-[13px] leading-[20px] text-[#302e2f]">
-                      Karlín, Praha 8
+                      {t("contactSection.location")}
                     </p>
                     <p className="font-clash font-medium text-[11px] leading-[16px] text-[#302e2f]">
-                      Snadná dostupnost MHD i autem
+                      {t("contactSection.accessInfo")}
                     </p>
                   </div>
                 </div>
@@ -158,10 +102,10 @@ export default function ContactSection() {
                 href="https://maps.google.com/?q=Sokolovská+694/98+Praha+8+Karlín"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[20px] uppercase rounded-[10px] px-8 py-4 hover:opacity-90 transition-opacity"
+                className="mt-auto flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[16px] sm:text-[20px] uppercase rounded-[10px] px-8 py-4 hover:opacity-90 transition-opacity"
               >
                 <Navigation className="size-5" />
-                Navigovat
+                {t("common.navigate")}
               </a>
             </div>
           </div>

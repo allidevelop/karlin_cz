@@ -1,60 +1,65 @@
 import Image from "next/image";
 import { Car, Award, MapPin, Gift, Sparkles } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   showLoyaltyCta?: boolean;
   showVoucherCta?: boolean;
+  desktopBannerUrl?: string | null;
+  mobileBannerUrl?: string | null;
+  cmsStartButton?: string | null;
 };
 
 const infoCards = [
   {
     id: "parking",
     icon: Car,
-    titleLine1: "Parkování",
-    titleLine2: "Zdarma",
-    description: "Parking na celý den\n7:00 - 20:00",
-    cta: "Začít",
+    line1Key: "expressWash.cards.parking.line1",
+    line2Key: "expressWash.cards.parking.line2",
+    descKey: "expressWash.cards.parking.description",
+    ctaKey: "expressWash.start",
   },
   {
     id: "location",
     icon: MapPin,
-    titleLine1: "Výborná",
-    titleLine2: "Dostupnost",
-    description: "Najdete nás na Karlíně\nOtevřeno Po - Ne",
+    line1Key: "expressWash.cards.accessibility.line1",
+    line2Key: "expressWash.cards.accessibility.line2",
+    descKey: "expressWash.cards.accessibility.description",
   },
   {
     id: "loyalty",
     icon: Award,
-    titleLine1: "Věrnostní",
-    titleLine2: "Program",
-    description: "Získej odměnu za každé mytí",
-    cta: "Začít",
+    line1Key: "expressWash.cards.loyalty.line1",
+    line2Key: "expressWash.cards.loyalty.line2",
+    descKey: "expressWash.cards.loyalty.description",
+    ctaKey: "expressWash.start",
   },
   {
     id: "voucher",
     icon: Gift,
-    titleLine1: "Dárkový",
-    titleLine2: "Voucher",
-    description: "Poptávku pošlete přes formulář níže",
-    cta: "Začít",
+    line1Key: "expressWash.cards.voucher.line1",
+    line2Key: "expressWash.cards.voucher.line2",
+    descKey: "expressWash.cards.voucher.description",
+    ctaKey: "expressWash.start",
   },
   {
     id: "coming-soon-1",
     icon: Sparkles,
-    titleLine1: "Již",
-    titleLine2: "Brzy",
-    description: "Připravujeme pro vás\nnovou službu",
+    line1Key: "expressWash.cards.comingSoon1.line1",
+    line2Key: "expressWash.cards.comingSoon1.line2",
+    descKey: "expressWash.cards.comingSoon1.description",
   },
   {
     id: "coming-soon-2",
     icon: Sparkles,
-    titleLine1: "Již",
-    titleLine2: "Brzy",
-    description: "Připravujeme pro vás\ndalší novinku",
+    line1Key: "expressWash.cards.comingSoon2.line1",
+    line2Key: "expressWash.cards.comingSoon2.line2",
+    descKey: "expressWash.cards.comingSoon2.description",
   },
 ];
 
-export default function ExpressWashSection({ showLoyaltyCta = false, showVoucherCta = false }: Props) {
+export default async function ExpressWashSection({ showLoyaltyCta = false, showVoucherCta = false, desktopBannerUrl, mobileBannerUrl, cmsStartButton }: Props) {
+  const t = await getTranslations();
   const ctaVisibility: Record<string, boolean> = {
     loyalty: showLoyaltyCta,
     voucher: showVoucherCta,
@@ -67,16 +72,16 @@ export default function ExpressWashSection({ showLoyaltyCta = false, showVoucher
           <div className="w-full lg:w-[600px] shrink-0">
             {/* Desktop banner */}
             <Image
-              src="/images/express-banner-desktop.png"
-              alt="Expresní ruční mytí aut již od 985 Kč"
+              src={desktopBannerUrl || "/images/express-banner-desktop.png"}
+              alt={t("expressWash.imageAlt")}
               width={600}
               height={450}
               className="hidden lg:block w-full h-auto rounded-[10px]"
             />
             {/* Mobile banner */}
             <Image
-              src="/images/express-banner-mobile.png"
-              alt="Expresní ruční mytí aut již od 985 Kč"
+              src={mobileBannerUrl || "/images/express-banner-mobile.png"}
+              alt={t("expressWash.imageAlt")}
               width={600}
               height={450}
               className="block lg:hidden w-full h-auto rounded-[10px]"
@@ -87,8 +92,8 @@ export default function ExpressWashSection({ showLoyaltyCta = false, showVoucher
           <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-4">
             {infoCards.map((card) => (
               <div
-                key={card.titleLine1 + card.titleLine2}
-                className="relative bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] p-[21px] lg:p-[22px] overflow-hidden flex flex-col items-center text-center"
+                key={card.id}
+                className="relative bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] p-[12px] lg:p-[22px] overflow-hidden flex flex-col items-center text-center"
               >
                 {/* Decorative glow */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-full blur-[20px] opacity-10" />
@@ -99,22 +104,22 @@ export default function ExpressWashSection({ showLoyaltyCta = false, showVoucher
                 </div>
 
                 {/* Title */}
-                <p className="font-clash font-bold text-[18px] leading-[22.5px] text-[#302e2f] uppercase">
-                  {card.titleLine1}
+                <p className="font-clash font-bold text-[14px] lg:text-[18px] leading-[18px] lg:leading-[22.5px] text-[#302e2f] uppercase">
+                  {t(card.line1Key)}
                 </p>
-                <p className="font-clash font-bold text-[18px] leading-[22.5px] text-[#7960a9] uppercase">
-                  {card.titleLine2}
+                <p className="font-clash font-bold text-[14px] lg:text-[18px] leading-[18px] lg:leading-[22.5px] text-[#7960a9] uppercase">
+                  {t(card.line2Key)}
                 </p>
 
                 {/* Description */}
-                <p className="font-clash font-medium text-[14px] leading-[22.75px] text-[#302e2f] mt-2 whitespace-pre-line">
-                  {card.description}
+                <p className="font-clash font-medium text-[11px] lg:text-[14px] leading-[16px] lg:leading-[22.75px] text-[#302e2f] mt-2 whitespace-pre-line">
+                  {t(card.descKey)}
                 </p>
 
                 {/* CTA button (controlled via admin) */}
-                {card.cta && ctaVisibility[card.id] && (
+                {card.ctaKey && ctaVisibility[card.id] && (
                   <button className="mt-3 w-full bg-[#7960a9] text-[#f0eff0] font-clash font-bold text-[14px] lg:text-[16px] uppercase leading-[20px] rounded-[5px] lg:rounded-[10px] px-4 py-2 hover:opacity-90 transition-opacity">
-                    {card.cta}
+                    {cmsStartButton || t(card.ctaKey)}
                   </button>
                 )}
               </div>

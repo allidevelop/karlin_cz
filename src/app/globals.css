@@ -112,6 +112,13 @@
   }
 }
 
+/* ── Global letter-spacing for Clash Display ── */
+
+.font-clash,
+[class*="font-clash"] {
+  letter-spacing: 0.02em;
+}
+
 /* ── Smooth scrolling ── */
 
 html {

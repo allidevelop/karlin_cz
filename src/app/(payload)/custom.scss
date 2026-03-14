@@ -1,1 +1,91 @@
-/* Add custom Payload admin styles here */
+/* ============================================
+   Automycka Karlin — Payload Admin Custom Styles
+   ============================================ */
+
+/* Icons defined as SCSS variables (compiled into CSS at build time) */
+$icon-car: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2'/%3E%3Ccircle cx='7' cy='17' r='2'/%3E%3Cpath d='M9 17h6'/%3E%3Ccircle cx='17' cy='17' r='2'/%3E%3C/svg%3E");
+$icon-file-text: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/%3E%3Cpath d='M14 2v4a2 2 0 0 0 2 2h4'/%3E%3Cpath d='M10 9H8'/%3E%3Cpath d='M16 13H8'/%3E%3Cpath d='M16 17H8'/%3E%3C/svg%3E");
+$icon-megaphone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 11 18-5v12L3 13v-2z'/%3E%3Cpath d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/%3E%3C/svg%3E");
+$icon-message: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 20A9 9 0 1 0 4 16.1L2 22Z'/%3E%3C/svg%3E");
+$icon-calendar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2v4'/%3E%3Cpath d='M16 2v4'/%3E%3Crect width='18' height='18' x='3' y='4' rx='2'/%3E%3Cpath d='M3 10h18'/%3E%3C/svg%3E");
+$icon-settings: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 7h-9'/%3E%3Cpath d='M14 17H5'/%3E%3Ccircle cx='17' cy='17' r='3'/%3E%3Ccircle cx='7' cy='7' r='3'/%3E%3C/svg%3E");
+
+/* Larger nav group labels */
+.nav-group__label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+/* Icon before group label text */
+.nav-group__label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: -4px;
+  margin-right: 6px;
+  background-color: currentColor;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Larger nav link items */
+.nav-group__content a {
+  font-size: 15px !important;
+}
+
+/* ============================
+   Group-specific icons
+   ============================ */
+
+/* Services / Služby / Услуги */
+[id="nav-group-Služby"] .nav-group__label::before,
+[id="nav-group-Services"] .nav-group__label::before,
+[id="nav-group-Услуги"] .nav-group__label::before {
+  -webkit-mask-image: $icon-car;
+  mask-image: $icon-car;
+}
+
+/* Content / Obsah / Контент */
+[id="nav-group-Obsah"] .nav-group__label::before,
+[id="nav-group-Content"] .nav-group__label::before,
+[id="nav-group-Контент"] .nav-group__label::before {
+  -webkit-mask-image: $icon-file-text;
+  mask-image: $icon-file-text;
+}
+
+/* Marketing / Маркетинг */
+[id="nav-group-Marketing"] .nav-group__label::before,
+[id="nav-group-Маркетинг"] .nav-group__label::before {
+  -webkit-mask-image: $icon-megaphone;
+  mask-image: $icon-megaphone;
+}
+
+/* Communication / Komunikace / Коммуникации */
+[id="nav-group-Komunikace"] .nav-group__label::before,
+[id="nav-group-Communication"] .nav-group__label::before,
+[id="nav-group-Коммуникации"] .nav-group__label::before {
+  -webkit-mask-image: $icon-message;
+  mask-image: $icon-message;
+}
+
+/* Bookings / Rezervace / Бронирования */
+[id="nav-group-Rezervace"] .nav-group__label::before,
+[id="nav-group-Bookings"] .nav-group__label::before,
+[id="nav-group-Бронирования"] .nav-group__label::before {
+  -webkit-mask-image: $icon-calendar;
+  mask-image: $icon-calendar;
+}
+
+/* Settings / Nastavení / Настройки */
+[id="nav-group-Nastavení"] .nav-group__label::before,
+[id="nav-group-Settings"] .nav-group__label::before,
+[id="nav-group-Настройки"] .nav-group__label::before {
+  -webkit-mask-image: $icon-settings;
+  mask-image: $icon-settings;
+}

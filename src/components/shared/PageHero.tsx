@@ -45,7 +45,7 @@ export default function PageHero({
             {title}
           </h1>
           {subtitle && (
-            <p className="font-clash text-[16px] lg:text-[20px] font-medium text-[#b1b3b6] mt-3 max-w-[768px] mx-auto leading-relaxed">
+            <p className="font-clash text-[22px] lg:text-[60px] font-medium text-[#f0eff0] mt-2 lg:mt-3 max-w-[960px] mx-auto leading-tight lg:leading-[60px]">
               {subtitle}
             </p>
           )}

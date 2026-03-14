@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export async function POST(request: Request) {
   try {
@@ -12,9 +14,12 @@ export async function POST(request: Request) {
       )
     }
 
-    // For now, log the contact form submission
-    // In production, this would send an email or create a record
-    console.log('[Contact Form]', { name, email, phone, message })
+    const payload = await getPayload({ config })
+
+    await payload.create({
+      collection: 'contact-messages',
+      data: { name, email, phone: phone || '', message },
+    })
 
     return NextResponse.json({ success: true, message: 'Zpráva byla úspěšně odeslána.' })
   } catch {
