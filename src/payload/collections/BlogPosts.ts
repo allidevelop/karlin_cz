@@ -15,9 +15,9 @@ export const BlogPosts: CollectionConfig = {
     group: { cs: 'Obsah', en: 'Content', ru: 'Контент' },
   },
   fields: [
-    { name: 'title', type: 'text', required: true, label: 'Název článku' },
+    { name: 'title', type: 'text', required: true, localized: true, label: 'Název článku' },
     { name: 'slug', type: 'text', required: true, unique: true },
-    { name: 'excerpt', type: 'textarea', label: 'Výňatek' },
+    { name: 'excerpt', type: 'textarea', localized: true, label: 'Výňatek' },
     { name: 'content', type: 'richText', required: true, label: 'Obsah' },
     { name: 'featuredImage', type: 'upload', relationTo: 'media', label: 'Hlavní obrázek', admin: { description: 'Doporučeno: JPG/WebP, 1200×675px (16:9), max 500 KB' } },
     {

@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import localFont from 'next/font/local'
 import PopupBannerLoader from '@/components/shared/PopupBannerLoader'
+import { getCmsMessages } from '@/lib/payload'
+import { deepMerge } from '@/lib/cms-messages'
 import '@/app/globals.css'
 
 const clashDisplay = localFont({
@@ -29,7 +31,17 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound()
   }
 
-  const messages = await getMessages()
+  // 1. Get static JSON messages (next-intl)
+  const jsonMessages = await getMessages()
+
+  // 2. Get CMS override messages (Payload globals)
+  const cmsMessages = await getCmsMessages(locale)
+
+  // 3. Merge: CMS values override JSON defaults (empty CMS fields are ignored)
+  const messages = deepMerge(
+    jsonMessages as Record<string, unknown>,
+    cmsMessages,
+  )
 
   return (
     <html lang={locale}>

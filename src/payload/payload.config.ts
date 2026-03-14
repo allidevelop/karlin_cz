@@ -28,6 +28,11 @@ import { ExpressWashSettings } from './globals/ExpressWashSettings.ts'
 import { SiteSettings } from './globals/SiteSettings.ts'
 import { HomePageContent } from './globals/HomePageContent.ts'
 import { Translations } from './globals/Translations.ts'
+import { TranslationsBooking } from './globals/TranslationsBooking.ts'
+import { TranslationsCommon } from './globals/TranslationsCommon.ts'
+import { TranslationsPages } from './globals/TranslationsPages.ts'
+import { LegalContent } from './globals/LegalContent.ts'
+import { SeoMetadata } from './globals/SeoMetadata.ts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -85,7 +90,17 @@ export default buildConfig({
     PopupBanners,
     PromoCodes,
   ],
-  globals: [ExpressWashSettings, SiteSettings, HomePageContent, Translations],
+  globals: [
+    ExpressWashSettings,
+    SiteSettings,
+    HomePageContent,
+    Translations,
+    TranslationsBooking,
+    TranslationsCommon,
+    TranslationsPages,
+    LegalContent,
+    SeoMetadata,
+  ],
   secret: process.env.PAYLOAD_SECRET || 'default-secret-change-in-production',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

@@ -15,11 +15,11 @@ export const Services: CollectionConfig = {
     group: { cs: 'Služby', en: 'Services', ru: 'Услуги' },
   },
   fields: [
-    { name: 'name', type: 'text', required: true, label: 'Název služby' },
+    { name: 'name', type: 'text', required: true, localized: true, label: 'Název služby' },
     { name: 'badge', type: 'text', localized: true, label: 'Badge / Štítek' },
     { name: 'slug', type: 'text', required: true, unique: true, admin: { position: 'sidebar' } },
-    { name: 'subtitle', type: 'text', label: 'Podtitul' },
-    { name: 'description', type: 'textarea', label: 'Krátký popis' },
+    { name: 'subtitle', type: 'text', localized: true, label: 'Podtitul' },
+    { name: 'description', type: 'textarea', localized: true, label: 'Krátký popis' },
     { name: 'content', type: 'richText', label: 'Detailní popis' },
     { name: 'image', type: 'upload', relationTo: 'media', label: 'Hlavní obrázek', admin: { description: 'Doporučeno: JPG/WebP, 1920×1080px, max 500 KB' } },
     { name: 'beforeImage', type: 'upload', relationTo: 'media', label: 'Obrázek PŘED (slider)', admin: { description: 'Doporučeno: JPG/WebP, 1280×720px, max 500 KB' } },
@@ -40,7 +40,7 @@ export const Services: CollectionConfig = {
       type: 'array',
       label: 'Více o programu',
       fields: [
-        { name: 'feature', type: 'text', required: true },
+        { name: 'feature', type: 'text', required: true, localized: true },
       ],
     },
     {

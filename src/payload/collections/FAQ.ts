@@ -14,8 +14,8 @@ export const FAQ: CollectionConfig = {
     group: { cs: 'Obsah', en: 'Content', ru: 'Контент' },
   },
   fields: [
-    { name: 'question', type: 'text', required: true, label: 'Otázka' },
-    { name: 'answer', type: 'textarea', required: true, label: 'Odpověď' },
+    { name: 'question', type: 'text', required: true, localized: true, label: 'Otázka' },
+    { name: 'answer', type: 'textarea', required: true, localized: true, label: 'Odpověď' },
     {
       name: 'pages',
       type: 'select',
