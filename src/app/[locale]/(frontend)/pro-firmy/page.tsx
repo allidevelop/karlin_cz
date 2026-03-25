@@ -16,6 +16,7 @@ import { getTranslations } from "next-intl/server";
 import { getHomePageContent, getMediaUrl } from "@/lib/payload";
 import SharedBottomSections from "@/components/shared/SharedBottomSections";
 import { LowerWaveDecoration } from "@/components/home/WaveDecorations";
+import BenefitsCarousel from "@/components/pro-firmy/BenefitsCarousel";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -287,31 +288,9 @@ export default async function ProFirmyPage() {
                 </div>
               </div>
 
-              {/* Row 2 — 3 larger benefit cards (stacked on mobile, 3-col on desktop) */}
+              {/* Row 2 — 3 larger benefit cards (horizontal carousel with gradient fade) */}
               <div className="pb-[80px]">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-[16px] lg:gap-[32px]">
-                  {benefitsRow2.map((benefit) => (
-                    <div
-                      key={benefit.title}
-                      className="relative bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] overflow-hidden p-[33px] flex flex-col items-center text-center gap-[20px]"
-                    >
-                      {/* Icon */}
-                      <div className="flex items-center justify-center w-[64px] h-[64px] rounded-[10px] lg:rounded-[10px] bg-gradient-to-r from-[#7960a9] to-[#9b7ec4]">
-                        <benefit.icon className="size-[32px] text-[#f0eff0]" />
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="font-clash font-bold text-[24px] text-[#302e2f] leading-[32px]">
-                        {benefit.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="font-clash font-medium text-[15px] text-[#302e2f] leading-[26px]">
-                        {benefit.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                <BenefitsCarousel benefits={benefitsRow2} />
               </div>
             </div>
           </section>
