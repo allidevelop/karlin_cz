@@ -7,6 +7,7 @@ import SharedBottomSections from "@/components/shared/SharedBottomSections";
 import { LowerWaveDecoration } from "@/components/home/WaveDecorations";
 import BenefitsSection from "@/components/pro-firmy/BenefitsSection";
 import MobileBadge from "@/components/pro-firmy/MobileBadge";
+import { Navigation } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -33,7 +34,7 @@ export default async function ProFirmyPage() {
         {/* Background video with YouTube iframe */}
         {cmsContent?.heroVideoId ? (
           <>
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${cmsContent.heroVideoId}?autoplay=1&mute=1&loop=1&playlist=${cmsContent.heroVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3`}
                 loading="eager"
@@ -43,18 +44,16 @@ export default async function ProFirmyPage() {
               />
             </div>
             {/* Fallback image for slow connections */}
-            <div className="absolute inset-0 opacity-30 -z-10">
-              <Image
-                src={heroImageUrl}
-                alt=""
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+            <Image
+              src={heroImageUrl}
+              alt=""
+              fill
+              className="object-cover -z-10"
+              priority
+            />
           </>
         ) : (
-          <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0">
             <Image
               src={heroImageUrl}
               alt=""
@@ -64,6 +63,9 @@ export default async function ProFirmyPage() {
             />
           </div>
         )}
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/40" />
 
         {/* Decorative blurred circles */}
         <div className="absolute bottom-[32px] left-[164px] w-[256px] h-[256px] bg-[rgba(240,239,240,0.1)] rounded-full blur-[32px]" />
@@ -87,15 +89,16 @@ export default async function ProFirmyPage() {
 
               <div className="flex flex-col lg:flex-row gap-[16px] items-center pt-[8px] w-full lg:w-auto">
                 <Link
-                  href="#corporate-form"
+                  href="/rezervace/vozidlo"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[20px] uppercase rounded-[10px] px-7 py-[17px] shadow-[0px_25px_50px_-12px_rgba(155,126,196,0.5)] hover:opacity-90 transition-opacity w-full sm:w-[200px] lg:w-auto"
                 >
-                  {t("proFirmy.getCta")}
+                  {t("hero.cta")}
                 </Link>
                 <Link
                   href="/sluzby"
                   className="inline-flex items-center justify-center gap-2 backdrop-blur-[12px] bg-[rgba(177,179,182,0.1)] border border-[#f0eff0] text-[#f0eff0] font-clash font-bold text-[20px] uppercase rounded-[10px] px-[29px] py-[17px] hover:bg-white/20 transition-colors w-full sm:w-[200px] lg:w-auto"
                 >
+                  <Navigation className="size-5" />
                   {t("proFirmy.ourServices")}
                 </Link>
               </div>
