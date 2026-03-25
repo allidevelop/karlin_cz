@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аудит текстов и переводов — Automycka Karlin</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #302e2f; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #302e2f; }
+  h2 { font-size: 22px; margin: 32px 0 16px; color: #7960a9; border-bottom: 2px solid #7960a9; padding-bottom: 8px; }
+  h3 { font-size: 17px; margin: 20px 0 10px; color: #302e2f; }
+  .subtitle { color: #666; font-size: 15px; margin-bottom: 24px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; padding: 16px; background: #fff; border-radius: 10px; border: 1px solid #ddd; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-cms { background: #7960a9; color: #fff; }
+  .badge-json { background: #302e2f; color: #fff; }
+  .badge-collection { background: #e8a838; color: #fff; }
+  .badge-both { background: linear-gradient(90deg, #7960a9, #302e2f); color: #fff; }
+  .badge-lang { background: #f0eff0; color: #302e2f; border: 1px solid #b1b3b6; font-size: 10px; padding: 1px 6px; }
+  .card { background: #fff; border-radius: 12px; border: 1px solid #ddd; padding: 20px; margin-bottom: 16px; }
+  .card-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .card-title { font-size: 16px; font-weight: 700; }
+  .card-link { color: #7960a9; font-size: 13px; text-decoration: none; font-weight: 600; }
+  .card-link:hover { text-decoration: underline; }
+  .links-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f0eff0; text-align: left; padding: 8px 10px; font-weight: 700; border-bottom: 2px solid #ddd; }
+  td { padding: 8px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:hover td { background: #faf9fb; }
+  .text-muted { color: #999; font-size: 12px; }
+  .status-ok { color: #22c55e; font-weight: 700; }
+  .status-warn { color: #f59e0b; font-weight: 700; }
+  .status-no { color: #ef4444; font-weight: 700; }
+  .section-summary { background: #faf9fb; border-left: 3px solid #7960a9; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: 13px; }
+  .admin-link { display: inline-flex; align-items: center; gap: 4px; background: #7960a9; color: #fff; padding: 4px 12px; border-radius: 6px; font-size: 12px; text-decoration: none; font-weight: 600; }
+  .admin-link:hover { background: #9b7ec4; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .legend { flex-direction: column; } }
+  .toc { background: #fff; border-radius: 12px; border: 1px solid #ddd; padding: 20px; margin-bottom: 24px; }
+  .toc a { color: #7960a9; text-decoration: none; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+  .toc ul { list-style: none; padding-left: 16px; }
+  .toc > ul { padding-left: 0; }
+  .toc li { margin: 4px 0; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Аудит текстов и переводов</h1>
+<p class="subtitle">Automycka Karlin &mdash; полный отчёт по управлению контентом. Дата: 14.03.2026</p>
+
+<div class="legend">
+  <div class="legend-item"><span class="badge badge-cms">CMS Global</span> Редактируется в админке (Globals)</div>
+  <div class="legend-item"><span class="badge badge-collection">CMS Collection</span> Данные из коллекций Payload</div>
+  <div class="legend-item"><span class="badge badge-json">JSON</span> Захардкожено в файлах переводов</div>
+  <div class="legend-item"><span class="badge badge-both">CMS + JSON</span> CMS с fallback на JSON</div>
+  <div class="legend-item"><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span> Языки</div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+  <strong>Содержание</strong>
+  <ul>
+    <li><a href="#admin">1. Ссылки на админку</a></li>
+    <li><a href="#globals">2. CMS Globals (настраиваемые из админки)</a></li>
+    <li><a href="#collections">3. CMS Collections (контент из коллекций)</a></li>
+    <li><a href="#pages">4. Постраничный аудит</a>
+      <ul>
+        <li><a href="#page-home">Главная страница</a></li>
+        <li><a href="#page-services">Страница услуг</a></li>
+        <li><a href="#page-service-detail">Детальная страница услуги</a></li>
+        <li><a href="#page-promotions">Страница акций</a></li>
+        <li><a href="#page-promo-detail">Детальная страница акции</a></li>
+        <li><a href="#page-blog">Блог</a></li>
+        <li><a href="#page-booking">Бронирование (все шаги)</a></li>
+        <li><a href="#page-profirmy">Для фирм</a></li>
+        <li><a href="#page-legal">Юридические страницы</a></li>
+      </ul>
+    </li>
+    <li><a href="#booking-detail">5. Детальный разбор бронирования</a></li>
+    <li><a href="#missing">6. Что НЕ настраивается из админки</a></li>
+    <li><a href="#recommendations">7. Рекомендации</a></li>
+  </ul>
+</div>
+
+<!-- 1. Admin Links -->
+<h2 id="admin">1. Ссылки на админку и сайт</h2>
+
+<div class="grid-2">
+  <div class="card">
+    <h3>Админ-панель Payload CMS</h3>
+    <p><a class="admin-link" href="http://144.91.95.134:3231/admin" target="_blank">Открыть админку</a></p>
+    <p class="text-muted" style="margin-top:8px">admin@automycka.cz / SecurePass123</p>
+  </div>
+  <div class="card">
+    <h3>Сайт (production)</h3>
+    <div class="links-row" style="margin-top:4px">
+      <a class="card-link" href="http://144.91.95.134:3231/cs" target="_blank">CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/en" target="_blank">EN</a>
+      <a class="card-link" href="http://144.91.95.134:3231/ru" target="_blank">RU</a>
+    </div>
+  </div>
+</div>
+
+<!-- 2. CMS Globals -->
+<h2 id="globals">2. CMS Globals (настраиваемые из админки)</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Translations (Переводы UI)</span>
+    <a class="admin-link" href="http://144.91.95.134:3231/admin/globals/translations" target="_blank">Редактировать</a>
+  </div>
+  <p class="section-summary">Все поля локализованы: CS / EN / RU. Переключатель языка в админке вверху.</p>
+  <table>
+    <tr><th>Вкладка</th><th>Поля</th><th>Где используется</th></tr>
+    <tr><td>Hero</td><td>heroTitle, heroSubtitle, heroCtaButton, heroNavigateButton</td><td>Hero-секция главной</td></tr>
+    <tr><td>Služby</td><td>servicesTitle, servicesSubtitle, servicesCtaButton, servicesChooseProgramButton, servicesAllButton</td><td>Секция услуг</td></tr>
+    <tr><td>Akce</td><td>promotionsViewDetailButton, promotionsAllButton, promotionsBookWithPromoButton</td><td>Секция акций</td></tr>
+    <tr><td>Express Wash</td><td>expressWashStartButton</td><td>Express Wash секция</td></tr>
+    <tr><td>Blog</td><td>blogReadAllButton</td><td>Секция блога</td></tr>
+    <tr><td>Recenze</td><td>reviewsLeaveReviewButton</td><td>Секция отзывов</td></tr>
+    <tr><td>FAQ</td><td>faqContactUsButton</td><td>Секция FAQ</td></tr>
+    <tr><td>Newsletter</td><td>newsletterSubscribeButton</td><td>Секция рассылки</td></tr>
+    <tr><td>Rezervace</td><td>bookingCtaButton, bookingStepVehicle, bookingStepProgram, bookingStepAddons, bookingStepContact</td><td>Шаги бронирования</td></tr>
+    <tr><td>Kontakt</td><td>contactTitle, contactSubtitle, contactSendButton, contactNavigateButton</td><td>Контактная секция</td></tr>
+    <tr><td>Obecné</td><td>headerPhone, footerCopyright, bookNowButton, learnMoreButton, notFoundBookButton, notFoundCallButton</td><td>Хедер, футер, 404</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Home Page Content (Контент главной)</span>
+    <a class="admin-link" href="http://144.91.95.134:3231/admin/globals/home-page-content" target="_blank">Редактировать</a>
+  </div>
+  <p class="section-summary">Заголовки и подзаголовки каждой секции главной страницы. Все поля локализованы: CS / EN / RU.</p>
+  <table>
+    <tr><th>Вкладка</th><th>Поля</th></tr>
+    <tr><td>Hero sekce</td><td>heroTitle, heroSubtitle, heroCtaText, heroImage</td></tr>
+    <tr><td>Služby</td><td>servicesTitle, servicesSubtitle</td></tr>
+    <tr><td>Akce</td><td>promotionsTitle, promotionsSubtitle</td></tr>
+    <tr><td>Recenze</td><td>reviewsTitle, reviewsSubtitle</td></tr>
+    <tr><td>FAQ</td><td>faqTitle, faqSubtitle</td></tr>
+    <tr><td>Partneři</td><td>partnersTitle, partnersSubtitle</td></tr>
+    <tr><td>Blog</td><td>blogTitle, blogSubtitle</td></tr>
+    <tr><td>Newsletter</td><td>newsletterTitle, newsletterSubtitle</td></tr>
+    <tr><td>Kontaktní sekce</td><td>contactTitle, contactFormHeading, contactFormSubheading</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Site Settings (Настройки сайта)</span>
+    <a class="admin-link" href="http://144.91.95.134:3231/admin/globals/site-settings" target="_blank">Редактировать</a>
+  </div>
+  <p class="section-summary">Контактные данные, часы работы, соцсети, юр. информация. НЕ локализовано (кроме address.full и operatingHours.days).</p>
+  <table>
+    <tr><th>Вкладка</th><th>Поля</th></tr>
+    <tr><td>Kontaktní údaje</td><td>phone, email, address (street/city/zip/full*), googleMapsUrl, googleMapsLink</td></tr>
+    <tr><td>Provozní doba</td><td>operatingHours (массив: days*, hours), operatingHoursSummary</td></tr>
+    <tr><td>Sociální sítě</td><td>instagram, facebook, tiktok</td></tr>
+    <tr><td>Právní informace</td><td>companyName, ico, dic</td></tr>
+  </table>
+  <p class="text-muted">* — локализованные поля</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Express Wash Settings</span>
+    <a class="admin-link" href="http://144.91.95.134:3231/admin/globals/express-wash-settings" target="_blank">Редактировать</a>
+  </div>
+  <table>
+    <tr><th>Поле</th><th>Описание</th></tr>
+    <tr><td>showLoyaltyCta, showVoucherCta</td><td>Вкл/выкл карточки лояльности и ваучера</td></tr>
+    <tr><td>desktopBannerImage, mobileBannerImage</td><td>Баннеры Express Wash</td></tr>
+  </table>
+</div>
+
+<!-- 3. CMS Collections -->
+<h2 id="collections">3. CMS Collections (контент из коллекций)</h2>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Services (Программы + аддоны)</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/services" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">name, slug, price, duration, badge*, features[], pricingByVehicle[], altegioId, image, isAddon, isActive, addonCategory</p>
+    <p class="text-muted">* badge — локализован</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Vehicle Categories</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/vehicle-categories" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">name, slug, image, mobileImage, altegioCategoryId, priceMultiplier, sortOrder</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Blog Posts</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/blog-posts" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">title, slug, excerpt, content, category, publishedAt, featuredImage, isPublished</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Promotions (Акции)</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/promotions" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">title, slug, description, badge, discountedPrice, originalPrice, validTo, image, altegioPromoCode</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">FAQ</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/faq" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">question, answer, pages (multi-select), isActive, sortOrder</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Reviews (Отзывы)</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/reviews" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">authorName, text, rating, date, source, isApproved</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Partners</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/partners" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">name, website, logo, isActive, sortOrder</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Banners</span>
+      <a class="admin-link" href="http://144.91.95.134:3231/admin/collections/banners" target="_blank">Открыть</a>
+    </div>
+    <p style="font-size:13px">title*, position, displayMode, startDate, endDate, desktopImage*, mobileImage*, linkUrl*, clickCount</p>
+    <p class="text-muted">* — локализованные поля</p>
+  </div>
+</div>
+
+<!-- 4. Page Audit -->
+<h2 id="pages">4. Постраничный аудит</h2>
+
+<!-- HOME -->
+<div class="card" id="page-home">
+  <div class="card-header">
+    <span class="card-title">Главная страница</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs" target="_blank">CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/en" target="_blank">EN</a>
+      <a class="card-link" href="http://144.91.95.134:3231/ru" target="_blank">RU</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Языки</th><th>Как изменить</th></tr>
+    <tr><td>Hero: заголовок + подзаголовок</td><td><span class="badge badge-both">CMS + JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>HomePageContent → Hero sekce</td></tr>
+    <tr><td>Hero: изображение</td><td><span class="badge badge-cms">CMS Global</span></td><td>—</td><td>HomePageContent → heroImage</td></tr>
+    <tr><td>Hero: кнопки CTA</td><td><span class="badge badge-both">CMS + JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>Translations → Hero tab</td></tr>
+    <tr><td>Услуги: заголовок + подзаголовок</td><td><span class="badge badge-both">CMS + JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>HomePageContent → Služby tab</td></tr>
+    <tr><td>Услуги: карточки авто</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Vehicle Categories collection</td></tr>
+    <tr><td>Услуги: кнопки</td><td><span class="badge badge-both">CMS + JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>Translations → Služby tab</td></tr>
+    <tr><td>Express Wash: баннеры</td><td><span class="badge badge-cms">CMS Global</span></td><td>—</td><td>Express Wash Settings</td></tr>
+    <tr><td>Акции: карточки</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Promotions collection</td></tr>
+    <tr><td>Отзывы</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Reviews collection</td></tr>
+    <tr><td>FAQ</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>FAQ collection</td></tr>
+    <tr><td>Партнёры</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Partners collection</td></tr>
+    <tr><td>Блог: посты</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Blog Posts collection</td></tr>
+    <tr><td>Newsletter: заголовок</td><td><span class="badge badge-both">CMS + JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>HomePageContent → Newsletter tab</td></tr>
+    <tr><td>Контакт: телефон, адрес</td><td><span class="badge badge-cms">CMS Global</span></td><td>частично</td><td>Site Settings → Kontaktní údaje</td></tr>
+    <tr><td>Футер: текст, ссылки, копирайт</td><td><span class="badge badge-both">CMS + JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>Translations → Obecné (footerCopyright)</td></tr>
+  </table>
+</div>
+
+<!-- SERVICES -->
+<div class="card" id="page-services">
+  <div class="card-header">
+    <span class="card-title">Страница услуг (/sluzby)</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs/sluzby" target="_blank">CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/en/sluzby" target="_blank">EN</a>
+      <a class="card-link" href="http://144.91.95.134:3231/ru/sluzby" target="_blank">RU</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Заголовок страницы</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → servicesPage.title</td></tr>
+    <tr><td>Карточки категорий</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Service Categories collection</td></tr>
+    <tr><td>Программы мытья</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Services collection (isAddon=false)</td></tr>
+    <tr><td>Цены</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Services → pricingByVehicle</td></tr>
+    <tr><td>Кнопки ("Подробнее", "Выбрать программу")</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → services.*</td></tr>
+  </table>
+</div>
+
+<!-- SERVICE DETAIL -->
+<div class="card" id="page-service-detail">
+  <div class="card-header">
+    <span class="card-title">Детальная страница услуги (/sluzby/[slug])</span>
+    <a class="card-link" href="http://144.91.95.134:3231/cs/sluzby/to-go" target="_blank">Пример CS</a>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Название, описание, контент</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Services → name, description, content</td></tr>
+    <tr><td>Фичи (checklist)</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Services → features[]</td></tr>
+    <tr><td>Галерея / Before-After</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Services → image, gallery, beforeImage, afterImage</td></tr>
+    <tr><td>UI-тексты ("Назад", "Забронировать")</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → serviceDetail.*</td></tr>
+  </table>
+</div>
+
+<!-- PROMOTIONS -->
+<div class="card" id="page-promotions">
+  <div class="card-header">
+    <span class="card-title">Страница акций (/akce)</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs/akce" target="_blank">CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/en/akce" target="_blank">EN</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Заголовок страницы</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → promotionsPage.title</td></tr>
+    <tr><td>Карточки акций</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Promotions collection</td></tr>
+    <tr><td>Кнопки</td><td><span class="badge badge-both">CMS + JSON</span></td><td>Translations → Akce tab</td></tr>
+  </table>
+</div>
+
+<!-- PROMO DETAIL -->
+<div class="card" id="page-promo-detail">
+  <div class="card-header">
+    <span class="card-title">Детальная страница акции (/akce/[slug])</span>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Название, описание, условия</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Promotions collection</td></tr>
+    <tr><td>Цены (старая/новая)</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Promotions → discountedPrice, originalPrice</td></tr>
+    <tr><td>Кнопка "Забронировать с акцией"</td><td><span class="badge badge-both">CMS + JSON</span></td><td>Translations → Akce → promotionsBookWithPromoButton</td></tr>
+  </table>
+</div>
+
+<!-- BLOG -->
+<div class="card" id="page-blog">
+  <div class="card-header">
+    <span class="card-title">Блог (/blog)</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs/blog" target="_blank">CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/en/blog" target="_blank">EN</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Заголовок страницы</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → blog.allArticlesTitle</td></tr>
+    <tr><td>Посты (title, excerpt, image)</td><td><span class="badge badge-collection">CMS Collection</span></td><td>Blog Posts collection</td></tr>
+    <tr><td>Кнопки ("Читать далее")</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → blog.readMore</td></tr>
+  </table>
+</div>
+
+<!-- BOOKING -->
+<div class="card" id="page-booking">
+  <div class="card-header">
+    <span class="card-title">Бронирование (5 шагов)</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs/rezervace/vozidlo" target="_blank">Шаг 1</a>
+      <a class="card-link" href="http://144.91.95.134:3231/cs/rezervace/program?vehicle=sedan" target="_blank">Шаг 2</a>
+      <a class="card-link" href="http://144.91.95.134:3231/cs/rezervace/doplnky" target="_blank">Шаг 3</a>
+      <a class="card-link" href="http://144.91.95.134:3231/cs/rezervace/datum" target="_blank">Шаг 4</a>
+      <a class="card-link" href="http://144.91.95.134:3231/cs/rezervace/kontakt" target="_blank">Шаг 5</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Языки</th><th>Как изменить</th></tr>
+    <tr><td>Названия шагов в progress bar</td><td><span class="badge badge-json">JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>messages → booking.steps.*</td></tr>
+    <tr><td>Hero: "Rezervace mytí" + подзаголовок</td><td><span class="badge badge-json">JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>messages → booking.heroTitle, booking.steps.*.subtitle</td></tr>
+    <tr><td>Названия категорий авто</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Vehicle Categories → name</td></tr>
+    <tr><td>Цены автокатегорий</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Services → pricingByVehicle</td></tr>
+    <tr><td>Названия программ</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Services collection → name</td></tr>
+    <tr><td>Фичи программ (checklist)</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Services → features[]</td></tr>
+    <tr><td>Названия аддонов</td><td><span class="badge badge-collection">CMS Collection</span></td><td>—</td><td>Services collection (isAddon=true)</td></tr>
+    <tr><td>Кнопки ("Přidat", "Odebrat", "Pokračovat")</td><td><span class="badge badge-json">JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>messages → booking.program.*, common.*</td></tr>
+    <tr><td>Лейблы формы контакта</td><td><span class="badge badge-json">JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>messages → booking.contactForm.*</td></tr>
+    <tr><td>GDPR / маркетинг текст</td><td><span class="badge badge-json">JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>messages → booking.contactForm.gdprConsent, marketingConsent</td></tr>
+    <tr><td>Подтверждение: тексты</td><td><span class="badge badge-json">JSON</span></td><td><span class="badge badge-lang">CS</span><span class="badge badge-lang">EN</span><span class="badge badge-lang">RU</span></td><td>messages → booking.confirmation.*</td></tr>
+  </table>
+</div>
+
+<!-- PRO FIRMY -->
+<div class="card" id="page-profirmy">
+  <div class="card-header">
+    <span class="card-title">Для фирм (/pro-firmy)</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs/pro-firmy" target="_blank">CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/en/pro-firmy" target="_blank">EN</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Все тексты (заголовки, описание, форма)</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → proFirmy.*</td></tr>
+    <tr><td>Лейблы формы, бенефиты, FAQ</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → proFirmy.*</td></tr>
+  </table>
+  <p class="section-summary">Страница полностью на JSON — ничего не настраивается из админки.</p>
+</div>
+
+<!-- LEGAL -->
+<div class="card" id="page-legal">
+  <div class="card-header">
+    <span class="card-title">Юридические страницы</span>
+    <div class="links-row">
+      <a class="card-link" href="http://144.91.95.134:3231/cs/obchodni-podminky" target="_blank">Условия CS</a>
+      <a class="card-link" href="http://144.91.95.134:3231/cs/zasady-ochrany-osobnich-udaju" target="_blank">Privacy CS</a>
+    </div>
+  </div>
+  <table>
+    <tr><th>Элемент</th><th>Источник</th><th>Как изменить</th></tr>
+    <tr><td>Весь текст (700+ строк на язык)</td><td><span class="badge badge-json">JSON</span></td><td>messages/{locale}.json → legal.*</td></tr>
+  </table>
+  <p class="section-summary">Полностью на JSON. Для изменений нужно редактировать файлы переводов и деплоить.</p>
+</div>
+
+<!-- 5. Booking Detail -->
+<h2 id="booking-detail">5. Детальный разбор бронирования по шагам</h2>
+
+<div class="card">
+  <h3>Шаг 1: Выбор категории (/rezervace/vozidlo)</h3>
+  <table>
+    <tr><th>Текст</th><th>Источник</th><th>Ключ / поле</th></tr>
+    <tr><td>"Naše služby" / "Vyberte si program pro vaše vozidlo"</td><td><span class="badge badge-json">JSON</span></td><td>booking.vehicle.title / subtitle</td></tr>
+    <tr><td>"Všechny služby" кнопка</td><td><span class="badge badge-json">JSON</span></td><td>common.allServices</td></tr>
+    <tr><td>Названия авто ("HATCHBACK / SEDAN", "SUV"...)</td><td><span class="badge badge-collection">CMS</span></td><td>VehicleCategories → name</td></tr>
+    <tr><td>"ceny od" / цена / "Kč"</td><td><span class="badge badge-json">JSON</span></td><td>common.pricesFrom / common.currency</td></tr>
+    <tr><td>"Vybrat program" кнопка</td><td><span class="badge badge-json">JSON</span></td><td>services.chooseProgram</td></tr>
+    <tr><td>FAQ-секция, Партнёры, Блог, Newsletter</td><td><span class="badge badge-collection">CMS</span> + <span class="badge badge-json">JSON</span></td><td>Collections + messages</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Шаг 2: Выбор программы (/rezervace/program)</h3>
+  <table>
+    <tr><th>Текст</th><th>Источник</th><th>Ключ / поле</th></tr>
+    <tr><td>"Vyberte program" / подзаголовок</td><td><span class="badge badge-json">JSON</span></td><td>booking.program.title / subtitle</td></tr>
+    <tr><td>"Změnit kategorii"</td><td><span class="badge badge-json">JSON</span></td><td>booking.program.changeCategory</td></tr>
+    <tr><td>Названия программ + цены</td><td><span class="badge badge-collection">CMS</span></td><td>Services → name, pricingByVehicle[].price</td></tr>
+    <tr><td>Бейдж "Premium" / "Nejoblíbenější"</td><td><span class="badge badge-collection">CMS</span></td><td>Services → badge (локализуемый)</td></tr>
+    <tr><td>"Co je v programu?" / "Skrýt"</td><td><span class="badge badge-json">JSON</span></td><td>booking.program.whatsIncluded / hide</td></tr>
+    <tr><td>Фичи (checklist)</td><td><span class="badge badge-collection">CMS</span></td><td>Services → features[]</td></tr>
+    <tr><td>"Přidat" / "Odebrat"</td><td><span class="badge badge-json">JSON</span></td><td>booking.program.add / remove</td></tr>
+    <tr><td>"Pouze doplňkové služby"</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.skipToAddons</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Шаг 3: Дополнительные услуги (/rezervace/doplnky)</h3>
+  <table>
+    <tr><th>Текст</th><th>Источник</th><th>Ключ / поле</th></tr>
+    <tr><td>"Doplňkové služby" / подзаголовок</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.title / subtitle</td></tr>
+    <tr><td>"Pokračovat Bez výběru Doplňku"</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.continueWithout</td></tr>
+    <tr><td>Названия категорий аддонов</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.categoryInterior / categoryExterior / categoryProtection</td></tr>
+    <tr><td>Названия аддонов + цены</td><td><span class="badge badge-collection">CMS</span></td><td>Services (isAddon=true) → name, price</td></tr>
+    <tr><td>Описания аддонов</td><td><span class="badge badge-collection">CMS</span></td><td>Services → description</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Шаг 4: Дата и время (/rezervace/datum)</h3>
+  <table>
+    <tr><th>Текст</th><th>Источник</th><th>Ключ / поле</th></tr>
+    <tr><td>"KOŠÍK"</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.cartTitle</td></tr>
+    <tr><td>"Váš košík je prázdný"</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.emptyCart</td></tr>
+    <tr><td>"PROGRAM" / "DOPLNĚK" бейджи</td><td><span class="badge badge-json">JSON</span></td><td>booking.program.programBadge / booking.contactForm.addonBadge</td></tr>
+    <tr><td>"Zadejte reklamní kód"</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.promoPlaceholder</td></tr>
+    <tr><td>"Použít" / ошибки промокода</td><td><span class="badge badge-json">JSON</span></td><td>common.apply / booking.cart.promo*</td></tr>
+    <tr><td>"Vyberte datum" / "Vyberte čas"</td><td><span class="badge badge-json">JSON</span></td><td>booking.addons.selectDate / booking.contactForm.selectTime</td></tr>
+    <tr><td>"Celkem:" / "Pokračovat" / "Zpět"</td><td><span class="badge badge-json">JSON</span></td><td>booking.program.total / common.continue / common.back</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Шаг 5: Контактные данные (/rezervace/kontakt)</h3>
+  <table>
+    <tr><th>Текст</th><th>Источник</th><th>Ключ / поле</th></tr>
+    <tr><td>"Osobní údaje"</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.title</td></tr>
+    <tr><td>"Jméno *" / "Telefon *" / "E-mail"</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.nameLabel / phoneLabel / emailLabel</td></tr>
+    <tr><td>Placeholder-ы полей</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.*Placeholder</td></tr>
+    <tr><td>"Komentář" / "Připomenutí"</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.commentLabel / reminderLabel</td></tr>
+    <tr><td>Опции напоминания</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.reminder1h / 2h / 24h / noReminder</td></tr>
+    <tr><td>GDPR-текст с ссылкой</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.gdprConsent</td></tr>
+    <tr><td>Маркетинг-согласие</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.marketingConsent</td></tr>
+    <tr><td>"Kompletní registrace"</td><td><span class="badge badge-json">JSON</span></td><td>booking.contactForm.submitBooking</td></tr>
+  </table>
+</div>
+
+<!-- 6. What's NOT CMS-editable -->
+<h2 id="missing">6. Что НЕ настраивается из админки</h2>
+
+<div class="card" style="border-left: 3px solid #ef4444;">
+  <table>
+    <tr><th>Страница / элемент</th><th>Текущий источник</th><th>Статус</th></tr>
+    <tr><td><strong>Бронирование: ВСЕ UI-тексты</strong> (названия шагов, кнопки, лейблы форм, GDPR, промокод)</td><td>JSON files</td><td><span class="status-warn">Только через файлы</span></td></tr>
+    <tr><td><strong>Pro firmy: вся страница</strong></td><td>JSON files</td><td><span class="status-warn">Только через файлы</span></td></tr>
+    <tr><td><strong>Юридические страницы: весь текст</strong> (700+ строк)</td><td>JSON files</td><td><span class="status-warn">Только через файлы</span></td></tr>
+    <tr><td><strong>Навигация</strong> (Služby, Akce, Pro firmy, Blog, Kontakt)</td><td>JSON files</td><td><span class="status-warn">Только через файлы</span></td></tr>
+    <tr><td><strong>Метаданные SEO</strong> (title, description для каждой страницы)</td><td>JSON files</td><td><span class="status-warn">Только через файлы</span></td></tr>
+    <tr><td><strong>Категории аддонов</strong> ("Péče o interiér", "Skla a viditelnost"...)</td><td>JSON files</td><td><span class="status-warn">Только через файлы</span></td></tr>
+    <tr><td><strong>Названия авто / программ / аддонов</strong></td><td>CMS Collections</td><td><span class="status-ok">Настраивается</span></td></tr>
+    <tr><td><strong>Цены</strong></td><td>CMS + Altegio sync</td><td><span class="status-ok">Настраивается + синхронизация</span></td></tr>
+    <tr><td><strong>Изображения</strong></td><td>CMS Collections</td><td><span class="status-ok">Настраивается</span></td></tr>
+  </table>
+</div>
+
+<!-- 7. Recommendations -->
+<h2 id="recommendations">7. Итоговая сводка</h2>
+
+<div class="card">
+  <h3>Что можно менять из админки прямо сейчас</h3>
+  <table>
+    <tr><th>Что</th><th>Где в админке</th><th>Языки</th></tr>
+    <tr><td>Заголовки всех секций главной</td><td>Globals → Home Page Content</td><td>CS / EN / RU</td></tr>
+    <tr><td>Тексты кнопок (CTA) по всему сайту</td><td>Globals → Translations</td><td>CS / EN / RU</td></tr>
+    <tr><td>Hero-изображение</td><td>Globals → Home Page Content → Hero</td><td>—</td></tr>
+    <tr><td>Программы мытья (имя, цена, фичи, изображение)</td><td>Collections → Services</td><td>badge: CS/EN/RU</td></tr>
+    <tr><td>Категории авто (имя, изображение)</td><td>Collections → Vehicle Categories</td><td>—</td></tr>
+    <tr><td>Акции (имя, описание, цена, изображение)</td><td>Collections → Promotions</td><td>—</td></tr>
+    <tr><td>Блог-посты</td><td>Collections → Blog Posts</td><td>—</td></tr>
+    <tr><td>FAQ</td><td>Collections → FAQ</td><td>—</td></tr>
+    <tr><td>Отзывы</td><td>Collections → Reviews</td><td>—</td></tr>
+    <tr><td>Партнёры</td><td>Collections → Partners</td><td>—</td></tr>
+    <tr><td>Баннеры</td><td>Collections → Banners</td><td>CS / EN / RU</td></tr>
+    <tr><td>Телефон, адрес, часы работы, соцсети</td><td>Globals → Site Settings</td><td>частично</td></tr>
+    <tr><td>Express Wash баннеры</td><td>Globals → Express Wash Settings</td><td>—</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Что требует правки файлов (НЕ из админки)</h3>
+  <p style="font-size:13px; margin-top:8px">Для изменения нижеследующего нужно редактировать файлы <code>messages/cs.json</code>, <code>messages/en.json</code>, <code>messages/ru.json</code> и делать rebuild + deploy:</p>
+  <ul style="font-size:13px; padding-left:20px; margin-top:8px">
+    <li>Бронирование: все UI-тексты (лейблы полей, кнопки, GDPR, подсказки)</li>
+    <li>Страница "Pro firmy" полностью</li>
+    <li>Юридические страницы (Obchodní podmínky, Zásady ochrany osobních údajů)</li>
+    <li>Навигация хедера</li>
+    <li>SEO метаданные (title/description для каждой страницы)</li>
+    <li>Категории дополнительных услуг ("Péče o interiér", "Ochrana a vosky")</li>
+    <li>Общие слова: "Kč", "od", "Načítání...", "Zpět", "Pokračovat" и т.д.</li>
+  </ul>
+</div>
+
+<p style="text-align:center; margin-top:32px; color:#999; font-size:12px">
+  Сгенерировано Claude Code &mdash; 14.03.2026
+</p>
+
+</div>
+</body>
+</html>

@@ -15,8 +15,10 @@ export const HomePageContent: GlobalConfig = {
           fields: [
             { name: 'heroTitle', type: 'text', label: 'Nadpis', localized: true, defaultValue: 'Automyčka Karlín' },
             { name: 'heroSubtitle', type: 'text', label: 'Podnadpis', localized: true, defaultValue: 'Ruční čištění disků' },
+            { name: 'heroSubtitles', type: 'text', label: 'Rotující podnadpisy (oddělené |)', localized: true, admin: { description: 'Více podnadpisů pro animaci. Např: RUČNÍ ČIŠTĚNÍ | DETAILING | KERAMICKÁ OCHRANA' } },
             { name: 'heroCtaText', type: 'text', label: 'Text CTA tlačítka', localized: true, defaultValue: 'Rychlá Rezervace' },
-            { name: 'heroImage', type: 'upload', relationTo: 'media', label: 'Pozadí hero', admin: { description: 'Doporučeno: JPG/WebP, 1920×1080px, max 1 MB' } },
+            { name: 'heroImage', type: 'upload', relationTo: 'media', label: 'Pozadí hero (fallback)', admin: { description: 'Záložní obrázek, pokud video není k dispozici. JPG/WebP, 1920×1080px' } },
+            { name: 'heroVideoId', type: 'text', label: 'YouTube Video ID', admin: { description: 'ID videa z YouTube pro pozadí hero. Např: Q4SuUYmRnkk' } },
           ],
         },
         {

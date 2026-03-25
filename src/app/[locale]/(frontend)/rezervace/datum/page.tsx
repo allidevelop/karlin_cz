@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useBookingStore } from "@/stores/booking-store";
+import { DatePicker } from "@/components/ui/date-picker";
+import { TimePicker } from "@/components/ui/time-picker";
 
 /** Group time slots: 3 morning, 3 afternoon, 3 evening */
 function groupTimeSlots(times: string[]) {
@@ -328,15 +330,15 @@ export default function DateTimeStepPage() {
                     {t("booking.addons.selectDate")}
                   </span>
                 </div>
-                <input
-                  type="date"
+                <DatePicker
                   value={selectedDate}
-                  min={todayStr}
-                  onChange={(e) => {
-                    setSelectedDate(e.target.value);
+                  onChange={(date) => {
+                    setSelectedDate(date);
                     setSelectedTime("");
                   }}
-                  className="w-full bg-white border border-[#b1b3b6]/50 rounded-[10px] px-4 py-3 font-clash text-[14px] text-[#302e2f] focus:outline-none focus:border-[#7960a9] transition-colors"
+                  minDate={todayStr}
+                  locale={locale}
+                  placeholder={t("booking.addons.selectDate")}
                 />
 
                 {/* Time selector */}
@@ -347,45 +349,16 @@ export default function DateTimeStepPage() {
                         <Loader2 className="size-5 text-[#7960a9] animate-spin" />
                       </div>
                     ) : timeSlots.length > 0 ? (
-                      <div className="relative">
-                        <select
-                          value={selectedTime}
-                          onChange={(e) => setSelectedTime(e.target.value)}
-                          className="w-full bg-white border border-[#b1b3b6]/50 rounded-[10px] px-4 py-3 font-clash text-[14px] text-[#302e2f] focus:outline-none focus:border-[#7960a9] transition-colors appearance-none pr-10"
-                        >
-                          <option value="">
-                            {t("booking.contactForm.selectTime")}
-                          </option>
-                          {grouped.morning.length > 0 && (
-                            <optgroup label={t("booking.cart.timeMorning")}>
-                              {grouped.morning.map((time) => (
-                                <option key={time} value={time}>
-                                  {time}
-                                </option>
-                              ))}
-                            </optgroup>
-                          )}
-                          {grouped.afternoon.length > 0 && (
-                            <optgroup label={t("booking.cart.timeAfternoon")}>
-                              {grouped.afternoon.map((time) => (
-                                <option key={time} value={time}>
-                                  {time}
-                                </option>
-                              ))}
-                            </optgroup>
-                          )}
-                          {grouped.evening.length > 0 && (
-                            <optgroup label={t("booking.cart.timeEvening")}>
-                              {grouped.evening.map((time) => (
-                                <option key={time} value={time}>
-                                  {time}
-                                </option>
-                              ))}
-                            </optgroup>
-                          )}
-                        </select>
-                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#302e2f] pointer-events-none" />
-                      </div>
+                      <TimePicker
+                        value={selectedTime}
+                        onChange={setSelectedTime}
+                        placeholder={t("booking.contactForm.selectTime")}
+                        groups={[
+                          { label: t("booking.cart.timeMorning"), times: grouped.morning },
+                          { label: t("booking.cart.timeAfternoon"), times: grouped.afternoon },
+                          { label: t("booking.cart.timeEvening"), times: grouped.evening },
+                        ]}
+                      />
                     ) : (
                       <p className="font-clash text-[13px] text-[#302e2f]/60">
                         {t("booking.contactForm.noTimeslots")}

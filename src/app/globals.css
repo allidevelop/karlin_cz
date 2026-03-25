@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Prevent layout shift when scrollbar appears/disappears */
+html {
+  overflow-y: scroll;
+}
+
 /* ── Tailwind v4 theme tokens ── */
 
 @theme inline {
@@ -123,6 +128,17 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ── Russian locale: Montserrat instead of Clash Display ── */
+
+html[lang="ru"] {
+  --font-clash-display: var(--font-montserrat);
+}
+
+html[lang="ru"] .font-bold,
+html[lang="ru"] .font-extrabold {
+  font-weight: 800;
 }
 
 /* ── Utility classes ── */

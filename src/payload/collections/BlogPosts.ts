@@ -21,6 +21,16 @@ export const BlogPosts: CollectionConfig = {
     { name: 'content', type: 'richText', required: true, label: 'Obsah' },
     { name: 'featuredImage', type: 'upload', relationTo: 'media', label: 'Hlavní obrázek', admin: { description: 'Doporučeno: JPG/WebP, 1200×675px (16:9), max 500 KB' } },
     {
+      name: 'gallery',
+      type: 'array',
+      label: 'Galerie obrázků (zobrazí se v článku)',
+      admin: { description: 'Obrázky se zobrazí mezi textem článku. Pořadí: 1. po úvodu, 2. uprostřed, 3. před závěrem' },
+      fields: [
+        { name: 'image', type: 'upload', relationTo: 'media', required: true, admin: { description: 'JPG/WebP, max 800 KB' } },
+        { name: 'caption', type: 'text', localized: true, label: 'Popisek' },
+      ],
+    },
+    {
       name: 'category',
       type: 'select',
       options: [

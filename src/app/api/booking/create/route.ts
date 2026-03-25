@@ -123,6 +123,7 @@ export async function POST(request: Request) {
 
     // Resolve addon Payload IDs from altegioIds
     let addonPayloadIds: (string | number)[] = []
+    let addonNames: string[] = []
     if (data.addonIds.length > 0) {
       const addonDocs = await payload.find({
         collection: 'services',
@@ -130,10 +131,12 @@ export async function POST(request: Request) {
         limit: data.addonIds.length,
       })
       addonPayloadIds = addonDocs.docs.map((d) => d.id)
+      addonNames = addonDocs.docs.map((d) => d.name).filter(Boolean)
     }
 
     const clientName = `${data.firstName} ${data.lastName}`.trim()
-    const serviceName = serviceDoc.docs[0]?.name ?? ''
+    const mainServiceName = serviceDoc.docs[0]?.name ?? ''
+    const serviceName = [mainServiceName, ...addonNames].filter(Boolean).join(', ')
 
     const booking = await payload.create({
       collection: 'bookings',

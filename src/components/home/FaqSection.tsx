@@ -67,12 +67,20 @@ export default function FaqSection({ items, cmsTitle, cmsSubtitle, cmsContactUsB
           <p className="font-clash font-bold text-[15.4px] leading-[24px] text-[#302e2f] mb-4">
             {t("faq.noAnswer")}
           </p>
-          <Link
-            href="#contact"
-            className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.1)] text-[#f0eff0] font-clash font-bold text-[15.1px] uppercase rounded-[13px] px-8 py-3 hover:opacity-90 transition-opacity"
-          >
-            {t("faq.contactUs")}
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/rezervace/vozidlo"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.1)] text-[#f0eff0] font-clash font-bold text-[15.1px] uppercase rounded-[13px] px-8 py-3 hover:opacity-90 transition-opacity"
+            >
+              {t("common.quickBooking")}
+            </Link>
+            <Link
+              href="#contact"
+              className="inline-flex items-center justify-center bg-[#302e2f] border border-[#b1b3b6] text-[#f0eff0] font-clash font-bold text-[15.1px] uppercase rounded-[13px] px-8 py-3 hover:opacity-90 transition-opacity"
+            >
+              {t("faq.contactUs")}
+            </Link>
+          </div>
         </div>
       </div>
     </section>

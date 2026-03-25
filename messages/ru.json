@@ -13,6 +13,7 @@
     "address": "Sokolovská 694/98, Karlín, 186 00 Praha",
     "brandName": "AUTOMYČKA KARLÍN",
     "navigate": "Навигация",
+    "quickBooking": "Быстрая запись",
     "submit": "Отправить",
     "apply": "Применить",
     "close": "Закрыть",
@@ -31,6 +32,8 @@
       "toGo": "To Go",
       "toGlow": "To Glow",
       "toWow": "To Wow",
+      "exteriorKomplet": "Exteriér Komplet",
+      "interiorKomplet": "Interiér Komplet",
       "premiumDetailing": "Premium Detailing",
       "allServices": "Все услуги"
     }
@@ -162,7 +165,8 @@
     "howToReach": "Как к нам добраться",
     "location": "Карлин, Прага 8",
     "accessInfo": "Удобный доступ на общественном транспорте и на автомобиле",
-    "mapTitle": "Карта - Automyčka Karlín"
+    "mapTitle": "Карта - Automyčka Karlín",
+    "videoInstructions": "Видео инструкция"
   },
   "faq": {
     "title": "Часто задаваемые вопросы",
@@ -196,6 +200,10 @@
       "news": "Новости",
       "technology": "Технологии"
     }
+  },
+  "instagram": {
+    "title": "Подписывайтесь на нас в Instagram",
+    "follow": "Подписаться в Instagram"
   },
   "newsletter": {
     "title": "Рассылка",
@@ -317,6 +325,7 @@
       "thankYou": "Спасибо за вашу запись",
       "servicesLabel": "Услуги",
       "addonsLabel": "Дополнительные услуги",
+      "addonFallbackName": "Дополнительная услуга",
       "totalLabel": "Итого",
       "bookingRefLabel": "Номер записи",
       "statusLabel": "Статус",
@@ -584,7 +593,8 @@
     "sending": "Отправка...",
     "success": "Сообщение успешно отправлено. Мы свяжемся с вами в ближайшее время!",
     "errorRequired": "Пожалуйста, заполните все обязательные поля.",
-    "errorGeneric": "Произошла ошибка. Пожалуйста, попробуйте снова."
+    "errorGeneric": "Произошла ошибка. Пожалуйста, попробуйте снова.",
+    "fieldRequired": "Это поле обязательно"
   },
   "newsletterForm": {
     "subscribing": "Подписка...",
@@ -596,7 +606,7 @@
   "notFoundCTA": {
     "heading": "Не нашли то, что искали?",
     "subtitle": "Посмотрите наши услуги или свяжитесь с нами",
-    "bookNow": "Записаться",
+    "bookNow": "Быстрая запись",
     "callUs": "Позвоните нам"
   },
   "kategorieVozidel": {

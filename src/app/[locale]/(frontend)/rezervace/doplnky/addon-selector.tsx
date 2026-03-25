@@ -8,6 +8,7 @@ import {
   ShoppingCart,
   X,
   Plus,
+  Minus,
   Check,
   ArrowRight,
   ChevronLeft,
@@ -343,23 +344,30 @@ function CategoryCarousel({
           <button
             type="button"
             onClick={scrollPrev}
-            className="flex items-center justify-center size-8 rounded-full border border-[#302e2f]/30 text-[#302e2f]/50 hover:border-[#7960a9] hover:text-[#7960a9] transition-colors"
+            className="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-[10px] border-2 border-[#b1b3b6] bg-[#f0eff0] text-[#302e2f] transition-all hover:border-[#7960a9] hover:text-[#7960a9] hover:shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]"
           >
-            <ChevronLeft className="size-4" />
+            <ChevronLeft className="size-5 lg:size-6" />
           </button>
           <button
             type="button"
             onClick={scrollNext}
-            className="flex items-center justify-center size-8 rounded-full border border-[#302e2f]/30 text-[#302e2f]/50 hover:border-[#7960a9] hover:text-[#7960a9] transition-colors"
+            className="flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-[10px] border-2 border-[#b1b3b6] bg-[#f0eff0] text-[#302e2f] transition-all hover:border-[#7960a9] hover:text-[#7960a9] hover:shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]"
           >
-            <ChevronRight className="size-4" />
+            <ChevronRight className="size-5 lg:size-6" />
           </button>
         </div>
       </div>
 
       {/* Embla carousel */}
       <div className="relative">
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div
+          className="overflow-hidden"
+          ref={emblaRef}
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+          }}
+        >
           <div className="flex gap-[16px]">
             {category.addons.map((addon) => (
               <div
@@ -375,8 +383,6 @@ function CategoryCarousel({
             ))}
           </div>
         </div>
-        {/* Right fade-out overlay */}
-        <div className="absolute top-0 right-0 w-16 lg:w-24 h-full pointer-events-none bg-gradient-to-l from-[#f0eff0]/80 to-transparent z-10" />
       </div>
     </div>
   );
@@ -497,7 +503,10 @@ function AddonCard({
           }`}
         >
           {isSelected ? (
-            <>{t("booking.program.remove")}</>
+            <>
+              <Minus className="size-3 lg:size-4" />
+              {t("booking.program.remove")}
+            </>
           ) : (
             <>
               <Plus className="size-3 lg:size-4" />

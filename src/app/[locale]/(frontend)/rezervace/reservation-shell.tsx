@@ -58,7 +58,7 @@ export function ReservationShell({
           <div className="absolute top-[20px] left-[10%] w-[114px] h-[114px] rounded-full bg-[#f0eff0]/10 blur-[32px] pointer-events-none lg:hidden" />
           <div className="absolute top-[-20px] right-[5%] w-[114px] h-[114px] rounded-full bg-[#f0eff0]/10 blur-[32px] pointer-events-none lg:hidden" />
 
-          <div className="max-w-[1536px] mx-auto px-4 lg:px-[32px] pt-[60px] pb-[40px] lg:pt-[120px] lg:pb-[100px]">
+          <div className="max-w-[1536px] mx-auto px-4 lg:px-[32px] pt-[100px] pb-[40px] lg:pt-[120px] lg:pb-[100px]">
             <div className="text-center">
               <h1 className="font-clash text-[28px] lg:text-[60px] font-bold text-[#f0eff0] leading-[34px] lg:leading-[60px]">
                 {t("booking.heroTitle")}
@@ -96,7 +96,7 @@ export function ReservationShell({
                     <div key={step.number} className="flex items-center">
                       <div className="flex items-center gap-2">
                         <div
-                          className={`flex items-center justify-center w-10 h-10 rounded-full font-clash text-[14px] font-bold transition-colors ${
+                          className={`flex items-center justify-center w-10 h-10 rounded-full font-clash text-[14px] font-bold leading-none transition-colors ${
                             isCompleted
                               ? "bg-[#7960a9] text-[#f0eff0]"
                               : isActive
@@ -107,7 +107,7 @@ export function ReservationShell({
                           {isCompleted ? (
                             <Check className="size-5" />
                           ) : (
-                            step.number
+                            index + 1
                           )}
                         </div>
                         <span
@@ -143,7 +143,7 @@ export function ReservationShell({
                     <div key={step.number} className="flex items-center">
                       <div className="flex items-center gap-2">
                         <div
-                          className={`flex items-center justify-center w-8 h-8 rounded-full font-clash text-[12px] font-bold transition-colors ${
+                          className={`flex items-center justify-center w-8 h-8 rounded-full font-clash text-[12px] font-bold leading-none transition-colors ${
                             isCompleted
                               ? "bg-[#7960a9] text-[#f0eff0]"
                               : isActive

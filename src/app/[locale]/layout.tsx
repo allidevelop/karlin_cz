@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import localFont from 'next/font/local'
+import { Montserrat } from 'next/font/google'
 import PopupBannerLoader from '@/components/shared/PopupBannerLoader'
 import { getCmsMessages } from '@/lib/payload'
 import { deepMerge } from '@/lib/cms-messages'
@@ -16,6 +17,13 @@ const clashDisplay = localFont({
     { path: '../../../public/fonts/clash-display/ClashDisplay-Bold.woff', weight: '700', style: 'normal' },
   ],
   variable: '--font-clash-display',
+  display: 'swap',
+})
+
+const montserrat = Montserrat({
+  subsets: ['cyrillic', 'latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-montserrat',
   display: 'swap',
 })
 
@@ -45,7 +53,11 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
-      <body className={`${clashDisplay.variable} bg-brand-black text-brand-white font-clash antialiased min-h-screen`}>
+      <head>
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
+      </head>
+      <body className={`${clashDisplay.variable} ${montserrat.variable} bg-brand-black text-brand-white font-clash antialiased min-h-screen`}>
         <NextIntlClientProvider messages={messages}>
           {children}
           <PopupBannerLoader />

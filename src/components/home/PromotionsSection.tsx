@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import useEmblaCarousel from "embla-carousel-react";
@@ -54,6 +54,24 @@ export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, c
     emblaApi?.scrollNext();
   }, [emblaApi]);
 
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const update = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+    };
+    update();
+    emblaApi.on("scroll", update);
+    emblaApi.on("reInit", update);
+    return () => {
+      emblaApi.off("scroll", update);
+      emblaApi.off("reInit", update);
+    };
+  }, [emblaApi]);
+
   if (promotions.length === 0) return null;
 
   return (
@@ -95,16 +113,25 @@ export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, c
         </div>
       </div>
 
-      {/* Carousel breaks out to right edge */}
-      <div className="pl-4 lg:pl-[max(32px,calc((100vw-1536px)/2+32px))]">
-        <div ref={emblaRef} className="overflow-hidden">
+      {/* Carousel contained in container */}
+      <div className="relative max-w-[1536px] mx-auto px-4 lg:px-[32px]">
+        <div
+          ref={emblaRef}
+          className="overflow-hidden"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+          }}
+        >
           <div className="flex gap-4 lg:gap-[48px]">
             {promotions.map((promo, i) => (
               <div
                 key={`${promo.slug}-${i}`}
-                className="min-w-0 shrink-0 grow-0 basis-[85vw] sm:basis-[348px] lg:basis-[400px]"
+                className="min-w-0 shrink-0 grow-0 basis-[80vw] sm:basis-[300px] lg:basis-[340px]"
               >
-                <div className="relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] h-[549px]">
+                <div className="group/card relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] h-full flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]">
+                  {/* Hover glow */}
+                  <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover/card:opacity-30 transition-opacity -z-10" />
                   {/* Badge — Dynamic Island shape */}
                   {promo.badge && (
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
@@ -123,63 +150,55 @@ export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, c
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-[rgba(48,46,47,0.5)]" />
-                    {/* Title overlay on image */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col items-center gap-2">
-                      <h3 className="font-clash font-bold text-[26px] lg:text-[32px] text-[#f0eff0] uppercase text-center leading-[30px]">
+                    {/* Title + Price overlay on image */}
+                    <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-1">
+                      <h3 className="font-clash font-bold text-[18px] lg:text-[22px] text-[#f0eff0] uppercase leading-[24px] lg:leading-[28px]">
                         {promo.title}
                       </h3>
-                    </div>
-                  </div>
-
-                  {/* Bottom: Content */}
-                  <div className="p-6 h-[292px] flex flex-col gap-4">
-                    {/* Description */}
-                    <p className="font-clash font-medium text-[16px] text-[#302e2f] leading-normal line-clamp-2">
-                      {promo.description}
-                    </p>
-
-                    {/* Prices */}
-                    {(promo.discountedPrice || promo.originalPrice) && (
-                      <div className="border-b border-[#f0eff0] pb-4">
-                        <div className="flex items-baseline gap-2">
+                      {(promo.discountedPrice || promo.originalPrice) && (
+                        <div className="flex items-baseline gap-1.5">
                           {promo.discountedPrice && (
                             <>
-                              <span className="font-clash font-bold text-[32px] leading-[40px] text-[#7960a9]">
+                              <span className="font-clash font-bold text-[28px] lg:text-[36px] text-[#f0eff0]">
                                 {promo.discountedPrice}
                               </span>
-                              <span className="font-clash font-normal text-[18px] text-[#7960a9]">
+                              <span className="font-clash font-bold text-[14px] lg:text-[18px] text-[#f0eff0]">
                                 {t("common.currency")}
                               </span>
                             </>
                           )}
                           {promo.originalPrice && (
-                            <>
-                              <span className="font-clash font-medium text-[24px] leading-[40px] text-[#b1b3b6] line-through ml-2">
-                                {promo.originalPrice}
-                              </span>
-                              <span className="font-clash font-normal text-[16px] text-[#b1b3b6] line-through">
-                                {t("common.currency")}
-                              </span>
-                            </>
+                            <span className="font-clash font-medium text-[18px] text-[#f0eff0]/50 line-through ml-1">
+                              {promo.originalPrice} {t("common.currency")}
+                            </span>
                           )}
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
+                  </div>
 
-                    {/* CTA */}
-                    <Link
-                      href={`/akce/${promo.slug}`}
-                      className="flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14.8px] uppercase leading-[24px] rounded-[10px] px-6 py-4 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] hover:opacity-90 transition-opacity"
-                    >
-                      {t("promotions.viewDetail")}
-                    </Link>
+                  {/* Bottom: Content */}
+                  <div className="p-5 flex-1 flex flex-col">
+                    {/* Description */}
+                    <p className="font-clash font-medium text-[14px] lg:text-[15px] text-[#302e2f] leading-relaxed line-clamp-3">
+                      {promo.description}
+                    </p>
 
-                    {/* Validity */}
-                    {promo.validUntil && (
-                      <p className="font-clash font-medium text-[14px] text-[#302e2f] text-center leading-[20px]">
-                        {t("promotions.validUntil")} {dateFormatter.format(new Date(promo.validUntil))}
-                      </p>
-                    )}
+                    {/* CTA + Validity pinned to bottom */}
+                    <div className="mt-auto flex flex-col gap-3 pt-3">
+                      <Link
+                        href={`/akce/${promo.slug}`}
+                        className="flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] uppercase leading-[24px] rounded-[10px] px-5 py-3 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:opacity-90 transition-opacity"
+                      >
+                        {t("promotions.viewDetail")}
+                      </Link>
+
+                      {promo.validUntil && (
+                        <p className="font-clash font-medium text-[12px] text-[#302e2f]/60 text-center leading-[18px]">
+                          {t("promotions.validUntil")} {dateFormatter.format(new Date(promo.validUntil))}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -25,6 +25,7 @@ import { PromoCodes } from './collections/PromoCodes.ts'
 
 // Globals
 import { ExpressWashSettings } from './globals/ExpressWashSettings.ts'
+import { InstagramReels } from './globals/InstagramReels.ts'
 import { SiteSettings } from './globals/SiteSettings.ts'
 import { HomePageContent } from './globals/HomePageContent.ts'
 import { Translations } from './globals/Translations.ts'
@@ -92,6 +93,7 @@ export default buildConfig({
   ],
   globals: [
     ExpressWashSettings,
+    InstagramReels,
     SiteSettings,
     HomePageContent,
     Translations,

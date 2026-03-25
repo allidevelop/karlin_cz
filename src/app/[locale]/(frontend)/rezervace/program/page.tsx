@@ -3,10 +3,11 @@ import { getPrograms, getVehicleCategories } from "@/lib/payload";
 import { getTranslations } from "next-intl/server";
 import ProgramSelector, { type CMSProgram, type CMSVehicleCategory } from "./program-selector";
 
-export default async function ProgramStepPage() {
+export default async function ProgramStepPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations();
   const [rawPrograms, rawVehicleCategories] = await Promise.all([
-    getPrograms(),
+    getPrograms(100, locale),
     getVehicleCategories(),
   ]);
 

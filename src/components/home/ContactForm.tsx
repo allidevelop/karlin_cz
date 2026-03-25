@@ -8,11 +8,13 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
   const t = useTranslations()
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({})
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('sending')
     setErrorMsg('')
+    setFieldErrors({})
 
     const form = e.currentTarget
     const data = {
@@ -22,7 +24,13 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
       message: (form.elements.namedItem('message') as HTMLTextAreaElement).value.trim(),
     }
 
-    if (!data.name || !data.email || !data.message) {
+    const errors: Record<string, boolean> = {}
+    if (!data.name) errors.name = true
+    if (!data.email) errors.email = true
+    if (!data.message) errors.message = true
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
       setStatus('error')
       setErrorMsg(t('contactForm.errorRequired'))
       return
@@ -48,6 +56,10 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
     }
   }
 
+  const inputBase = "w-full bg-[#f0eff0] border-2 rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 transition"
+  const inputOk = "border-[#b1b3b6] focus:ring-[#7960a9]"
+  const inputErr = "border-red-500 focus:ring-red-500"
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -67,8 +79,12 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
           type="text"
           required
           placeholder={t('contactSection.namePlaceholder')}
-          className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition"
+          className={`${inputBase} ${fieldErrors.name ? inputErr : inputOk}`}
+          onChange={() => fieldErrors.name && setFieldErrors(prev => ({ ...prev, name: false }))}
         />
+        {fieldErrors.name && (
+          <p className="font-clash text-[12px] text-red-500 mt-1">{t('contactForm.fieldRequired')}</p>
+        )}
       </div>
       <div>
         <label
@@ -82,7 +98,7 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
           name="phone"
           type="tel"
           placeholder={t('contactSection.phonePlaceholder')}
-          className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition"
+          className={`${inputBase} ${inputOk}`}
         />
       </div>
       <div>
@@ -98,8 +114,12 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
           type="email"
           required
           placeholder={t('contactSection.emailPlaceholder')}
-          className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[52px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition"
+          className={`${inputBase} ${fieldErrors.email ? inputErr : inputOk}`}
+          onChange={() => fieldErrors.email && setFieldErrors(prev => ({ ...prev, email: false }))}
         />
+        {fieldErrors.email && (
+          <p className="font-clash text-[12px] text-red-500 mt-1">{t('contactForm.fieldRequired')}</p>
+        )}
       </div>
       <div>
         <label
@@ -114,8 +134,12 @@ export default function ContactForm({ cmsSendButton }: { cmsSendButton?: string 
           rows={4}
           required
           placeholder={t('contactSection.messagePlaceholder')}
-          className="w-full bg-[#f0eff0] border-2 border-[#b1b3b6] rounded-[10px] px-5 py-3 h-[140px] sm:h-[178px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition resize-none"
+          className={`w-full bg-[#f0eff0] border-2 rounded-[10px] px-5 py-3 h-[100px] sm:h-[120px] text-[#302e2f] placeholder:text-[#b1b3b6] font-clash text-sm focus:outline-none focus:ring-2 transition resize-none ${fieldErrors.message ? inputErr : inputOk}`}
+          onChange={() => fieldErrors.message && setFieldErrors(prev => ({ ...prev, message: false }))}
         />
+        {fieldErrors.message && (
+          <p className="font-clash text-[12px] text-red-500 mt-1">{t('contactForm.fieldRequired')}</p>
+        )}
       </div>
 
       {status === 'success' && (

@@ -8,3 +8,4 @@ export { default as FaqSection } from "./FaqSection";
 export { default as PartnersSection } from "./PartnersSection";
 export { default as BlogSection } from "./BlogSection";
 export { default as NewsletterSection } from "./NewsletterSection";
+export { default as InstagramReelsSection } from "./InstagramReelsSection";

@@ -159,8 +159,8 @@ export default async function KategorieVozidelPage({ params }: { params: Promise
                         <div className="absolute inset-0 bg-[#302e2f]/40 mix-blend-multiply" />
 
                         {/* Category name + price on image (mobile) */}
-                        <div className="lg:hidden absolute bottom-0 left-0 right-0 px-6 pb-6 flex flex-col items-center gap-[10px]">
-                          <h3 className="font-clash font-bold text-[13px] text-[#f0eff0] uppercase tracking-[0.35px] leading-[17.5px] text-center">
+                        <div className="lg:hidden absolute bottom-0 left-0 right-0 px-4 pb-5 flex flex-col items-center gap-[8px]">
+                          <h3 className="font-clash font-bold text-[15px] text-[#f0eff0] uppercase tracking-[0.5px] leading-[20px] text-center">
                             {cat.name}
                           </h3>
                           {minPrice != null && (
@@ -178,8 +178,8 @@ export default async function KategorieVozidelPage({ params }: { params: Promise
                         </div>
 
                         {/* Category name on image (desktop) */}
-                        <div className="hidden lg:block absolute bottom-0 left-0 right-0 px-6 pb-6 pt-[23px]">
-                          <h3 className="font-clash font-bold text-[14px] text-[#f0eff0] uppercase tracking-[0.35px] leading-[17.5px]">
+                        <div className="hidden lg:block absolute bottom-0 left-0 right-0 px-6 pb-7">
+                          <h3 className="font-clash font-bold text-[20px] text-[#f0eff0] uppercase tracking-[0.5px] leading-[26px]">
                             {cat.name}
                           </h3>
                         </div>
@@ -225,21 +225,13 @@ export default async function KategorieVozidelPage({ params }: { params: Promise
                           </div>
                         </div>
 
-                        {/* Buttons */}
-                        <div className="flex items-center justify-center gap-[15px] w-full">
-                          <Link
-                            href="/rezervace/vozidlo"
-                            className="inline-flex items-center justify-center bg-[#302e2f] border-2 border-[#302e2f] backdrop-blur-[12px] rounded-[10px] h-[47px] w-[160px] font-clash font-bold text-[18px] text-[#f0eff0] uppercase hover:bg-[#302e2f]/90 transition-colors"
-                          >
-                            {t("kategorieVozidel.learnMore")}
-                          </Link>
-                          <Link
-                            href="/rezervace/program"
-                            className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] h-[47px] w-[160px] font-clash font-bold text-[18px] text-[#f0eff0] uppercase shadow-[0px_25px_50px_-12px_rgba(155,126,196,0.5)] hover:opacity-90 transition-opacity"
-                          >
-                            {t("kategorieVozidel.booking")}
-                          </Link>
-                        </div>
+                        {/* CTA button */}
+                        <Link
+                          href="/rezervace/vozidlo"
+                          className="w-full flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] uppercase leading-[24px] rounded-[10px] py-[14px] hover:opacity-90 transition-opacity"
+                        >
+                          {t("services.chooseProgram")}
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -73,7 +73,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
             src="/images/wave-bg.png"
             alt=""
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-15"
             priority={false}
           />
         </div>

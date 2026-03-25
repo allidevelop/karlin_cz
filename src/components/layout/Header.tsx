@@ -42,7 +42,9 @@ const serviceSubItems = [
   { labelKey: "toGo", href: "/sluzby/to-go" },
   { labelKey: "toGlow", href: "/sluzby/to-glow" },
   { labelKey: "toWow", href: "/sluzby/to-wow" },
-  { labelKey: "premiumDetailing", href: "/sluzby/premium-detailing" },
+  { labelKey: "exteriorKomplet", href: "/sluzby/exterier-komplet" },
+  { labelKey: "interiorKomplet", href: "/sluzby/interier-komplet" },
+  { labelKey: "premiumDetailing", href: "/sluzby/premium-detailing-komplet" },
   { labelKey: "allServices", href: "/sluzby" },
 ] as const;
 

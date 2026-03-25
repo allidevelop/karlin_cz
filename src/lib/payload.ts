@@ -14,13 +14,14 @@ export function getMediaUrl(media: unknown): string | null {
 /**
  * Get all active services, sorted by sortOrder.
  */
-export async function getServices(limit = 100) {
+export async function getServices(limit = 100, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'services',
     limit,
     depth: 2,
     sort: 'sortOrder',
+    locale: locale as 'cs' | 'en' | 'ru' | undefined,
     where: {
       isActive: { equals: true },
     },
@@ -31,13 +32,14 @@ export async function getServices(limit = 100) {
 /**
  * Get all active programs (non-addon services), sorted by sortOrder.
  */
-export async function getPrograms(limit = 100) {
+export async function getPrograms(limit = 100, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'services',
     limit,
     depth: 2,
     sort: 'sortOrder',
+    locale: locale as 'cs' | 'en' | 'ru' | undefined,
     where: {
       isActive: { equals: true },
       isAddon: { equals: false },
@@ -49,13 +51,14 @@ export async function getPrograms(limit = 100) {
 /**
  * Get all active addons, sorted by sortOrder.
  */
-export async function getAddons(limit = 100) {
+export async function getAddons(limit = 100, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'services',
     limit,
     depth: 1,
     sort: 'sortOrder',
+    locale: locale as 'cs' | 'en' | 'ru' | undefined,
     where: {
       isActive: { equals: true },
       isAddon: { equals: true },
@@ -68,12 +71,13 @@ export async function getAddons(limit = 100) {
  * Get a single service by its slug.
  * Returns the document or `null` if not found.
  */
-export async function getServiceBySlug(slug: string) {
+export async function getServiceBySlug(slug: string, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'services',
     limit: 1,
     depth: 2,
+    locale: locale as 'cs' | 'en' | 'ru' | undefined,
     where: {
       slug: { equals: slug },
     },
@@ -253,18 +257,54 @@ export async function getBlogPostBySlug(slug: string) {
 // Express Wash Settings (Global)
 // ---------------------------------------------------------------------------
 
-export async function getExpressWashSettings() {
+export async function getExpressWashSettings(locale?: string) {
   try {
     const payload = await getPayload({ config })
-    const data = await payload.findGlobal({ slug: 'express-wash-settings', depth: 1 })
+    const data = await payload.findGlobal({
+      slug: 'express-wash-settings',
+      depth: 1,
+      locale: locale as 'cs' | 'en' | 'ru' | undefined,
+    })
     return {
       showLoyaltyCta: !!data?.showLoyaltyCta,
       showVoucherCta: !!data?.showVoucherCta,
       desktopBannerUrl: getMediaUrl(data?.desktopBannerImage),
       mobileBannerUrl: getMediaUrl(data?.mobileBannerImage),
+      bannerLink: (data as Record<string, unknown>)?.bannerLink as string | null ?? null,
     }
   } catch {
-    return { showLoyaltyCta: false, showVoucherCta: false, desktopBannerUrl: null, mobileBannerUrl: null }
+    return { showLoyaltyCta: false, showVoucherCta: false, desktopBannerUrl: null, mobileBannerUrl: null, bannerLink: null }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Instagram Reels (Global)
+// ---------------------------------------------------------------------------
+
+export async function getInstagramReels(locale?: string) {
+  try {
+    const payload = await getPayload({ config })
+    const data = await payload.findGlobal({
+      slug: 'instagram-reels',
+      depth: 1,
+      locale: locale as 'cs' | 'en' | 'ru' | undefined,
+    }) as Record<string, unknown>
+    if (!data?.isEnabled) return null
+    return {
+      title: data.sectionTitle as string | null,
+      subtitle: data.sectionSubtitle as string | null,
+      instagramUrl: data.instagramUrl as string | null,
+      reels: ((data.reels as Array<{ video?: { url?: string } | null; instagramLink?: string; caption?: string }>) ?? [])
+        .filter(r => r.video && typeof r.video === 'object' && r.video.url)
+        .map(r => ({
+          videoUrl: (r.video as { url: string }).url,
+          instagramLink: r.instagramLink ?? null,
+          caption: r.caption ?? null,
+        }))
+        .filter((reel, index, self) => self.findIndex(r => r.videoUrl === reel.videoUrl) === index),
+    }
+  } catch {
+    return null
   }
 }
 
@@ -394,4 +434,54 @@ export async function getHomePageContent(locale?: string) {
   } catch {
     return null
   }
+}
+
+// ---------------------------------------------------------------------------
+// CMS Messages Merge — fetch all translation globals and merge into one object
+// ---------------------------------------------------------------------------
+
+import { deepMerge, mapFieldsToMessages } from './cms-messages'
+import { BOOKING_FIELD_MAP } from '@/payload/globals/TranslationsBooking'
+import { COMMON_FIELD_MAP } from '@/payload/globals/TranslationsCommon'
+import { PAGES_FIELD_MAP } from '@/payload/globals/TranslationsPages'
+import { SEO_FIELD_MAP } from '@/payload/globals/SeoMetadata'
+
+async function fetchGlobalSafe(slug: string, locale: string): Promise<Record<string, unknown>> {
+  try {
+    const payload = await getPayload({ config })
+    return (await payload.findGlobal({
+      slug,
+      locale: locale as 'cs' | 'en' | 'ru',
+      depth: 0,
+    })) as unknown as Record<string, unknown>
+  } catch {
+    return {}
+  }
+}
+
+/**
+ * Fetch ALL CMS translation globals and return a merged messages object
+ * that can overlay the static JSON messages.
+ */
+export async function getCmsMessages(locale: string): Promise<Record<string, unknown>> {
+  const [booking, common, pages, seo] = await Promise.all([
+    fetchGlobalSafe('translations-booking', locale),
+    fetchGlobalSafe('translations-common', locale),
+    fetchGlobalSafe('translations-pages', locale),
+    fetchGlobalSafe('seo-metadata', locale),
+  ])
+
+  const bookingMessages = mapFieldsToMessages(booking as Record<string, string>, BOOKING_FIELD_MAP)
+  const commonMessages = mapFieldsToMessages(common as Record<string, string>, COMMON_FIELD_MAP)
+  const pagesMessages = mapFieldsToMessages(pages as Record<string, string>, PAGES_FIELD_MAP)
+  const seoMessages = mapFieldsToMessages(seo as Record<string, string>, SEO_FIELD_MAP)
+
+  // Merge all CMS message fragments into one overlay object
+  let merged: Record<string, unknown> = {}
+  merged = deepMerge(merged, commonMessages) as Record<string, unknown>
+  merged = deepMerge(merged, bookingMessages) as Record<string, unknown>
+  merged = deepMerge(merged, pagesMessages) as Record<string, unknown>
+  merged = deepMerge(merged, seoMessages) as Record<string, unknown>
+
+  return merged
 }

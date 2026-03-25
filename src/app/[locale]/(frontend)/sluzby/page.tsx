@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Check, ChevronRight } from "lucide-react";
-import { getServices, getTranslations as getCmsTranslations } from "@/lib/payload";
+import { getPrograms, getTranslations as getCmsTranslations } from "@/lib/payload";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/shared/PageHero";
 import NotFoundCTA from "@/components/shared/NotFoundCTA";
@@ -31,7 +31,7 @@ const FALLBACK_IMAGE_MAP: Record<string, string> = {
 export default async function SluzbyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const [services, cmsTranslations] = await Promise.all([
-    getServices(),
+    getPrograms(6, locale),
     getCmsTranslations(locale),
   ]);
   const t = await getTranslations();
@@ -101,8 +101,9 @@ export default async function SluzbyPage({ params }: { params: Promise<{ locale:
                   service.features as
                     | { feature: string; id?: string }[]
                     | undefined
-                )?.slice(0, 5);
+                );
                 const badgeText = (service as Record<string, unknown>).badge as string | null | undefined;
+                const description = (service as Record<string, unknown>).description as string | null | undefined;
 
                 return (
                   <div key={slug} className="relative">
@@ -167,8 +168,8 @@ export default async function SluzbyPage({ params }: { params: Promise<{ locale:
 
                       {/* Desktop: Features + Buttons */}
                       <div className="hidden lg:flex flex-col flex-1 p-6">
-                        {/* Features list */}
-                        {features && features.length > 0 && (
+                        {/* Features list or description fallback */}
+                        {features && features.length > 0 ? (
                           <div className="flex flex-col gap-3 mb-6">
                             {features.map((f, i) => (
                               <div
@@ -182,7 +183,11 @@ export default async function SluzbyPage({ params }: { params: Promise<{ locale:
                               </div>
                             ))}
                           </div>
-                        )}
+                        ) : description ? (
+                          <p className="font-clash font-medium text-[14px] text-[#302e2f] leading-relaxed mb-6">
+                            {description}
+                          </p>
+                        ) : null}
 
                         {/* Spacer */}
                         <div className="flex-1" />

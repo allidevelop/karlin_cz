@@ -22,5 +22,9 @@ module.exports = {
     autorestart: true,
     max_memory_restart: '512M',
     restart_delay: 5000,
+    kill_timeout: 300000,
+    listen_timeout: 10000,
+    max_restarts: 50,
+    min_uptime: 30000,
   }]
 }

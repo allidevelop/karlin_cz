@@ -1,8 +1,9 @@
 import { getAddons } from "@/lib/payload";
 import AddonSelector, { type CMSAddon } from "./addon-selector";
 
-export default async function AddonsStepPage() {
-  const rawAddons = await getAddons();
+export default async function AddonsStepPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const rawAddons = await getAddons(100, locale);
 
   // Serialize CMS data for client component
   const addons: CMSAddon[] = rawAddons.map((a) => {

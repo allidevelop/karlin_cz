@@ -18,19 +18,23 @@ export default function Footer() {
   ];
 
   const serviceLinks = [
-    { label: "To Go", href: "/sluzby#to-go" as const },
-    { label: "To Glow", href: "/sluzby#to-glow" as const },
-    { label: "To Wow", href: "/sluzby#to-wow" as const },
+    { label: tNav("serviceMenu.toGo"), href: "/sluzby/to-go" as const },
+    { label: tNav("serviceMenu.toGlow"), href: "/sluzby/to-glow" as const },
+    { label: tNav("serviceMenu.toWow"), href: "/sluzby/to-wow" as const },
+    { label: tNav("serviceMenu.exteriorKomplet"), href: "/sluzby/exterier-komplet" as const },
+    { label: tNav("serviceMenu.interiorKomplet"), href: "/sluzby/interier-komplet" as const },
+    { label: tNav("serviceMenu.premiumDetailing"), href: "/sluzby/premium-detailing-komplet" as const },
+    { label: tNav("serviceMenu.allServices"), href: "/sluzby" as const },
   ];
 
   return (
     <footer className="bg-brand-black text-brand-gray">
       <div className="mx-auto max-w-[1536px] px-4 sm:px-8 py-16">
         {/* ── Main grid ── */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-10 text-center sm:text-left sm:grid-cols-2 lg:grid-cols-5">
           {/* Column 1 – Logo & description */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 justify-center sm:justify-start">
               <Image
                 src="/images/logo-footer.svg"
                 alt={tCommon("brandName")}
@@ -91,11 +95,11 @@ export default function Footer() {
               {t("contactHeading")}
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-3 justify-center sm:justify-start">
                 <MapPin className="size-[18px] shrink-0 text-brand-gray" />
                 <span>{tCommon("address")}</span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-3 justify-center sm:justify-start">
                 <Phone className="size-[18px] shrink-0 text-brand-gray" />
                 <a
                   href="tel:+420775009033"
@@ -104,7 +108,7 @@ export default function Footer() {
                   {tCommon("phone")}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-3 justify-center sm:justify-start">
                 <Mail className="size-[18px] shrink-0 text-brand-gray" />
                 <a
                   href="mailto:automyckakarlin@email.cz"
@@ -126,8 +130,8 @@ export default function Footer() {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-brand-black pt-8 sm:flex-row">
-          <p className="text-sm text-brand-gray">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-brand-white/10 pt-8 sm:flex-row">
+          <p className="text-sm text-brand-gray text-center sm:text-left">
             {t("copyright")}
           </p>
           <div className="flex gap-6">

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Navigation } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import AnimatedSubtitle from "./AnimatedSubtitle";
 
 type Props = {
   cmsTitle?: string | null;
@@ -9,34 +10,77 @@ type Props = {
   cmsCtaText?: string | null;
   cmsHeroImageUrl?: string | null;
   cmsNavigateButton?: string | null;
+  cmsSubtitles?: string | null;
+  cmsHeroVideoId?: string | null;
 };
 
-export default async function HeroSection({ cmsTitle, cmsSubtitle, cmsCtaText, cmsHeroImageUrl, cmsNavigateButton }: Props) {
+export default async function HeroSection({ cmsTitle, cmsSubtitle, cmsCtaText, cmsHeroImageUrl, cmsNavigateButton, cmsSubtitles, cmsHeroVideoId }: Props) {
   const t = await getTranslations();
+
+  // Parse subtitle texts: from CMS pipe-separated or fallback to single subtitle
+  const subtitleTexts = cmsSubtitles
+    ? cmsSubtitles.split("|").map((s) => s.trim()).filter(Boolean)
+    : [cmsSubtitle || t("hero.subtitle")];
   return (
     <section
       id="hero"
-      className="relative min-h-[369px] lg:min-h-[672px] w-full overflow-hidden flex items-center justify-center"
+      className="relative min-h-[520px] lg:min-h-[672px] w-full overflow-hidden flex items-center justify-center"
     >
-      {/* Background photo */}
-      <Image
-        src={cmsHeroImageUrl || "/images/hero-bg.jpg"}
-        alt={t("hero.imageAlt")}
-        fill
-        className="object-cover"
-        priority
-      />
+      {/* Background video or photo */}
+      {(cmsHeroVideoId || "Q4SuUYmRnkk") ? (
+        <>
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${cmsHeroVideoId || "Q4SuUYmRnkk"}?autoplay=1&mute=1&loop=1&playlist=${cmsHeroVideoId || "Q4SuUYmRnkk"}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3`}
+              loading="eager"
+              allow="autoplay; encrypted-media"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full border-0"
+              title="Background video"
+            />
+          </div>
+          {/* Fallback image for slow connections */}
+          <Image
+            src={cmsHeroImageUrl || "/images/hero-bg.jpg"}
+            alt={t("hero.imageAlt")}
+            fill
+            className="object-cover -z-10"
+            priority
+          />
+        </>
+      ) : (
+        <Image
+          src={cmsHeroImageUrl || "/images/hero-bg.jpg"}
+          alt={t("hero.imageAlt")}
+          fill
+          className="object-cover"
+          priority
+        />
+      )}
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 lg:px-8 pt-10 lg:pt-0">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 lg:px-8 pt-24 lg:pt-0">
         <div className="max-w-[1536px] mx-auto text-center">
-          <h1 className="font-clash text-[36px] lg:text-[60px] font-bold text-[#f0eff0] uppercase leading-[40px] lg:leading-[60px]">
+          <h1
+            className="font-clash text-[36px] lg:text-[60px] font-bold text-[#f0eff0] uppercase leading-[40px] lg:leading-[60px]"
+            style={{
+              WebkitTextStroke: "0.5px rgba(240, 239, 240, 0.4)",
+            }}
+          >
             {t("hero.title")}
           </h1>
-          <p className="font-clash text-[36px] lg:text-[60px] font-medium text-[#7960a9] uppercase leading-[40px] lg:leading-[60px] mt-4">
-            {t("hero.subtitle")}
+          <p
+            className="font-clash text-[36px] lg:text-[60px] font-bold text-[#7960a9] uppercase leading-[40px] lg:leading-[60px] mt-4"
+            style={{
+              WebkitTextStroke: "0.5px rgba(240, 239, 240, 0.4)",
+            }}
+          >
+            {subtitleTexts.length > 1 ? (
+              <AnimatedSubtitle texts={subtitleTexts} />
+            ) : (
+              subtitleTexts[0]
+            )}
           </p>
 
           {/* CTA Buttons */}

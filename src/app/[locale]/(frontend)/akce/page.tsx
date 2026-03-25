@@ -91,7 +91,7 @@ export default async function AkcePage() {
                   <Link
                     key={promo.slug}
                     href={`/akce/${promo.slug}`}
-                    className="relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] flex flex-col group"
+                    className="relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] flex flex-col group transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]"
                   >
                     {promo.badge && (
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 flex items-start justify-center">
@@ -128,7 +128,7 @@ export default async function AkcePage() {
                             <span className="font-clash font-bold text-[24px] lg:text-[32px] leading-[40px]">
                               {discounted}
                             </span>
-                            <span className="font-clash font-normal text-[18px] leading-[28px]">
+                            <span className="font-clash font-bold text-[18px] leading-[28px]">
                               {t("common.currency")}
                             </span>
                           </div>

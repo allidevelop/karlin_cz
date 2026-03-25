@@ -28,7 +28,7 @@ export default function NotFoundCTA({ cmsBookNowButton, cmsCallUsButton }: { cms
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[16px] pt-[16px]">
             <Link
               href="/rezervace/vozidlo"
-              className="inline-flex items-center justify-center gap-2 bg-[#302e2f] border border-[#b1b3b6] rounded-[16px] px-[41px] py-[21px] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] font-clash font-bold text-[16px] text-white hover:bg-[#3a3839] transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[16px] px-[41px] py-[21px] shadow-[0px_20px_25px_-5px_rgba(121,96,169,0.4)] font-clash font-bold text-[16px] text-white hover:opacity-90 transition-opacity"
             >
               {cmsBookNowButton || t("notFoundCTA.bookNow")}
               <ArrowRight className="size-4" />

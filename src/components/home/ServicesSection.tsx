@@ -72,7 +72,7 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
   });
 
   return (
-    <section id="services" className="pb-[80px]">
+    <section id="services" className="pb-[80px] -mt-px">
       <div className="max-w-[1536px] mx-auto pt-[25px] px-4 lg:px-[32px]">
         {/* Header row */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-[30px] gap-4">
@@ -84,9 +84,10 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
               {t("services.subtitle")}
             </p>
           </div>
+          {/* Desktop only — button in header row */}
           <Link
             href="/sluzby"
-            className="inline-flex items-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity self-start lg:self-auto"
+            className="hidden lg:inline-flex items-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity"
           >
             {t("services.allServices")}
             <ArrowRight className="size-[18px]" />
@@ -114,8 +115,8 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
                 />
                 <div className="absolute inset-0 bg-[#302e2f]/40 mix-blend-multiply" />
                 {/* Category label */}
-                <div className="absolute bottom-0 left-0 right-0 px-4 lg:px-6 pb-4 lg:pb-6">
-                  <span className="font-clash font-bold text-[13px] lg:text-[14px] text-[#f0eff0] uppercase tracking-[0.35px] leading-[17.5px]">
+                <div className="absolute bottom-0 left-0 right-0 px-4 lg:px-6 pb-5 lg:pb-7">
+                  <span className="font-clash font-bold text-[15px] lg:text-[20px] text-[#f0eff0] uppercase tracking-[0.5px] leading-[20px] lg:leading-[26px]">
                     {card.name}
                   </span>
                 </div>
@@ -155,6 +156,15 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
             </Link>
           ))}
         </div>
+
+        {/* Mobile only — button below grid */}
+        <Link
+          href="/sluzby"
+          className="lg:hidden flex items-center justify-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-4 w-full hover:opacity-90 transition-opacity mt-6"
+        >
+          {t("services.allServices")}
+          <ArrowRight className="size-[18px]" />
+        </Link>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import {
   getBlogPosts,
   getPartners,
   getExpressWashSettings,
+  getInstagramReels,
   getHomePageContent,
   getActiveBanners,
   getMediaUrl,
@@ -17,6 +18,7 @@ import {
   ServicesSection,
   PromotionsSection,
   ExpressWashSection,
+  InstagramReelsSection,
   ReviewsSection,
   ContactSection,
   FaqSection,
@@ -24,6 +26,7 @@ import {
   BlogSection,
   NewsletterSection,
 } from "@/components/home";
+import { Link } from "@/i18n/navigation";
 import {
   UpperWaveDecoration,
   LowerWaveDecoration,
@@ -32,14 +35,15 @@ import BannerCarousel from "@/components/shared/BannerCarousel";
 
 export default async function HomePage() {
   const locale = await getLocale();
-  const [faq, reviews, promotions, blogPosts, partners, expressWashSettings, cmsContent, heroBelowBanners, footerAboveBanners, cmsTranslations] =
+  const [faq, reviews, promotions, blogPosts, partners, expressWashSettings, instagramReels, cmsContent, heroBelowBanners, footerAboveBanners, cmsTranslations] =
     await Promise.all([
       getFAQ('home'),
       getReviews(),
       getPromotions(),
       getBlogPosts(8),
       getPartners(),
-      getExpressWashSettings(),
+      getExpressWashSettings(locale),
+      getInstagramReels(locale),
       getHomePageContent(locale),
       getActiveBanners('hero-below', locale),
       getActiveBanners('footer-above', locale),
@@ -86,8 +90,10 @@ export default async function HomePage() {
       <HeroSection
         cmsTitle={cmsContent?.heroTitle}
         cmsSubtitle={cmsContent?.heroSubtitle}
+        cmsSubtitles={cmsContent?.heroSubtitles}
         cmsCtaText={cmsContent?.heroCtaText}
         cmsHeroImageUrl={getMediaUrl(cmsContent?.heroImage)}
+        cmsHeroVideoId={cmsContent?.heroVideoId}
         cmsNavigateButton={cmsTranslations?.heroNavigateButton}
       />
 
@@ -100,6 +106,8 @@ export default async function HomePage() {
 
       {/* ══ Light sections wrapper with decorative purple wave ribbons ══ */}
       <div className="relative bg-[#f0eff0] overflow-hidden mt-[-2px]">
+        {/* Purple gradient transition from hero */}
+        <div className="absolute top-0 left-0 right-0 h-[60px] bg-gradient-to-b from-[#9b7ec4]/30 to-transparent z-[2] pointer-events-none" />
         <UpperWaveDecoration />
 
         {/* Content sections */}
@@ -126,13 +134,34 @@ export default async function HomePage() {
             cmsViewDetailButton={cmsTranslations?.promotionsViewDetailButton}
             cmsAllPromotionsButton={cmsTranslations?.promotionsAllButton}
           />
+          {instagramReels && instagramReels.reels.length > 0 && (
+            <InstagramReelsSection
+              reels={instagramReels.reels}
+              title={instagramReels.title}
+              subtitle={instagramReels.subtitle}
+              instagramUrl={instagramReels.instagramUrl}
+            />
+          )}
           <ExpressWashSection
             showLoyaltyCta={expressWashSettings.showLoyaltyCta}
             showVoucherCta={expressWashSettings.showVoucherCta}
             desktopBannerUrl={expressWashSettings.desktopBannerUrl}
             mobileBannerUrl={expressWashSettings.mobileBannerUrl}
+            bannerLink={expressWashSettings.bannerLink}
             cmsStartButton={cmsTranslations?.expressWashStartButton}
           />
+        </div>
+
+        {/* CTA: Rychlá Rezervace */}
+        <div className="relative z-[1] max-w-[1536px] mx-auto px-4 lg:px-[32px] pb-[25px]">
+          <div className="flex justify-center">
+            <Link
+              href="/rezervace/vozidlo"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[16px] lg:text-[20px] uppercase rounded-[10px] px-10 py-4 lg:py-5 shadow-[0px_25px_50px_-12px_rgba(155,126,196,0.5)] hover:opacity-90 transition-opacity"
+            >
+              {cmsTranslations?.heroCtaText || "Rychlá Rezervace"}
+            </Link>
+          </div>
         </div>
       </div>
 

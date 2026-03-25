@@ -26,10 +26,10 @@ export default function PageHero({
       <div className="absolute inset-0 bg-gradient-to-br from-[#302e2f] to-[#1a1919]" />
 
       {/* Decorative bokeh circles */}
-      <div className="absolute top-[40px] left-[15%] w-64 h-64 bg-[#7960a9]/8 rounded-full blur-3xl" />
-      <div className="absolute top-[-40px] right-[20%] w-64 h-64 bg-[#9b7ec4]/6 rounded-full blur-3xl" />
+      <div className="absolute top-[40px] left-[15%] w-64 h-64 bg-[rgba(240,239,240,0.1)] rounded-full blur-[32px]" />
+      <div className="absolute top-[-40px] right-[20%] w-64 h-64 bg-[rgba(240,239,240,0.1)] rounded-full blur-[32px]" />
 
-      <div className="relative z-10 max-w-[1536px] mx-auto px-4 lg:px-[32px] pt-28 pb-12 lg:pt-32 lg:pb-16">
+      <div className="relative z-10 max-w-[1536px] mx-auto px-4 lg:px-[32px] pt-24 pb-8 lg:pt-28 lg:pb-10">
         {backLink && (
           <Link
             href={backLink.href}
@@ -41,11 +41,11 @@ export default function PageHero({
         )}
 
         <div className="text-center">
-          <h1 className="font-clash text-[36px] lg:text-[60px] font-bold text-[#f0eff0] leading-tight">
+          <h1 className="font-clash text-[30px] lg:text-[48px] font-bold text-[#f0eff0] leading-tight">
             {title}
           </h1>
           {subtitle && (
-            <p className="font-clash text-[22px] lg:text-[60px] font-medium text-[#f0eff0] mt-2 lg:mt-3 max-w-[960px] mx-auto leading-tight lg:leading-[60px]">
+            <p className="font-clash text-[18px] lg:text-[36px] font-medium text-[#f0eff0] mt-2 lg:mt-3 max-w-[960px] mx-auto leading-tight lg:leading-[40px]">
               {subtitle}
             </p>
           )}

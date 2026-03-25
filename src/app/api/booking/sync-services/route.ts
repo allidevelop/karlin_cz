@@ -238,6 +238,7 @@ export async function GET(req: NextRequest) {
           collection: 'services',
           id: existing.docs[0].id,
           data: updateData,
+          locale: 'cs',
         })
         stats.programsUpdated++
       } else {
@@ -265,6 +266,7 @@ export async function GET(req: NextRequest) {
         await payload.create({
           collection: 'services',
           data: createData,
+          locale: 'cs',
         })
         stats.programsCreated++
       }
@@ -303,6 +305,7 @@ export async function GET(req: NextRequest) {
           collection: 'services',
           id: existing.docs[0].id,
           data: updateData,
+          locale: 'cs',
         })
         stats.addonsUpdated++
       } else {
@@ -327,6 +330,7 @@ export async function GET(req: NextRequest) {
         await payload.create({
           collection: 'services',
           data: createData,
+          locale: 'cs',
         })
         stats.addonsCreated++
       }

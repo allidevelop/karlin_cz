@@ -13,6 +13,7 @@
     "address": "Sokolovská 694/98, Karlín, 186 00 Praha",
     "brandName": "AUTOMYČKA KARLÍN",
     "navigate": "Navigovat",
+    "quickBooking": "Rychlá Rezervace",
     "submit": "Odeslat",
     "apply": "Použít",
     "close": "Zavřít",
@@ -31,6 +32,8 @@
       "toGo": "To Go",
       "toGlow": "To Glow",
       "toWow": "To Wow",
+      "exteriorKomplet": "Exteriér Komplet",
+      "interiorKomplet": "Interiér Komplet",
       "premiumDetailing": "Premium Detailing",
       "allServices": "Všechny služby"
     }
@@ -162,7 +165,8 @@
     "howToReach": "Jak se k nám dostat",
     "location": "Karlín, Praha 8",
     "accessInfo": "Snadná dostupnost MHD i autem",
-    "mapTitle": "Mapa - Automyčka Karlín"
+    "mapTitle": "Mapa - Automyčka Karlín",
+    "videoInstructions": "Video instrukce"
   },
   "faq": {
     "title": "Často kladené otázky",
@@ -196,6 +200,10 @@
       "news": "Novinky",
       "technology": "Technologie"
     }
+  },
+  "instagram": {
+    "title": "Sledujte nás na Instagramu",
+    "follow": "Sledovat na Instagramu"
   },
   "newsletter": {
     "title": "Newsletter",
@@ -317,6 +325,7 @@
       "thankYou": "Děkujeme za rezervaci",
       "servicesLabel": "Služby",
       "addonsLabel": "Doplňkové služby",
+      "addonFallbackName": "Doplňková služba",
       "totalLabel": "Celkem",
       "bookingRefLabel": "Číslo rezervace",
       "statusLabel": "Stav",
@@ -584,7 +593,8 @@
     "sending": "Odesílání...",
     "success": "Zpráva byla úspěšně odeslána. Brzy se vám ozveme!",
     "errorRequired": "Vyplňte prosím všechna povinná pole.",
-    "errorGeneric": "Došlo k chybě při odesílání. Zkuste to prosím znovu."
+    "errorGeneric": "Došlo k chybě při odesílání. Zkuste to prosím znovu.",
+    "fieldRequired": "Toto pole je povinné"
   },
   "newsletterForm": {
     "subscribing": "Přihlašování...",
@@ -596,7 +606,7 @@
   "notFoundCTA": {
     "heading": "Nenašli jste co hledáte?",
     "subtitle": "Podívejte se na naše služby nebo nás kontaktujte",
-    "bookNow": "Rezervovat termín",
+    "bookNow": "Rychlá Rezervace",
     "callUs": "Zavolejte nám"
   },
   "kategorieVozidel": {

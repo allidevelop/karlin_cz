@@ -57,6 +57,14 @@ export const SiteSettings: GlobalConfig = {
           ],
         },
         {
+          label: 'E-mail notifikace',
+          fields: [
+            { name: 'contactFormEmailEnabled', type: 'checkbox', label: 'Odesílat e-mail při nové zprávě z kontaktního formuláře', defaultValue: true },
+            { name: 'newsletterEmailEnabled', type: 'checkbox', label: 'Odesílat e-mail při nové přihlášce k newsletteru', defaultValue: true },
+            { name: 'notificationEmail', type: 'email', label: 'E-mail pro notifikace', defaultValue: 'automyckakarlin@email.cz' },
+          ],
+        },
+        {
           label: 'Právní informace',
           fields: [
             { name: 'companyName', type: 'text', label: 'Název společnosti', defaultValue: 'Automyčka Karlín' },

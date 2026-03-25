@@ -259,9 +259,16 @@ export default function PromoCarousel({ promotions }: Props) {
         </div>
       </div>
 
-      {/* Carousel — aligned to container left, overflows right */}
-      <div className="pl-4 lg:pl-[max(32px,calc((100vw-1536px)/2+32px))]">
-        <div ref={emblaRef} className="overflow-hidden">
+      {/* Carousel contained in container */}
+      <div className="max-w-[1536px] mx-auto px-4 lg:px-[32px]">
+        <div
+          ref={emblaRef}
+          className="overflow-hidden"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+          }}
+        >
           <div className="flex gap-[24px]">
             {promos.map((promo, i) => (
               <div

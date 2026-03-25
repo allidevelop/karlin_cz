@@ -7,6 +7,7 @@ type Props = {
   showVoucherCta?: boolean;
   desktopBannerUrl?: string | null;
   mobileBannerUrl?: string | null;
+  bannerLink?: string | null;
   cmsStartButton?: string | null;
 };
 
@@ -58,7 +59,7 @@ const infoCards = [
   },
 ];
 
-export default async function ExpressWashSection({ showLoyaltyCta = false, showVoucherCta = false, desktopBannerUrl, mobileBannerUrl, cmsStartButton }: Props) {
+export default async function ExpressWashSection({ showLoyaltyCta = false, showVoucherCta = false, desktopBannerUrl, mobileBannerUrl, bannerLink, cmsStartButton }: Props) {
   const t = await getTranslations();
   const ctaVisibility: Record<string, boolean> = {
     loyalty: showLoyaltyCta,
@@ -68,25 +69,36 @@ export default async function ExpressWashSection({ showLoyaltyCta = false, showV
     <section className="pb-[25px]">
       <div className="max-w-[1536px] mx-auto px-4 lg:px-[32px]">
         <div className="flex flex-col lg:flex-row gap-6 items-center">
-          {/* Left: Express banner — image */}
-          <div className="w-full lg:w-[600px] shrink-0">
-            {/* Desktop banner */}
-            <Image
-              src={desktopBannerUrl || "/images/express-banner-desktop.png"}
-              alt={t("expressWash.imageAlt")}
-              width={600}
-              height={450}
-              className="hidden lg:block w-full h-auto rounded-[10px]"
-            />
-            {/* Mobile banner */}
-            <Image
-              src={mobileBannerUrl || "/images/express-banner-mobile.png"}
-              alt={t("expressWash.imageAlt")}
-              width={600}
-              height={450}
-              className="block lg:hidden w-full h-auto rounded-[10px]"
-            />
-          </div>
+          {/* Left: Express banner — image (optionally clickable) */}
+          {(() => {
+            const bannerContent = (
+              <div className="w-full lg:w-[600px] shrink-0">
+                <Image
+                  src={desktopBannerUrl || "/images/express-banner-desktop.png"}
+                  alt={t("expressWash.imageAlt")}
+                  width={600}
+                  height={450}
+                  className="hidden lg:block w-full h-auto rounded-[10px]"
+                />
+                <Image
+                  src={mobileBannerUrl || "/images/express-banner-mobile.png"}
+                  alt={t("expressWash.imageAlt")}
+                  width={600}
+                  height={450}
+                  className="block lg:hidden w-full h-auto rounded-[10px]"
+                />
+              </div>
+            );
+            if (bannerLink) {
+              const isExternal = bannerLink.startsWith('http');
+              return isExternal ? (
+                <a href={bannerLink} target="_blank" rel="noopener noreferrer" className="hover:opacity-90 transition-opacity">{bannerContent}</a>
+              ) : (
+                <a href={bannerLink} className="hover:opacity-90 transition-opacity">{bannerContent}</a>
+              );
+            }
+            return bannerContent;
+          })()}
 
           {/* Right: Info cards grid */}
           <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-4">

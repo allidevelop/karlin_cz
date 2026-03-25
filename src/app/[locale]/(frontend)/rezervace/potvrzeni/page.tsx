@@ -191,27 +191,47 @@ export default function ConfirmationPage() {
               </div>
             )}
 
-            {/* ─── Google Calendar button (top) ─── */}
-            {store.selectedDate && store.selectedTime && (
-              <div className="flex justify-center pt-[16px] px-[20px] lg:px-[49px]">
-                <a
-                  href={buildGoogleCalendarUrl({
-                    title: t("booking.confirmation.calendarEventTitle", { service: store.selectedProgram?.name ?? t("booking.confirmation.defaultService") }),
-                    date: store.selectedDate!,
-                    time: store.selectedTime!,
-                    durationMinutes: 60,
-                    location: "Sokolovská 694/98, Karlín, 186 00 Praha",
-                    description: `${store.selectedProgram?.name ?? t("booking.confirmation.defaultService")}${store.addons.length > 0 ? ` + ${store.addons.map(a => a.name).join(", ")}` : ""}`,
-                  })}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity"
-                >
-                  <Calendar className="size-4" />
-                  {t("booking.confirmation.addToGoogleCalendar")}
-                </a>
-              </div>
-            )}
+            {/* ─── Calendar buttons (top) ─── */}
+            {store.selectedDate && store.selectedTime && (() => {
+              const calOpts = {
+                title: t("booking.confirmation.calendarEventTitle", { service: store.selectedProgram?.name ?? t("booking.confirmation.defaultService") }),
+                date: store.selectedDate!,
+                time: store.selectedTime!,
+                durationMinutes: 60,
+                location: "Sokolovská 694/98, Karlín, 186 00 Praha",
+                description: `${store.selectedProgram?.name ?? t("booking.confirmation.defaultService")}${store.addons.length > 0 ? ` + ${store.addons.map(a => a.name).join(", ")}` : ""}`,
+              };
+              return (
+                <div className="flex flex-col sm:flex-row justify-center gap-2 pt-[16px] px-[20px] lg:px-[49px]">
+                  <a
+                    href={buildGoogleCalendarUrl(calOpts)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity"
+                  >
+                    <Calendar className="size-4" />
+                    Google Calendar
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const ics = generateICS(calOpts);
+                      const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = "automycka-booking.ics";
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }}
+                    className="inline-flex items-center justify-center gap-2 border-2 border-[#7960a9] text-[#7960a9] font-clash font-bold text-[14px] rounded-[10px] px-6 py-3 hover:bg-[#7960a9]/10 transition-colors"
+                  >
+                    <Calendar className="size-4" />
+                    Apple Calendar
+                  </button>
+                </div>
+              );
+            })()}
 
             {/* ─── Date & Time ─── */}
             <div className="text-center pt-[24px] px-[20px] lg:px-[49px]">
@@ -253,7 +273,7 @@ export default function ConfirmationPage() {
                       className="flex items-center justify-between py-[6px] border-b border-[#b1b3b6]/30"
                     >
                       <span className="font-clash text-[16px] lg:text-[18px] font-medium text-[#302e2f]">
-                        + {addon.name}
+                        + {addon.name || t("booking.confirmation.addonFallbackName")}
                       </span>
                       <span className="font-clash text-[16px] lg:text-[18px] font-bold text-[#302e2f]">
                         {addon.price.toLocaleString(locale)} {t("common.currency")}
@@ -289,9 +309,9 @@ export default function ConfirmationPage() {
                 <Image
                   src="/images/logo-footer.svg"
                   alt="Automycka Karlin logo"
-                  width={40}
-                  height={40}
-                  className="size-[40px] lg:size-[48px] object-contain"
+                  width={48}
+                  height={24}
+                  className="w-[40px] lg:w-[48px] h-auto object-contain"
                 />
                 <span className="font-clash text-[16px] lg:text-[18px] font-bold text-[#302e2f] leading-[24px] uppercase">
                   {t("common.brandName")}
@@ -310,7 +330,7 @@ export default function ConfirmationPage() {
             {/* ─── Google Maps embed ─── */}
             <div className="mt-[16px] lg:mt-[24px] border-t border-b border-[#b1b3b6]">
               <iframe
-                src="https://maps.google.com/maps?q=Sokolovsk%C3%A1+694%2F98%2C+Karl%C3%ADn%2C+Praha+8&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src={`https://maps.google.com/maps?q=Sokolovsk%C3%A1+694%2F98%2C+Karl%C3%ADn%2C+Praha+8&t=&z=15&ie=UTF8&iwloc=&output=embed&hl=${locale}`}
                 width="100%"
                 height="193"
                 className="block lg:h-[217px]"

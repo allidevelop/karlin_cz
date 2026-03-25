@@ -130,11 +130,13 @@ export default async function DoplnkoveSluzbPage({ params }: { params: Promise<{
                         const slug = service.slug as string;
 
                         return (
-                          <div key={slug} className="flex flex-col">
-                            {/* Card */}
-                            <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] overflow-hidden flex flex-col h-full">
+                          <Link key={slug} href={`/sluzby/${slug}`} className="group relative">
+                            <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden h-full flex flex-col">
+                              {/* Hover glow */}
+                              <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover:opacity-30 transition-opacity -z-10 hidden lg:block" />
+
                               {/* Image area */}
-                              <div className="relative h-[200px] lg:h-[256px]">
+                              <div className="relative h-[180px] lg:h-[256px]">
                                 <Image
                                   src={imageSrc}
                                   alt={service.name ?? ""}
@@ -142,66 +144,40 @@ export default async function DoplnkoveSluzbPage({ params }: { params: Promise<{
                                   className="object-cover"
                                   sizes="(max-width: 1024px) 50vw, 33vw"
                                 />
-                                {/* Dark overlay */}
-                                <div className="absolute inset-0 bg-[#302e2f]/50" />
+                                <div className="absolute inset-0 bg-[#302e2f]/15 lg:bg-[#302e2f]/50" />
 
-                                {/* Service name overlay */}
-                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 flex flex-col items-center gap-1 lg:gap-2">
-                                  <h3 className="font-clash font-bold text-[13px] lg:text-[24px] text-white text-center leading-[18px] lg:leading-[30px]">
+                                {/* Name + price overlay */}
+                                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6">
+                                  <h3 className="font-clash font-bold text-[13px] lg:text-[20px] text-white uppercase leading-[18px] lg:leading-[26px]">
                                     {service.name}
                                   </h3>
-                                  {service.subtitle && (
-                                    <p className="font-clash font-medium text-[11px] lg:text-[20px] text-white text-center leading-[14px] lg:leading-[20px]">
-                                      {service.subtitle}
-                                    </p>
-                                  )}
+                                  <div className="flex items-baseline gap-1 mt-1 lg:mt-2">
+                                    <span className="font-clash font-bold text-[16px] lg:text-[29px] text-white">
+                                      {service.price != null
+                                        ? new Intl.NumberFormat(locale).format(service.price)
+                                        : ""}
+                                    </span>
+                                    <span className="font-clash font-normal text-[12px] lg:text-[18px] text-white">
+                                      {t("common.currency")}
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
 
-                              {/* Content area */}
-                              <div className="flex flex-col flex-1 p-[10px] lg:p-6 gap-[10px] lg:gap-4">
-                                {/* Description */}
-                                <p className="font-clash font-medium text-[11px] lg:text-[16px] text-[#302e2f] text-center leading-normal">
-                                  {service.description ?? ""}
-                                </p>
-
-                                {/* Price */}
-                                <div className="flex items-baseline justify-center gap-2 border-b border-[#f0eff0] pb-1 lg:pb-4">
-                                  <span className="font-clash font-bold text-[20px] lg:text-[32px] text-[#7960a9] leading-[36px] lg:leading-[40px]">
-                                    {service.price != null
-                                      ? new Intl.NumberFormat(locale).format(service.price)
-                                      : ""}
-                                  </span>
-                                  <span className="font-clash font-medium text-[12px] lg:text-[18px] text-[#b1b3b6] leading-[28px]">
-                                    {t("common.currency")}
-                                  </span>
-                                </div>
-
-                                {/* Buttons - desktop */}
-                                <div className="hidden lg:flex items-center justify-center gap-[15px]">
-                                  <Link
-                                    href={`/sluzby/${slug}`}
-                                    className="inline-flex items-center justify-center bg-[#302e2f] border-2 border-[#302e2f] rounded-[10px] h-[47px] w-[180px] font-clash font-bold text-[20px] text-white uppercase hover:bg-[#302e2f]/90 transition-colors backdrop-blur-[12px]"
-                                  >
-                                    {t("common.learnMore")}
-                                  </Link>
-                                  <Link
-                                    href="/rezervace/vozidlo"
-                                    className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] h-[47px] w-[180px] font-clash font-bold text-[20px] text-white uppercase shadow-[0px_25px_50px_-12px_rgba(155,126,196,0.5)] hover:opacity-90 transition-opacity"
-                                  >
-                                    {t("common.bookNow")}
-                                  </Link>
-                                </div>
-
-                                {/* Rating placeholder - desktop */}
-                                <div className="hidden lg:flex items-center justify-center gap-2">
-                                  <span className="font-clash text-[12px] font-medium text-[#b1b3b6]">
-                                    {t("doplnkoveSluzby.rating")}
-                                  </span>
-                                </div>
+                              {/* Bottom: description + CTA */}
+                              <div className="flex flex-col flex-1 p-4 lg:p-6">
+                                {service.description && (
+                                  <p className="font-clash font-medium text-[11px] lg:text-[14px] text-[#302e2f]/70 leading-relaxed line-clamp-2 mb-3">
+                                    {service.description}
+                                  </p>
+                                )}
+                                <div className="flex-1" />
+                                <span className="w-full flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[12px] lg:text-[14px] uppercase leading-[24px] rounded-[10px] py-3 hover:opacity-90 transition-opacity">
+                                  {t("common.learnMore")}
+                                </span>
                               </div>
                             </div>
-                          </div>
+                          </Link>
                         );
                       })}
                     </div>

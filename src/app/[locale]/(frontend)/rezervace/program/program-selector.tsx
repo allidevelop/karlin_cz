@@ -384,14 +384,14 @@ export default function ProgramSelector({
             </div>
 
             {/* ─── Desktop layout (unchanged) ─── */}
-            <div className="hidden lg:grid grid-cols-2 gap-[24px] items-start">
+            <div className="hidden lg:block lg:columns-2 lg:gap-[24px]">
               {displayPrograms.map((program) => {
                 const isSelected = store.selectedProgram?.id === program.id;
                 const isExpanded = expanded === program.id;
                 const imageSrc = program.imageUrl;
 
                 return (
-                  <div key={program.id} className="relative">
+                  <div key={program.id} className="relative mb-[24px] break-inside-avoid">
                     {/* Badge (from CMS) */}
                     {program.badge && (
                       <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 z-10 flex">
@@ -420,17 +420,16 @@ export default function ProgramSelector({
                           />
                         )}
                         <div className="absolute inset-0 bg-[#302e2f]/60" />
+                        {/* Duration badge — top left */}
+                        {program.duration && (
+                          <span className="absolute top-4 left-4 z-10 inline-flex items-center bg-[#f0eff0]/20 backdrop-blur-sm rounded-full px-3 py-1 font-clash text-[12px] font-medium text-white whitespace-nowrap">
+                            {program.duration}
+                          </span>
+                        )}
                         <div className="absolute bottom-0 left-0 right-0 p-5">
-                          <div className="flex items-center gap-2">
-                            <h3 className="font-clash font-bold text-[24px] text-white uppercase leading-[32px]">
-                              {program.name}
-                            </h3>
-                            {program.duration && (
-                              <span className="inline-flex items-center bg-[#f0eff0]/20 backdrop-blur-sm rounded-full px-2 py-0.5 font-clash text-[12px] font-medium text-white whitespace-nowrap">
-                                {program.duration}
-                              </span>
-                            )}
-                          </div>
+                          <h3 className="font-clash font-bold text-[24px] text-white uppercase leading-[32px]">
+                            {program.name}
+                          </h3>
                           <div className="flex items-baseline gap-1 mt-1">
                             <span className="font-clash text-[12px] font-normal text-[#f0eff0]/70 uppercase tracking-[0.6px]">
                               {t("common.priceFrom")}
@@ -504,9 +503,10 @@ export default function ProgramSelector({
                   store.setAddonOnly(true);
                   router.push("/rezervace/doplnky");
                 }}
-                className="inline-flex items-center gap-1 font-clash text-[13px] font-medium text-[#7960a9] hover:text-[#9b7ec4] transition-colors underline underline-offset-2"
+                className="inline-flex items-center gap-2 font-clash text-[14px] font-bold text-[#f0eff0] bg-[#302e2f] border border-[#f0eff0] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity uppercase"
               >
                 {t("booking.addons.skipToAddons")}
+                <ChevronDown className="size-4 -rotate-90" />
               </button>
             </div>
 

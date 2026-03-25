@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import useEmblaCarousel from "embla-carousel-react";
@@ -57,6 +57,24 @@ export default function BlogSection({ posts, cmsTitle, cmsSubtitle, cmsReadAllBu
     emblaApi?.scrollNext();
   }, [emblaApi]);
 
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const update = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+    };
+    update();
+    emblaApi.on("scroll", update);
+    emblaApi.on("reInit", update);
+    return () => {
+      emblaApi.off("scroll", update);
+      emblaApi.off("reInit", update);
+    };
+  }, [emblaApi]);
+
   if (posts.length === 0) return null;
 
   return (
@@ -98,9 +116,16 @@ export default function BlogSection({ posts, cmsTitle, cmsSubtitle, cmsReadAllBu
         </div>
       </div>
 
-      {/* Carousel breaks out to right edge */}
-      <div className="pl-4 lg:pl-[max(32px,calc((100vw-1536px)/2+32px))]">
-        <div ref={emblaRef} className="overflow-hidden">
+      {/* Carousel contained in container */}
+      <div className="relative max-w-[1536px] mx-auto px-4 lg:px-[32px]">
+        <div
+          ref={emblaRef}
+          className="overflow-hidden"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent)",
+          }}
+        >
           <div className="flex gap-4 lg:gap-[48px]">
             {posts.map((post, i) => (
               <div

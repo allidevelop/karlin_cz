@@ -200,7 +200,7 @@ export default async function BlogPostPage({
     <>
       {/* Hero */}
       <section className="relative bg-[#302e2f] overflow-hidden">
-        <div className="relative z-10 flex flex-col items-center justify-center gap-[10px] lg:gap-[25px] px-4 lg:px-[192px] pt-28 pb-12 lg:pt-32 lg:pb-16">
+        <div className="relative z-10 flex flex-col items-center justify-center gap-[10px] lg:gap-[25px] px-4 lg:px-[64px] pt-20 pb-8 lg:pt-24 lg:pb-12">
           {/* Category badge */}
           {categoryLabel && (
             <span className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] px-[16px] py-[8px] font-clash font-medium text-[10px] lg:text-[13.3px] text-[#f0eff0] leading-[20px]">
@@ -210,7 +210,7 @@ export default async function BlogPostPage({
 
           {/* Title */}
           <div className="max-w-[1536px] w-full mx-auto px-4 lg:px-[32px] flex flex-col items-center gap-[25px]">
-            <div className="text-center max-w-[768px]">
+            <div className="text-center max-w-[960px]">
               <h1 className="font-clash font-bold text-[22px] lg:text-[60px] text-[#f0eff0] leading-[25px] lg:leading-[60px]">
                 {post.title}
               </h1>
@@ -268,9 +268,9 @@ export default async function BlogPostPage({
 
         <div className="relative z-[1]">
       <section className="py-[25px] lg:pt-[25px]">
-        <div className="flex items-center justify-center px-[16px] lg:px-[384px]">
+        <div className="flex items-center justify-center px-[16px] lg:px-[128px]">
           {/* Content card */}
-          <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden w-full max-w-[768px] px-[32px] lg:px-[48px] pt-[32px] lg:pt-[48px] pb-[48px] lg:pb-[64px] flex flex-col gap-[10px] lg:gap-[15px] items-center">
+          <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden w-full max-w-[960px] px-[24px] lg:px-[64px] pt-[32px] lg:pt-[48px] pb-[48px] lg:pb-[64px] flex flex-col gap-[10px] lg:gap-[15px] items-center">
             {/* Featured image */}
             <div className="relative w-full h-[251px] rounded-[13px] overflow-hidden">
               <Image
@@ -281,9 +281,48 @@ export default async function BlogPostPage({
               />
             </div>
 
-            {/* Content */}
+            {/* Content with inline gallery images */}
             <div className="w-full flex flex-col gap-[16px] lg:gap-[16px]">
-              {renderContent(post.content)}
+              {(() => {
+                const contentNodes = renderContent(post.content);
+                const galleryItems = ((post as Record<string, unknown>).gallery as Array<{ image: { url?: string } | null; caption?: string }> | undefined) ?? [];
+                if (!contentNodes || galleryItems.length === 0) return contentNodes;
+
+                // Distribute gallery images evenly throughout content
+                const nodes = Array.isArray(contentNodes) ? contentNodes : [contentNodes];
+                const totalNodes = nodes.length;
+                const result: React.ReactNode[] = [];
+
+                galleryItems.forEach((item, gi) => {
+                  const imgUrl = typeof item.image === 'object' && item.image?.url ? item.image.url : null;
+                  if (!imgUrl) return;
+                  // Insert after: 1st image after 1/4, 2nd after 1/2, 3rd after 3/4
+                  const insertAfter = Math.floor(((gi + 1) / (galleryItems.length + 1)) * totalNodes);
+
+                  // Find the right position and mark it
+                  if (!result[insertAfter]) result[insertAfter] = [];
+                  (result[insertAfter] as React.ReactNode[]).push(
+                    <div key={`gallery-${gi}`} className="relative w-full h-[200px] lg:h-[350px] rounded-[13px] overflow-hidden my-4">
+                      <Image src={imgUrl} alt={item.caption || ''} fill className="object-cover" />
+                      {item.caption && (
+                        <p className="absolute bottom-0 left-0 right-0 bg-[#302e2f]/60 px-4 py-2 font-clash text-[12px] text-white text-center">
+                          {item.caption}
+                        </p>
+                      )}
+                    </div>
+                  );
+                });
+
+                // Merge nodes with gallery images
+                const merged: React.ReactNode[] = [];
+                nodes.forEach((node, i) => {
+                  merged.push(node);
+                  if (result[i]) {
+                    merged.push(...(Array.isArray(result[i]) ? (result[i] as React.ReactNode[]) : [result[i]]));
+                  }
+                });
+                return merged;
+              })()}
             </div>
           </div>
         </div>

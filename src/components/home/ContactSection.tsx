@@ -1,4 +1,4 @@
-import { MapPin, Clock, Navigation } from "lucide-react";
+import { MapPin, Clock, Navigation, Play } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import ContactForm from "./ContactForm";
 
@@ -97,16 +97,27 @@ export default async function ContactSection({ cmsTitle, cmsFormHeading, cmsForm
                 </div>
               </div>
 
-              {/* Navigate button */}
-              <a
-                href="https://maps.google.com/?q=Sokolovská+694/98+Praha+8+Karlín"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[16px] sm:text-[20px] uppercase rounded-[10px] px-8 py-4 hover:opacity-90 transition-opacity"
-              >
-                <Navigation className="size-5" />
-                {t("common.navigate")}
-              </a>
+              {/* Navigate + Video buttons */}
+              <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full">
+                <a
+                  href="https://maps.google.com/?q=Sokolovská+694/98+Praha+8+Karlín"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] sm:text-[16px] uppercase rounded-[10px] px-6 py-4 hover:opacity-90 transition-opacity"
+                >
+                  <Navigation className="size-5" />
+                  {t("common.navigate")}
+                </a>
+                <a
+                  href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQzMzUzNTI0MTc3OTMx?igsh=ZjZ5am9yczRrN3d0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-bold text-[14px] sm:text-[16px] uppercase rounded-[10px] px-6 py-4 hover:opacity-90 transition-opacity"
+                >
+                  <Play className="size-5" />
+                  {t("contactSection.videoInstructions")}
+                </a>
+              </div>
             </div>
           </div>
         </div>

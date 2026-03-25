@@ -78,7 +78,7 @@ export default async function ServiceDetailPage({
 }) {
   const { slug, locale } = await params;
   const [service, cmsTranslations] = await Promise.all([
-    getServiceBySlug(slug),
+    getServiceBySlug(slug, locale),
     getCmsTranslations(locale),
   ]);
   const t = await getTranslations();
