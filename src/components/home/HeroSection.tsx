@@ -92,7 +92,7 @@ export default async function HeroSection({ cmsTitle, cmsSubtitle, cmsCtaText, c
               {t("hero.cta")}
             </Link>
             <Link
-              href="https://maps.google.com/?q=Sokolovsk%C3%A1+694/98+Praha+8+Karl%C3%ADn"
+              href="https://maps.app.goo.gl/3gRDhNv4v2ZNZQYD9"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full lg:w-auto inline-flex items-center justify-center gap-2 backdrop-blur-[12px] bg-[rgba(177,179,182,0.1)] border border-[#f0eff0] text-[#f0eff0] font-clash font-bold text-[20px] uppercase rounded-[10px] px-[29px] py-[17px] hover:bg-white/20 transition-colors"

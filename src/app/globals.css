@@ -148,3 +148,24 @@ html[lang="ru"] .font-extrabold {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* ── Card hover tint ── */
+
+.card-hover-tint {
+  position: relative;
+}
+
+.card-hover-tint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #7960a9;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.card-hover-tint:hover::after {
+  opacity: 0.12;
+}

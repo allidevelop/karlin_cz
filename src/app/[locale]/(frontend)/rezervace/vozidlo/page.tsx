@@ -110,7 +110,7 @@ export default async function VehicleStepPage() {
             {categories.map((cat) => (
               <div
                 key={cat.id}
-                className="group relative rounded-[10px] overflow-hidden border border-[#b1b3b6] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] backdrop-blur-[2px] bg-[#f0eff0] h-[241px] lg:h-[480px] flex flex-col"
+                className="card-hover-tint group relative rounded-[10px] overflow-hidden border border-[#b1b3b6] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] backdrop-blur-[2px] bg-[#f0eff0] h-[241px] lg:h-[480px] flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]"
               >
                 {/* Hover glow effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover:opacity-30 transition-opacity -z-10" />
@@ -153,7 +153,7 @@ export default async function VehicleStepPage() {
                 </div>
 
                 {/* Bottom: Price + CTA */}
-                <div className="p-3 lg:p-6 lg:h-[240px] flex flex-col items-center justify-center backdrop-blur-[5px]">
+                <div className="p-3 lg:p-6 lg:h-[240px] flex flex-col items-center justify-center">
                   {/* Mobile price layout */}
                   <div className="lg:hidden text-center mb-2">
                     <span className="font-clash font-bold text-[10px] text-[#302e2f]/50 uppercase tracking-[0.6px] block mb-0.5">

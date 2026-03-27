@@ -54,6 +54,22 @@ function slugify(str: string): string {
     .replace(/^-+|-+$/g, '')
 }
 
+/**
+ * Parse Altegio comment field into features array.
+ * Lines starting with ✔️ or ➕ are treated as features.
+ */
+function parseFeatures(comment: string | undefined | null): { feature: string }[] {
+  if (!comment) return []
+  return comment
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.startsWith('✔️') || line.startsWith('➕'))
+    .map(line => ({
+      feature: line.replace(/^[✔️➕]+\s*/, '').trim(),
+    }))
+    .filter(f => f.feature.length > 0)
+}
+
 function durationToText(seconds: number): string {
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
@@ -216,7 +232,6 @@ export async function GET(req: NextRequest) {
       if (existing.docs.length > 0) {
         // Only update Altegio-sourced fields — preserve manual CMS content
         const updateData: Record<string, unknown> = {
-            name: title,
             price: lowestPrice,
             altegioId: firstVariant.id,
             pricingByVehicle,
@@ -224,6 +239,11 @@ export async function GET(req: NextRequest) {
             isActive: true,
             isAddon: false,
             sortOrder: sortOrder++,
+        }
+        // Sync features from Altegio comment (always overwrite to keep in sync)
+        const features = parseFeatures(firstVariant.comment)
+        if (features.length > 0) {
+          updateData.features = features
         }
         // Sync description from Altegio comment if CMS description is empty
         if (!existing.docs[0].description && firstVariant.comment) {
@@ -253,6 +273,11 @@ export async function GET(req: NextRequest) {
             isActive: true,
             isAddon: false,
             sortOrder: sortOrder++,
+        }
+        // Sync features from Altegio comment
+        const features = parseFeatures(firstVariant.comment)
+        if (features.length > 0) {
+          createData.features = features
         }
         // Sync description from Altegio comment
         if (firstVariant.comment) {
@@ -285,7 +310,6 @@ export async function GET(req: NextRequest) {
       if (existing.docs.length > 0) {
         // Only update Altegio-sourced fields — preserve image, addonCategory
         const updateData: Record<string, unknown> = {
-            name: addon.title,
             price: addon.price_min,
             altegioId: addon.id,
             duration: durationToText(addon.duration),

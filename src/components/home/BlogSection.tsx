@@ -134,8 +134,10 @@ export default function BlogSection({ posts, cmsTitle, cmsSubtitle, cmsReadAllBu
               >
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-white hover:shadow-md transition-shadow h-full"
+                  className="card-hover-tint group relative flex flex-col rounded-[10px] overflow-hidden border border-[#b1b3b6] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] backdrop-blur-[2px] bg-[#f0eff0] transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)] h-full"
                 >
+                  {/* Hover glow */}
+                  <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover:opacity-30 transition-opacity -z-10" />
                   {/* Image */}
                   <div className="relative h-[192px] lg:h-[220px] overflow-hidden">
                     <Image
@@ -147,7 +149,7 @@ export default function BlogSection({ posts, cmsTitle, cmsSubtitle, cmsReadAllBu
                   </div>
 
                   {/* Body */}
-                  <div className="p-5 lg:p-6">
+                  <div className="p-5 lg:p-6 flex-1">
                     {/* Date + read time */}
                     <div className="flex items-center gap-3 mb-3">
                       {post.publishedAt && (

@@ -301,7 +301,7 @@ export default async function ServiceDetailPage({
               {t("serviceDetail.quickBooking")}
             </Link>
             <Link
-              href="https://maps.google.com/?q=Sokolovská+694/98+Praha+Karlín"
+              href="https://maps.app.goo.gl/3gRDhNv4v2ZNZQYD9"
               target="_blank"
               className="inline-flex items-center justify-center gap-2 backdrop-blur-[12px] bg-[#302e2f] border border-[#f0eff0] rounded-[10px] px-[29px] py-[17px] font-clash font-bold text-[20px] text-[#f0eff0] uppercase hover:bg-[#3a3839] transition-colors"
             >

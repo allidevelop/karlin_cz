@@ -117,7 +117,7 @@ export default async function SluzbyPage({ params }: { params: Promise<{ locale:
                     )}
 
                     {/* Card */}
-                    <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden h-full flex flex-col">
+                    <div className="card-hover-tint group relative bg-[#f0eff0] border border-[#b1b3b6] backdrop-blur-[2px] rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]">
                       {/* Image area */}
                       <div className="relative h-[240px] lg:h-[256px]">
                         {imageSrc && (
@@ -196,7 +196,7 @@ export default async function SluzbyPage({ params }: { params: Promise<{ locale:
                         <div className="flex items-center justify-center gap-[15px]">
                           <Link
                             href={`/sluzby/${slug}`}
-                            className="inline-flex items-center justify-center bg-[#302e2f] border-2 border-[#302e2f] rounded-[10px] h-[47px] w-[200px] font-clash font-bold text-[20px] text-white uppercase hover:bg-[#302e2f]/90 transition-colors"
+                            className="inline-flex items-center justify-center bg-[#302e2f] border-2 border-[#302e2f] rounded-[10px] h-[47px] w-[200px] font-clash font-bold text-[20px] text-white uppercase hover:opacity-90 transition-opacity"
                           >
                             {t("common.learnMore")}
                           </Link>

@@ -503,7 +503,7 @@ export default function ProgramSelector({
                   store.setAddonOnly(true);
                   router.push("/rezervace/doplnky");
                 }}
-                className="inline-flex items-center gap-2 font-clash text-[14px] font-bold text-[#f0eff0] bg-[#302e2f] border border-[#f0eff0] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity uppercase"
+                className="inline-flex items-center gap-2 font-clash text-[14px] font-bold text-[#f0eff0] bg-[#302e2f] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity uppercase"
               >
                 {t("booking.addons.skipToAddons")}
                 <ChevronDown className="size-4 -rotate-90" />

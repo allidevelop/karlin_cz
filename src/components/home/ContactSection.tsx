@@ -100,7 +100,7 @@ export default async function ContactSection({ cmsTitle, cmsFormHeading, cmsForm
               {/* Navigate + Video buttons */}
               <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full">
                 <a
-                  href="https://maps.google.com/?q=Sokolovská+694/98+Praha+8+Karlín"
+                  href="https://maps.app.goo.gl/3gRDhNv4v2ZNZQYD9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-[#f0eff0] font-clash font-bold text-[14px] sm:text-[16px] uppercase rounded-[10px] px-6 py-4 hover:opacity-90 transition-opacity"

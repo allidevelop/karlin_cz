@@ -104,7 +104,7 @@ export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, c
             </button>
             <Link
               href="/akce"
-              className="hidden lg:inline-flex items-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity ml-2"
+              className="hidden lg:inline-flex items-center gap-2 bg-[#302e2f] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity ml-2"
             >
               {t("promotions.allPromotions")}
               <ArrowRight className="size-[18px]" />
@@ -129,9 +129,9 @@ export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, c
                 key={`${promo.slug}-${i}`}
                 className="min-w-0 shrink-0 grow-0 basis-[80vw] sm:basis-[300px] lg:basis-[340px]"
               >
-                <div className="group/card relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] h-full flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]">
+                <div className="card-hover-tint group relative rounded-[10px] overflow-hidden border border-[#b1b3b6] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] backdrop-blur-[2px] bg-[#f0eff0] h-full flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]">
                   {/* Hover glow */}
-                  <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover/card:opacity-30 transition-opacity -z-10" />
+                  <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover:opacity-30 transition-opacity -z-10" />
                   {/* Badge — Dynamic Island shape */}
                   {promo.badge && (
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20">

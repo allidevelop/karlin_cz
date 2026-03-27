@@ -178,9 +178,9 @@ export default async function ProFirmyPage() {
                     {t("proFirmy.messageLabel")}
                   </label>
                   <textarea
-                    rows={4}
+                    rows={3}
                     placeholder={t("proFirmy.messagePlaceholder")}
-                    className="w-full rounded-[12px] border border-[#b1b3b6] bg-[#f0eff0] px-[17px] pt-[13px] pb-[85px] font-clash text-[16px] text-[#302e2f] placeholder:text-[#b1b3b6] focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition resize-none"
+                    className="w-full rounded-[12px] border border-[#b1b3b6] bg-[#f0eff0] px-[17px] pt-[13px] pb-[13px] font-clash text-[16px] text-[#302e2f] placeholder:text-[#b1b3b6] focus:outline-none focus:ring-2 focus:ring-[#7960a9] transition resize-none"
                   />
                 </div>
 

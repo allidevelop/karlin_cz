@@ -29,9 +29,8 @@ const SERVICE_IMAGE_MAP: Record<string, string> = {
   'to-go': 'service-togo.jpg',
   'to-glow': 'service-toglow.jpg',
   'to-wow': 'service-towow.jpg',
-  'exterior-komplet': 'service-exterior.jpg',
-  'interior-komplet': 'service-interior.jpg',
-  'premium-detailing': 'service-premium.jpg',
+  'exterier-komplet': 'service-exterior.jpg',
+  'interier-komplet': 'service-interior.jpg',
   'premium-detailing-komplet': 'service-premium.jpg',
   'komplexni-myti': 'service-togo.jpg',
 }
@@ -74,7 +73,7 @@ const PROGRAM_FEATURES: Record<string, string[]> = {
     'Mytí oken zevnitř i zvenku',
     'Vůně interiéru',
   ],
-  'exterior-komplet': [
+  'exterier-komplet': [
     'Předmytí a ruční mytí karoserie',
     'Čištění disků a podběhů',
     'Ošetření pneumatik',
@@ -82,7 +81,7 @@ const PROGRAM_FEATURES: Record<string, string[]> = {
     'Ošetření plastových prvků',
     'Sušení mikrovláknem',
   ],
-  'interior-komplet': [
+  'interier-komplet': [
     'Kompletní vysávání interiéru',
     'Čištění palubní desky a panelů',
     'Čištění a ošetření sedadel',
@@ -90,18 +89,6 @@ const PROGRAM_FEATURES: Record<string, string[]> = {
     'Čištění oken zevnitř',
     'Ošetření plastů a gumy',
     'Vůně interiéru',
-  ],
-  'premium-detailing': [
-    'Kompletní předmytí a ruční mytí',
-    'Dekontaminace laku (clay bar)',
-    'Vícevrstvé strojní leštění',
-    'Keramický coating / prémiový vosk',
-    'Čištění motorového prostoru',
-    'Kompletní renovace interiéru',
-    'Hloubkové čištění sedadel a koberců',
-    'Ošetření kůže speciálními přípravky',
-    'Mytí oken s hydrofobní úpravou',
-    'Prémiová vůně interiéru',
   ],
   'premium-detailing-komplet': [
     'Kompletní předmytí a ruční mytí',

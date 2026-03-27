@@ -100,7 +100,7 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
             <Link
               key={card.id}
               href={card.href}
-              className="group relative rounded-[10px] overflow-hidden border border-[#b1b3b6] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] backdrop-blur-[2px] bg-[#f0eff0] h-[241px] lg:h-[480px] flex flex-col"
+              className="card-hover-tint group relative rounded-[10px] overflow-hidden border border-[#b1b3b6] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] backdrop-blur-[2px] bg-[#f0eff0] h-[241px] lg:h-[480px] flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]"
             >
               {/* Hover glow */}
               <div className="absolute -inset-2 bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[32px] blur-[12px] opacity-0 group-hover:opacity-30 transition-opacity -z-10" />
@@ -125,7 +125,7 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
               </div>
 
               {/* Bottom: Price + CTA */}
-              <div className="p-4 lg:p-6 lg:h-[240px] flex flex-col items-center justify-center backdrop-blur-[5px]">
+              <div className="p-4 lg:p-6 lg:h-[240px] flex flex-col items-center justify-center">
                 {/* Mobile price layout */}
                 <div className="lg:hidden text-center">
                   <span className="font-clash font-normal text-[15px] text-[#302e2f]">{t("common.priceFrom")} </span>
@@ -135,11 +135,11 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
 
                 {/* Desktop price layout */}
                 <div className="hidden lg:flex flex-col items-center gap-2 flex-1 justify-center">
-                  <span className="font-clash font-bold text-[12px] text-[#b1b3b6] uppercase tracking-[0.6px] leading-[16px]">
+                  <span className="font-clash font-bold text-[12px] text-[#302e2f]/50 uppercase tracking-[0.6px] leading-[16px]">
                     {t("common.pricesFrom")}
                   </span>
                   <div className="flex items-baseline gap-1">
-                    <span className="font-clash font-bold text-[60px] leading-[60px] text-[#7960a9]">
+                    <span className="font-clash font-bold text-[60px] leading-[60px] bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] bg-clip-text text-transparent">
                       {card.price}
                     </span>
                     <span className="font-clash font-bold text-[22.9px] leading-[32px] text-[#7960a9]">

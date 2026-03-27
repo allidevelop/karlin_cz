@@ -102,7 +102,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                       className="group block"
                     >
                       {/* Card */}
-                      <div className="relative bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] overflow-hidden h-full flex flex-col">
+                      <div className="card-hover-tint relative bg-[#f0eff0] border border-[#b1b3b6] backdrop-blur-[2px] rounded-[10px] overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]">
                         {/* Category badge — notch effect: flat top, rounded bottom */}
                         {categoryLabel && (
                           <div className="hidden lg:flex absolute top-0 left-1/2 -translate-x-1/2 z-10 items-start justify-center">

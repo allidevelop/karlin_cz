@@ -91,7 +91,7 @@ export default async function AkcePage() {
                   <Link
                     key={promo.slug}
                     href={`/akce/${promo.slug}`}
-                    className="relative rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#f0eff0] flex flex-col group transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]"
+                    className="card-hover-tint relative rounded-[10px] overflow-hidden border border-[#b1b3b6] backdrop-blur-[2px] bg-[#f0eff0] flex flex-col group transition-all duration-300 hover:border-[#7960a9] hover:shadow-[0_0_30px_-5px_rgba(121,96,169,0.3)]"
                   >
                     {promo.badge && (
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 flex items-start justify-center">
@@ -117,14 +117,14 @@ export default async function AkcePage() {
                       </div>
                     </div>
 
-                    <div className="p-6 flex-1 flex flex-col gap-4 items-center justify-center">
-                      <p className="font-clash font-medium text-[16px] text-[#302e2f] leading-normal text-center line-clamp-2 w-full">
+                    <div className="p-6 flex-1 flex flex-col gap-4 items-center justify-center transition-colors duration-300 group-hover:bg-gradient-to-br group-hover:from-[#7960a9] group-hover:to-[#9b7ec4]">
+                      <p className="font-clash font-medium text-[16px] text-[#302e2f] leading-normal text-center line-clamp-2 w-full transition-colors duration-300 group-hover:text-[#f0eff0]">
                         {promo.description}
                       </p>
 
-                      <div className="border-b border-[#f0eff0] pb-4 w-full flex flex-col items-center gap-1">
+                      <div className="border-b border-[#f0eff0] pb-4 w-full flex flex-col items-center gap-1 transition-colors duration-300 group-hover:border-[#f0eff0]/30">
                         {discounted && (
-                          <div className="flex items-baseline gap-2 justify-center text-[#7960a9]">
+                          <div className="flex items-baseline gap-2 justify-center text-[#7960a9] transition-colors duration-300 group-hover:text-[#f0eff0]">
                             <span className="font-clash font-bold text-[24px] lg:text-[32px] leading-[40px]">
                               {discounted}
                             </span>
@@ -134,7 +134,7 @@ export default async function AkcePage() {
                           </div>
                         )}
                         {original && (
-                          <div className="flex items-baseline gap-2 justify-center text-[#b1b3b6]">
+                          <div className="flex items-baseline gap-2 justify-center text-[#b1b3b6] transition-colors duration-300 group-hover:text-[#f0eff0]/50">
                             <span className="font-clash font-medium text-[24px] leading-[40px] line-through decoration-solid">
                               {original}
                             </span>
@@ -145,14 +145,14 @@ export default async function AkcePage() {
                         )}
                       </div>
 
-                      <div className="w-full bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] px-6 py-4 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] group-hover:opacity-90 transition-opacity">
-                        <span className="flex items-center justify-center font-clash font-bold text-[14.8px] text-[#f0eff0] uppercase leading-[24px]">
+                      <div className="w-full bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] px-6 py-4 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 group-hover:from-[#f0eff0] group-hover:to-[#f0eff0]">
+                        <span className="flex items-center justify-center font-clash font-bold text-[14.8px] text-[#f0eff0] uppercase leading-[24px] transition-colors duration-300 group-hover:text-[#7960a9]">
                           {t("promotions.viewDetail")}
                         </span>
                       </div>
 
                       {promo.validTo && (
-                        <p className="font-clash font-medium text-[14px] text-[#302e2f] text-center leading-[20px]">
+                        <p className="font-clash font-medium text-[14px] text-[#302e2f] text-center leading-[20px] transition-colors duration-300 group-hover:text-[#f0eff0]/70">
                           {t("promotions.validUntil")} {dateFormatter.format(new Date(promo.validTo))}
                         </p>
                       )}

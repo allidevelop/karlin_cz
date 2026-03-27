@@ -27,7 +27,7 @@ export const SiteSettings: GlobalConfig = {
               ],
             },
             { name: 'googleMapsUrl', type: 'text', label: 'Google Maps URL', defaultValue: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.123456!2d14.4486!3d50.0924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA1JzMyLjYiTiAxNMKwMjYnNTUuMCJF!5e0!3m2!1scs!2scz!4v1234567890' },
-            { name: 'googleMapsLink', type: 'text', label: 'Odkaz na Google Maps (navigace)', defaultValue: 'https://maps.google.com/?q=Sokolovská+694/98+Praha+8+Karlín' },
+            { name: 'googleMapsLink', type: 'text', label: 'Odkaz na Google Maps (navigace)', defaultValue: 'https://maps.app.goo.gl/3gRDhNv4v2ZNZQYD9' },
           ],
         },
         {

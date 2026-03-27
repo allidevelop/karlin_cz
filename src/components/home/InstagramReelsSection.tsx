@@ -72,6 +72,7 @@ export default function InstagramReelsSection({ reels, subtitle, instagramUrl }:
         if (video) {
           if (i === index) {
             video.muted = false;
+            video.play().catch(() => {});
           } else {
             video.muted = true;
             video.pause();
@@ -195,7 +196,7 @@ export default function InstagramReelsSection({ reels, subtitle, instagramUrl }:
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#302e2f] border border-[#f0eff0] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center gap-2 bg-[#302e2f] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity"
             >
               {t("instagram.follow")}
             </a>
