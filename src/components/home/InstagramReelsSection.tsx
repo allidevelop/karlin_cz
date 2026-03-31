@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
+import { ChevronLeft, ChevronRight, Volume2, VolumeX, Instagram } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type Reel = {
@@ -95,7 +95,7 @@ export default function InstagramReelsSection({ reels, subtitle, instagramUrl }:
               {t("instagram.title")}
             </h2>
             {subtitle && (
-              <p className="font-clash font-normal text-[14.8px] lg:text-[24px] text-[#302e2f]/70 leading-[24px] lg:leading-normal mt-1">
+              <p className="font-clash font-medium text-[15.1px] lg:text-[36px] text-[#302e2f] leading-[24px] lg:leading-normal mt-1 lg:mt-0">
                 {subtitle}
               </p>
             )}
@@ -107,6 +107,17 @@ export default function InstagramReelsSection({ reels, subtitle, instagramUrl }:
             <button onClick={scrollNext} aria-label="Next" className={arrowBtnClass}>
               <ChevronRight className="size-6" />
             </button>
+            {instagramUrl && (
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-[#302e2f] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity ml-2"
+              >
+                <Instagram className="size-[18px]" />
+                {t("instagram.followShort")}
+              </a>
+            )}
           </div>
         </div>
 
@@ -134,48 +145,31 @@ export default function InstagramReelsSection({ reels, subtitle, instagramUrl }:
                   </div>
                 )}
 
-                {/* Video card */}
-                <div className="rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#302e2f] aspect-[9/16] relative group">
-                  {reel.instagramLink ? (
-                    <a href={reel.instagramLink} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                      <video
-                        ref={(el) => { videoRefs.current[i] = el; }}
-                        src={reel.videoUrl}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-full h-full object-cover"
-                      />
-                    </a>
-                  ) : (
-                    <video
-                      ref={(el) => { videoRefs.current[i] = el; }}
-                      src={reel.videoUrl}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-                  )}
+                {/* Video card — click toggles sound */}
+                <div
+                  className="rounded-[10px] overflow-hidden border border-[#b1b3b6] bg-[#302e2f] aspect-[9/16] relative group cursor-pointer"
+                  onClick={() => toggleSound(i)}
+                >
+                  <video
+                    ref={(el) => { videoRefs.current[i] = el; }}
+                    src={reel.videoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
 
-                  {/* Sound toggle button */}
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      toggleSound(i);
-                    }}
-                    className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-[#302e2f]/60 backdrop-blur-sm text-white/80 hover:text-white hover:bg-[#302e2f]/80 transition-all"
-                    aria-label={unmutedIndex === i ? "Mute" : "Unmute"}
+                  {/* Sound indicator */}
+                  <div
+                    className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-[#302e2f]/60 backdrop-blur-sm text-white/80 pointer-events-none"
                   >
                     {unmutedIndex === i ? (
                       <Volume2 className="size-4" />
                     ) : (
                       <VolumeX className="size-4" />
                     )}
-                  </button>
+                  </div>
                 </div>
 
                 {/* Caption */}
@@ -189,19 +183,6 @@ export default function InstagramReelsSection({ reels, subtitle, instagramUrl }:
           </div>
         </div>
 
-        {/* Follow link */}
-        {instagramUrl && (
-          <div className="flex justify-center mt-8">
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#302e2f] text-[#f0eff0] font-clash font-medium text-[14.6px] leading-[24px] rounded-[10px] px-6 py-3 hover:opacity-90 transition-opacity"
-            >
-              {t("instagram.follow")}
-            </a>
-          </div>
-        )}
       </div>
     </section>
   );

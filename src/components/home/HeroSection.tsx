@@ -63,9 +63,9 @@ export default async function HeroSection({ cmsTitle, cmsSubtitle, cmsCtaText, c
       <div className="relative z-10 flex flex-col items-center justify-center px-4 lg:px-8 pt-24 lg:pt-0">
         <div className="max-w-[1536px] mx-auto text-center">
           <h1
-            className="font-clash text-[36px] lg:text-[60px] font-bold text-[#f0eff0] uppercase leading-[40px] lg:leading-[60px]"
+            className="font-clash text-[36px] lg:text-[60px] font-bold text-transparent uppercase leading-[40px] lg:leading-[60px]"
             style={{
-              WebkitTextStroke: "0.5px rgba(240, 239, 240, 0.4)",
+              WebkitTextStroke: "1px rgba(240, 239, 240, 0.8)",
             }}
           >
             {t("hero.title")}
@@ -104,17 +104,8 @@ export default async function HeroSection({ cmsTitle, cmsSubtitle, cmsCtaText, c
         </div>
       </div>
 
-      {/* Wave divider at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <Image
-          src="/images/hero-wave.png"
-          alt=""
-          width={1920}
-          height={54}
-          className="w-full h-auto block"
-          aria-hidden="true"
-        />
-      </div>
+      {/* Gradient fade to light section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-[80px] bg-gradient-to-b from-transparent to-[#f0eff0]" aria-hidden="true" />
     </section>
   );
 }

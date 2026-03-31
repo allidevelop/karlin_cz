@@ -55,7 +55,7 @@ export default function PartnersSection({ partners, cmsTitle, cmsSubtitle }: Pro
             <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
               {t("partners.title")}
             </h2>
-            <p className="font-clash font-medium text-[15px] lg:text-[20px] text-[#302e2f] leading-[24px] lg:leading-[28px] mt-1">
+            <p className="font-clash font-medium text-[15.1px] lg:text-[36px] text-[#302e2f] leading-[24px] lg:leading-normal mt-1 lg:mt-0">
               {t("partners.subtitle")}
             </p>
           </div>

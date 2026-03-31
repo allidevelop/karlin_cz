@@ -128,7 +128,7 @@ export async function getVehicleCategories() {
  * Get all active FAQ items, sorted by sortOrder.
  * If `page` is provided, only returns items assigned to that page (or items with no pages set).
  */
-export async function getFAQ(page?: string) {
+export async function getFAQ(page?: string, locale?: string) {
   const payload = await getPayload({ config })
 
   if (page) {
@@ -136,6 +136,7 @@ export async function getFAQ(page?: string) {
       collection: 'faq',
       limit: 100,
       sort: 'sortOrder',
+      locale: (locale as 'cs' | 'en' | 'ru') || undefined,
       where: {
         isActive: { equals: true },
         or: [
@@ -151,6 +152,7 @@ export async function getFAQ(page?: string) {
     collection: 'faq',
     limit: 100,
     sort: 'sortOrder',
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       isActive: { equals: true },
     },
@@ -165,12 +167,13 @@ export async function getFAQ(page?: string) {
 /**
  * Get all approved reviews, sorted by date descending (newest first).
  */
-export async function getReviews() {
+export async function getReviews(locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'reviews',
     limit: 100,
     sort: '-date',
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       isApproved: { equals: true },
     },
@@ -185,12 +188,13 @@ export async function getReviews() {
 /**
  * Get all active promotions.
  */
-export async function getPromotions() {
+export async function getPromotions(locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'promotions',
     limit: 100,
     depth: 1,
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       isActive: { equals: true },
     },
@@ -202,12 +206,13 @@ export async function getPromotions() {
  * Get a single promotion by its slug.
  * Returns the document or `null` if not found.
  */
-export async function getPromotionBySlug(slug: string) {
+export async function getPromotionBySlug(slug: string, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'promotions',
     limit: 1,
     depth: 1,
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       slug: { equals: slug },
     },
@@ -222,13 +227,14 @@ export async function getPromotionBySlug(slug: string) {
 /**
  * Get published blog posts, sorted by publishedAt descending (newest first).
  */
-export async function getBlogPosts(limit = 10) {
+export async function getBlogPosts(limit = 10, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'blog-posts',
     limit,
     depth: 1,
     sort: '-publishedAt',
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       isPublished: { equals: true },
     },
@@ -240,12 +246,13 @@ export async function getBlogPosts(limit = 10) {
  * Get a single blog post by its slug.
  * Returns the document or `null` if not found.
  */
-export async function getBlogPostBySlug(slug: string) {
+export async function getBlogPostBySlug(slug: string, locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'blog-posts',
     limit: 1,
     depth: 1,
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       slug: { equals: slug },
     },
@@ -315,13 +322,14 @@ export async function getInstagramReels(locale?: string) {
 /**
  * Get all active partners, sorted by sortOrder.
  */
-export async function getPartners() {
+export async function getPartners(locale?: string) {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'partners',
     limit: 100,
     depth: 1,
     sort: 'sortOrder',
+    locale: (locale as 'cs' | 'en' | 'ru') || undefined,
     where: {
       isActive: { equals: true },
     },

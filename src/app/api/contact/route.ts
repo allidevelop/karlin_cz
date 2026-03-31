@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import nodemailer from 'nodemailer'
 
-const NOTIFY_EMAIL = process.env.CONTACT_NOTIFY_EMAIL || 'automyckakarlin@email.cz'
+const NOTIFY_EMAIL = process.env.CONTACT_NOTIFY_EMAIL || 'info@automycka-karlin.eu'
 const SMTP_HOST = process.env.SMTP_HOST || ''
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587')
 const SMTP_USER = process.env.SMTP_USER || ''

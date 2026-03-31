@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Header, Footer } from "@/components/layout";
+import PopupBannerWrapper from "@/components/shared/PopupBannerWrapper";
 
-export default function FrontendLayout({
+export default async function FrontendLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export default function FrontendLayout({
           src="/images/wave-bg.png"
           alt=""
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-[0.08]"
           priority={false}
         />
       </div>
@@ -26,6 +27,8 @@ export default function FrontendLayout({
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
+      {/* Popup banner modal — shows once per session */}
+      <PopupBannerWrapper />
     </div>
   );
 }

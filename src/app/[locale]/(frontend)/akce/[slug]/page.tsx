@@ -26,7 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug, locale } = await params;
   const t = await getTranslations({ locale });
-  const promo = await getPromotionBySlug(slug);
+  const promo = await getPromotionBySlug(slug, locale);
   if (!promo) {
     return { title: t("metadata.promoNotFound") };
   }
@@ -43,7 +43,7 @@ export default async function PromoDetailPage({
 }) {
   const { slug, locale } = await params;
   const [promo, cmsTranslations] = await Promise.all([
-    getPromotionBySlug(slug),
+    getPromotionBySlug(slug, locale),
     getCmsTranslations(locale),
   ]);
   const t = await getTranslations();
@@ -109,7 +109,7 @@ export default async function PromoDetailPage({
       : null;
 
   // Related promotions
-  const allPromos = await getPromotions();
+  const allPromos = await getPromotions(locale);
   const relatedPromos = allPromos.filter((p) => p.slug !== slug).slice(0, 4);
 
   // Map related promos for PromoCarousel
@@ -141,36 +141,23 @@ export default async function PromoDetailPage({
         <LowerWaveDecoration />
 
         <div className="relative z-[1]">
-          {/* Back link */}
-          <section className="pt-[25px]">
-            <div className="max-w-[1536px] mx-auto px-4 lg:px-[32px]">
-              <Link
-                href="/akce"
-                className="inline-flex items-center gap-[8px] font-clash text-[15.3px] font-medium text-[#302e2f] hover:text-[#7960a9] transition-colors"
-              >
-                <ChevronLeft className="size-[20px]" />
-                <span>{t("promotions.backToAllPromotions")}</span>
-              </Link>
-            </div>
-          </section>
-
           {/* Promo detail — image + details side by side */}
-          <section className="pt-[32px] pb-[32px]">
+          <section className="pt-[25px] pb-[32px]">
             <div className="max-w-[1536px] mx-auto px-4 lg:px-[32px]">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] lg:gap-[48px] items-start">
+              <div className="max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[24px] lg:gap-[32px] items-start">
                 {/* Left: Image with badge */}
                 <div className="relative">
                   {/* Badge pill — centered on top edge */}
                   {promo.badge && (
-                    <div className="absolute top-[-22px] left-0 right-0 z-20 flex items-start justify-center overflow-visible">
-                      <span className="inline-flex items-center justify-center backdrop-blur-[7.5px] bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] text-white font-clash font-bold text-[32px] leading-[20px] rounded-full px-[16px] pt-[8px] pb-[16px]">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
+                      <span className="inline-flex items-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] backdrop-blur-[7.5px] text-[#f0eff0] font-clash font-bold text-[16px] leading-[20px] rounded-b-[20px] px-6 py-3">
                         {promo.badge}
                       </span>
                     </div>
                   )}
 
-                  <div className="relative rounded-[24px] overflow-hidden shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
-                    <div className="relative aspect-[712/600] lg:h-[600px] w-full bg-gradient-to-br from-[#302e2f] to-[#302e2f]/80">
+                  <div className="relative rounded-[16px] overflow-hidden shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
+                    <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-[#302e2f] to-[#302e2f]/80">
                       {imageUrl ? (
                         <Image
                           src={imageUrl}
@@ -197,7 +184,7 @@ export default async function PromoDetailPage({
                   {/* Title + subtitle + date + description */}
                   <div className="flex flex-col gap-[16px]">
                     {/* Title */}
-                    <h1 className="font-clash text-[36px] lg:text-[60px] font-bold text-[#1a1a1a] leading-[1] lg:leading-[60px]">
+                    <h1 className="font-clash text-[28px] lg:text-[40px] font-bold text-[#1a1a1a] leading-[1.1]">
                       {promo.title}
                     </h1>
 
@@ -224,21 +211,21 @@ export default async function PromoDetailPage({
                   </div>
 
                   {/* Price box — purple bg */}
-                  <div className="bg-[#7960a9] rounded-[10px] p-[20px] lg:p-[32px] flex flex-col gap-[24px]">
+                  <div className="bg-[#7960a9] rounded-[10px] p-[16px] lg:p-[24px] flex flex-col gap-[16px]">
                     {/* Prices row */}
-                    <div className="relative h-[96px]">
+                    <div className="flex items-end justify-between">
                       {/* Left: original + discounted price */}
-                      <div className="absolute left-0 top-0 flex flex-col gap-[8px]">
+                      <div className="flex flex-col gap-[4px]">
                         {originalPriceStr && (
-                          <span className="font-clash text-[18px] font-normal text-[#b1b3b6] line-through leading-[28px]">
+                          <span className="font-clash text-[14px] font-normal text-[#b1b3b6] line-through leading-[20px]">
                             {originalPriceStr}
                           </span>
                         )}
-                        <div className="flex items-baseline gap-[12px] text-[#f0eff0]">
-                          <span className="font-clash text-[48px] lg:text-[60px] font-bold leading-[60px]">
+                        <div className="flex items-baseline gap-[8px] text-[#f0eff0]">
+                          <span className="font-clash text-[36px] lg:text-[48px] font-bold leading-[1]">
                             {discountedPriceNumber}
                           </span>
-                          <span className="font-clash text-[28.4px] font-bold leading-[36px]">
+                          <span className="font-clash text-[20px] font-bold leading-[28px]">
                             {t("common.currency")}
                           </span>
                         </div>
@@ -246,11 +233,11 @@ export default async function PromoDetailPage({
 
                       {/* Right: savings indicator */}
                       {savingsStr && (
-                        <div className="absolute right-0 top-[6px] flex flex-col gap-[4px] items-end">
-                          <span className="font-clash text-[12.7px] font-normal text-[#b1b3b6] opacity-80 leading-[20px]">
+                        <div className="flex flex-col gap-[2px] items-end">
+                          <span className="font-clash text-[11px] font-normal text-[#b1b3b6] opacity-80 leading-[16px]">
                             {t("promotions.youSave")}
                           </span>
-                          <span className="font-clash text-[27.2px] font-bold text-[#f0eff0] leading-[36px]">
+                          <span className="font-clash text-[20px] font-bold text-[#f0eff0] leading-[28px]">
                             {savingsStr}
                           </span>
                         </div>
@@ -266,6 +253,7 @@ export default async function PromoDetailPage({
                       altegioServiceId={(promo as Record<string, unknown>).altegioServiceId as number | null ?? null}
                       serviceName={promo.title}
                       servicePrice={promo.discountedPrice ?? promo.originalPrice ?? null}
+                      externalBookingUrl={(promo as Record<string, unknown>).externalBookingUrl as string | null ?? null}
                     />
                   </div>
                 </div>
@@ -273,25 +261,21 @@ export default async function PromoDetailPage({
 
               {/* Included items and Terms — two columns below */}
               {(includes.length > 0 || terms.length > 0) && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-[32px] mt-[32px] py-[32px]">
+                <div className="max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[20px] mt-[24px]">
                   {/* Co je zahrnuto — light bg card */}
                   {includes.length > 0 && (
-                    <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] p-[20px] lg:p-[32px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]">
-                      <div className="flex items-center gap-[12px] mb-[24px]">
-                        <span className="w-[48px] h-[4px] bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-full" />
-                        <h2 className="font-clash text-[22px] lg:text-[30px] font-bold text-[#302e2f] leading-[28px] lg:leading-[36px]">
+                    <div className="bg-[#f0eff0] border border-[#b1b3b6] rounded-[10px] p-[16px] lg:p-[24px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)]">
+                      <div className="flex items-center gap-[10px] mb-[16px]">
+                        <span className="w-[36px] h-[3px] bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-full" />
+                        <h2 className="font-clash text-[18px] lg:text-[22px] font-bold text-[#302e2f] leading-[26px]">
                           {t("promotions.whatsIncluded")}
                         </h2>
                       </div>
-                      <div className="flex flex-col gap-[16px]">
+                      <div className="flex flex-col gap-[10px]">
                         {includes.map((item) => (
-                          <div key={item} className="flex items-start gap-[16px]">
-                            <div className="pt-[4px] shrink-0 w-[24px]">
-                              <div className="flex items-center justify-center size-[24px] rounded-full border border-[#b1b3b6] bg-[#f0eff0]">
-                                <Check className="size-[16px] text-[#7960a9]" />
-                              </div>
-                            </div>
-                            <span className="font-clash text-[16px] lg:text-[20px] font-medium text-[#302e2f] leading-[22px] lg:leading-[26px]">
+                          <div key={item} className="flex items-start gap-[10px]">
+                            <Check className="size-[18px] text-[#7960a9] shrink-0 mt-[2px]" />
+                            <span className="font-clash text-[14px] lg:text-[15px] font-medium text-[#302e2f] leading-[22px]">
                               {item}
                             </span>
                           </div>
@@ -302,22 +286,18 @@ export default async function PromoDetailPage({
 
                   {/* Podmínky akce — purple gradient bg */}
                   {terms.length > 0 && (
-                    <div className="bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] p-[20px] lg:p-[32px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]">
-                      <div className="flex items-center gap-[12px] mb-[24px]">
-                        <span className="w-[48px] h-[4px] bg-white rounded-full" />
-                        <h2 className="font-clash text-[22px] lg:text-[30px] font-bold text-white leading-[28px] lg:leading-[36px]">
+                    <div className="bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] rounded-[10px] p-[16px] lg:p-[24px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)]">
+                      <div className="flex items-center gap-[10px] mb-[16px]">
+                        <span className="w-[36px] h-[3px] bg-white rounded-full" />
+                        <h2 className="font-clash text-[18px] lg:text-[22px] font-bold text-white leading-[26px]">
                           {t("promotions.terms")}
                         </h2>
                       </div>
-                      <div className="flex flex-col gap-[16px]">
+                      <div className="flex flex-col gap-[10px]">
                         {terms.map((term) => (
-                          <div key={term} className="flex items-start gap-[16px]">
-                            <div className="pt-[4px] shrink-0 w-[24px]">
-                              <div className="flex items-center justify-center size-[24px] rounded-full border border-[#f0eff0]">
-                                <Check className="size-[16px] text-white" />
-                              </div>
-                            </div>
-                            <span className="font-clash text-[16px] lg:text-[20px] font-medium text-white leading-[22px] lg:leading-[26px]">
+                          <div key={term} className="flex items-start gap-[10px]">
+                            <Check className="size-[18px] text-white shrink-0 mt-[2px]" />
+                            <span className="font-clash text-[14px] lg:text-[15px] font-medium text-white leading-[22px]">
                               {term}
                             </span>
                           </div>

@@ -37,11 +37,11 @@ export default async function HomePage() {
   const locale = await getLocale();
   const [faq, reviews, promotions, blogPosts, partners, expressWashSettings, instagramReels, cmsContent, heroBelowBanners, footerAboveBanners, cmsTranslations] =
     await Promise.all([
-      getFAQ('home'),
-      getReviews(),
-      getPromotions(),
-      getBlogPosts(8),
-      getPartners(),
+      getFAQ('home', locale),
+      getReviews(locale),
+      getPromotions(locale),
+      getBlogPosts(8, locale),
+      getPartners(locale),
       getExpressWashSettings(locale),
       getInstagramReels(locale),
       getHomePageContent(locale),
@@ -105,9 +105,7 @@ export default async function HomePage() {
       )}
 
       {/* ══ Light sections wrapper with decorative purple wave ribbons ══ */}
-      <div className="relative bg-[#f0eff0] overflow-hidden mt-[-2px]">
-        {/* Purple gradient transition from hero */}
-        <div className="absolute top-0 left-0 right-0 h-[60px] bg-gradient-to-b from-[#9b7ec4]/30 to-transparent z-[2] pointer-events-none" />
+      <div className="relative bg-[#f0eff0] overflow-hidden">
         <UpperWaveDecoration />
 
         {/* Content sections */}

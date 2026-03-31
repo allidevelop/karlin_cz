@@ -136,9 +136,16 @@ html[lang="ru"] {
   --font-clash-display: var(--font-montserrat);
 }
 
-html[lang="ru"] .font-bold,
+html[lang="ru"] .font-bold {
+  font-weight: 800;
+}
+
 html[lang="ru"] .font-extrabold {
   font-weight: 800;
+}
+
+html[lang="ru"] .font-semibold {
+  font-weight: 700;
 }
 
 /* ── Utility classes ── */

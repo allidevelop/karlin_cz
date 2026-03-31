@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     try {
       const settings = await payload.findGlobal({ slug: 'site-settings' }) as Record<string, unknown>
       const emailEnabled = settings.newsletterEmailEnabled !== false
-      const notifyTo = (settings.notificationEmail as string) || 'automyckakarlin@email.cz'
+      const notifyTo = (settings.notificationEmail as string) || 'info@automycka-karlin.eu'
       if (emailEnabled) {
         sendNewsletterNotification(email, notifyTo).catch((err) => {
           console.error('[NEWSLETTER] Email send error:', err.message)

@@ -194,7 +194,7 @@ export function ReservationShell({
             src="/images/wave-bg.png"
             alt=""
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-[0.16]"
             priority={false}
           />
         </div>

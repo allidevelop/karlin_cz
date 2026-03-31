@@ -180,7 +180,7 @@ export default function PromotionsSection({ promotions, cmsTitle, cmsSubtitle, c
                   {/* Bottom: Content */}
                   <div className="p-5 flex-1 flex flex-col">
                     {/* Description */}
-                    <p className="font-clash font-medium text-[14px] lg:text-[15px] text-[#302e2f] leading-relaxed line-clamp-3">
+                    <p className="font-clash font-medium text-[15px] lg:text-[17px] text-[#302e2f] leading-relaxed line-clamp-3">
                       {promo.description}
                     </p>
 

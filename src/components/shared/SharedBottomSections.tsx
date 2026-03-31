@@ -32,9 +32,9 @@ export default async function SharedBottomSections({
 }) {
   const locale = await getLocale();
   const [faq, partners, blogPosts, cmsTranslations] = await Promise.all([
-    getFAQ(pageSlug),
-    getPartners(),
-    getBlogPosts(4),
+    getFAQ(pageSlug, locale),
+    getPartners(locale),
+    getBlogPosts(4, locale),
     getCmsTranslations(locale),
   ]);
 

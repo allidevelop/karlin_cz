@@ -111,7 +111,7 @@ export default function Footer() {
               <li className="flex items-center gap-3 justify-center sm:justify-start">
                 <Mail className="size-[18px] shrink-0 text-brand-gray" />
                 <a
-                  href="mailto:automyckakarlin@email.cz"
+                  href="mailto:info@automycka-karlin.eu"
                   className="font-medium text-brand-gray transition-colors hover:text-brand-white"
                 >
                   {tCommon("email")}

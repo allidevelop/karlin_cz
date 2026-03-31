@@ -7,7 +7,6 @@ import SharedBottomSections from "@/components/shared/SharedBottomSections";
 import { LowerWaveDecoration } from "@/components/home/WaveDecorations";
 import BenefitsSection from "@/components/pro-firmy/BenefitsSection";
 import MobileBadge from "@/components/pro-firmy/MobileBadge";
-import { Navigation } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -98,7 +97,6 @@ export default async function ProFirmyPage() {
                   href="/sluzby"
                   className="inline-flex items-center justify-center gap-2 backdrop-blur-[12px] bg-[rgba(177,179,182,0.1)] border border-[#f0eff0] text-[#f0eff0] font-clash font-bold text-[20px] uppercase rounded-[10px] px-[29px] py-[17px] hover:bg-white/20 transition-colors w-full sm:w-[200px] lg:w-auto"
                 >
-                  <Navigation className="size-5" />
                   {t("proFirmy.ourServices")}
                 </Link>
               </div>

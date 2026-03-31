@@ -42,6 +42,14 @@ export const Promotions: CollectionConfig = {
       ],
     },
     {
+      name: 'externalBookingUrl',
+      type: 'text',
+      label: { cs: 'Externí odkaz na rezervaci', en: 'External booking URL', ru: 'Внешняя ссылка на бронирование' },
+      admin: {
+        description: 'URL na Altegio widget nebo jiný rezervační systém. Pokud je vyplněno, tlačítko "Zapisat se" povede na tento odkaz.',
+      },
+    },
+    {
       name: 'altegioServiceId',
       type: 'number',
       label: { cs: 'Altegio service ID (přímá rezervace)', en: 'Altegio service ID (direct booking)', ru: 'Altegio service ID (прямое бронирование)' },

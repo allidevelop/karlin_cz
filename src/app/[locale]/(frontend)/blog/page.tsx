@@ -40,7 +40,7 @@ const fallbackImages = [
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const posts = await getBlogPosts();
+  const posts = await getBlogPosts(10, locale);
   const t = await getTranslations();
   const dateFormatterShort = createDateFormatterShort(locale);
 

@@ -285,8 +285,8 @@ export default async function ServiceDetailPage({
             <h1 className="font-clash text-[36px] lg:text-[60px] font-bold text-[#f0eff0] leading-tight">
               {service.name ?? t("serviceDetail.notFound")}
             </h1>
-            {service.description && (
-              <p className="font-clash text-[22px] lg:text-[60px] font-medium text-[#f0eff0] mt-2 lg:mt-3 max-w-[960px] mx-auto leading-tight lg:leading-[60px]">
+            {service.description && !String(service.description).includes('✔') && (
+              <p className="font-clash text-[18px] lg:text-[24px] font-medium text-[#f0eff0]/80 mt-2 lg:mt-3 max-w-[960px] mx-auto leading-relaxed">
                 {service.description}
               </p>
             )}
@@ -323,7 +323,7 @@ export default async function ServiceDetailPage({
             src="/images/wave-bg.png"
             alt=""
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-[0.16]"
             priority={false}
           />
         </div>
@@ -382,8 +382,8 @@ export default async function ServiceDetailPage({
           </div>
         </section>
 
-        {/* ─── 2. Naše výhody (Comparison Section) ─── */}
-        <section className="pb-16 lg:pb-24">
+        {/* ─── 2. Naše výhody (Comparison Section) — HIDDEN per ICECAT-217 ─── */}
+        <section className="pb-16 lg:pb-24 hidden">
           <div className="max-w-[1280px] mx-auto px-4 lg:px-[32px]">
             {/* Section header */}
             <div className="text-center mb-8 lg:mb-16">
@@ -427,11 +427,12 @@ export default async function ServiceDetailPage({
               <div className="bg-[#f0eff0] border-2 border-[#7960a9] rounded-[10px] p-6 lg:p-[34px] shadow-[0px_25px_50px_-12px_rgba(179,148,217,0.2)]">
                 <div className="flex items-center gap-3 mb-8">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/logo.svg"
                     alt={t("common.brandName")}
                     width={64}
                     height={64}
                     className="size-12 lg:size-16"
+                    unoptimized
                   />
                   <h3 className="font-clash font-bold text-[20px] lg:text-[24px] text-[#7960a9] leading-[32px]">
                     {t("common.brandName")}
@@ -562,8 +563,8 @@ export default async function ServiceDetailPage({
           </div>
         </section>
 
-        {/* ─── 6. Bezpečnost a zodpovědnost ─── */}
-        <section className="py-16 lg:py-24">
+        {/* ─── 6. Bezpečnost a zodpovědnost — HIDDEN per ICECAT-216 ─── */}
+        <section className="py-16 lg:py-24 hidden">
           <div className="max-w-[1280px] mx-auto px-4 lg:px-[32px]">
             {/* Section header */}
             <div className="text-center mb-6 lg:mb-16">
@@ -600,7 +601,7 @@ export default async function ServiceDetailPage({
         </section>
 
         {/* ─── 7. Ceník a faktory ovlivňující cenu ─── */}
-        <section className="pb-16 lg:pb-24">
+        <section className="py-16 lg:py-24">
           <div className="max-w-[1280px] mx-auto px-4 lg:px-[32px]">
             {/* Section header */}
             <div className="text-center mb-6 lg:mb-10">

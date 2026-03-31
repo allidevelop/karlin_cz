@@ -80,7 +80,7 @@ export default async function ServicesSection({ cmsTitle, cmsSubtitle, cmsChoose
             <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
               {t("services.title")}
             </h2>
-            <p className="font-clash font-normal text-[14.8px] lg:text-[36px] lg:font-medium text-[#302e2f] leading-[24px] lg:leading-normal mt-1">
+            <p className="font-clash font-medium text-[15.1px] lg:text-[36px] text-[#302e2f] leading-[24px] lg:leading-normal mt-1 lg:mt-0">
               {t("services.subtitle")}
             </p>
           </div>

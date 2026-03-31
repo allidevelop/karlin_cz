@@ -37,7 +37,7 @@ export default function FaqSection({ items, cmsTitle, cmsSubtitle, cmsContactUsB
           <h2 className="font-clash font-bold text-[30px] lg:text-[48px] text-[#302e2f] leading-[36px] lg:leading-[48px]">
             {t("faq.title")}
           </h2>
-          <p className="font-clash font-medium text-[15.5px] lg:text-[20px] text-[#302e2f] leading-[24px] lg:leading-[28px] mt-2">
+          <p className="font-clash font-medium text-[15.1px] lg:text-[36px] text-[#302e2f] leading-[24px] lg:leading-normal mt-1 lg:mt-0">
             {t("faq.subtitle")}
           </p>
         </div>
@@ -70,13 +70,13 @@ export default function FaqSection({ items, cmsTitle, cmsSubtitle, cmsContactUsB
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/rezervace/vozidlo"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.1)] text-[#f0eff0] font-clash font-bold text-[15.1px] uppercase rounded-[13px] px-8 py-3 hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-[#7960a9] to-[#9b7ec4] shadow-[0px_25px_50px_-12px_rgba(155,126,196,0.5)] text-[#f0eff0] font-clash font-bold text-[16px] lg:text-[20px] uppercase rounded-[10px] px-10 py-4 lg:py-5 hover:opacity-90 transition-opacity"
             >
               {t("common.quickBooking")}
             </Link>
             <Link
               href="#contact"
-              className="inline-flex items-center justify-center bg-[#302e2f] border border-[#b1b3b6] text-[#f0eff0] font-clash font-bold text-[15.1px] uppercase rounded-[13px] px-8 py-3 hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center bg-[#302e2f] text-[#f0eff0] font-clash font-bold text-[16px] lg:text-[20px] uppercase rounded-[10px] px-10 py-4 lg:py-5 hover:opacity-90 transition-opacity"
             >
               {t("faq.contactUs")}
             </Link>

@@ -14,7 +14,7 @@ export const SiteSettings: GlobalConfig = {
           label: 'Kontaktní údaje',
           fields: [
             { name: 'phone', type: 'text', label: 'Telefon', defaultValue: '+420 775 009 033' },
-            { name: 'email', type: 'email', label: 'Email', defaultValue: 'automyckakarlin@email.cz' },
+            { name: 'email', type: 'email', label: 'Email', defaultValue: 'info@automycka-karlin.eu' },
             {
               name: 'address',
               type: 'group',
@@ -61,7 +61,7 @@ export const SiteSettings: GlobalConfig = {
           fields: [
             { name: 'contactFormEmailEnabled', type: 'checkbox', label: 'Odesílat e-mail při nové zprávě z kontaktního formuláře', defaultValue: true },
             { name: 'newsletterEmailEnabled', type: 'checkbox', label: 'Odesílat e-mail při nové přihlášce k newsletteru', defaultValue: true },
-            { name: 'notificationEmail', type: 'email', label: 'E-mail pro notifikace', defaultValue: 'automyckakarlin@email.cz' },
+            { name: 'notificationEmail', type: 'email', label: 'E-mail pro notifikace', defaultValue: 'info@automycka-karlin.eu' },
           ],
         },
         {

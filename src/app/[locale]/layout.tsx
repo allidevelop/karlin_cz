@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
-import PopupBannerLoader from '@/components/shared/PopupBannerLoader'
 import { getCmsMessages } from '@/lib/payload'
 import { deepMerge } from '@/lib/cms-messages'
 import '@/app/globals.css'
@@ -57,10 +56,12 @@ export default async function LocaleLayout({ children, params }: Props) {
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
       </head>
-      <body className={`${clashDisplay.variable} ${montserrat.variable} bg-brand-black text-brand-white font-clash antialiased min-h-screen`}>
+      <body
+        className={`${clashDisplay.variable} ${montserrat.variable} bg-brand-black text-brand-white font-clash antialiased min-h-screen`}
+        style={locale === 'ru' ? { '--font-clash-display': 'var(--font-montserrat)' } as React.CSSProperties : undefined}
+      >
         <NextIntlClientProvider messages={messages}>
           {children}
-          <PopupBannerLoader />
         </NextIntlClientProvider>
       </body>
     </html>

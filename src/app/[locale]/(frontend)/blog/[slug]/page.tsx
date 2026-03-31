@@ -151,10 +151,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const { slug, locale } = await params;
+  const post = await getBlogPostBySlug(slug, locale);
   if (!post) {
     return { title: "Článek nenalezen" };
   }
@@ -170,7 +170,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug, locale);
   const t = await getTranslations();
   const dateFormatter = createDateFormatter(locale);
 
@@ -189,7 +189,7 @@ export default async function BlogPostPage({
     : "";
 
   // Get related posts (all posts except current, up to 3)
-  const allPosts = await getBlogPosts();
+  const allPosts = await getBlogPosts(10, locale);
   const relatedPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
   // Use CMS featured image if available, otherwise fall back to placeholder
@@ -261,7 +261,7 @@ export default async function BlogPostPage({
             src="/images/wave-bg.png"
             alt=""
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-[0.16]"
             priority={false}
           />
         </div>

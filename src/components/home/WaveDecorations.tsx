@@ -22,7 +22,7 @@ export function UpperWaveDecoration() {
         src="/images/wave-bg.png"
         alt=""
         fill
-        className="object-cover opacity-20"
+        className="object-cover opacity-[0.08]"
         priority={false}
       />
     </div>
@@ -44,7 +44,7 @@ export function LowerWaveDecoration() {
         src="/images/wave-bg.png"
         alt=""
         fill
-        className="object-cover opacity-20"
+        className="object-cover opacity-[0.08]"
         priority={false}
       />
     </div>

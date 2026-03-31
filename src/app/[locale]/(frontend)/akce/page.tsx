@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AkcePage() {
   const locale = await getLocale();
   const [promotions, cmsTranslations] = await Promise.all([
-    getPromotions(),
+    getPromotions(locale),
     getCmsTranslations(locale),
   ]);
   const t = await getTranslations();
@@ -69,7 +69,7 @@ export default async function AkcePage() {
             src="/images/wave-bg.png"
             alt=""
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-[0.16]"
             priority={false}
           />
         </div>
